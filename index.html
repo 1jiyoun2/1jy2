@@ -1,16 +1,37 @@
+<!DOCTYPE html>
 <html>
-<head> <title> WonJiYoun </title> 
+<head> <title> WonJiYoun </title>
 <meta charset = "utf-8">
-</head> 
+</head>
 <body>
 
-<ol>
-  <li> html </li>
-  <li> css </li>
-  <li> javascript </li>
-</ol>
-WonJiYoun
+<h1>  Ko-Jp Typing Test   </h1>
 
+     
+    <input type = "text" onchange = "alert('ch')" >
+    
+    <input type = "button" value = "버튼"
+        onclick = " alert('hi') "> <p>
+
+    <input type = "lable" value = "これは何ですか" id = "jpex"> <br>
+    <input type = "lable" value = "korewa nan des ka" id = "enex"> <br>
+    <input type = "text" id = "input1">
+
+    <input type = "button" value = "확인"
+     onclick = " fn_kakuning() ">
+     
+     <script>
+         function fn_kakuning(){
+             if(jpex.value == input1.value) alert('성공')
+             else alert('오타를 확인해주세요...')
+         }
+</script>
+<p>
+
+
+        
+    
+        
 </body>
 
 </html>
