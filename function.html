@@ -1,0 +1,323 @@
+<html>
+<head> <title> 함수 </title> </head>
+
+<body>
+<!-- editor-template -->
+<div class="editor-template">
+<h3>C언어 함수</h3>
+
+<hr />
+<h4>함수란?</h4>
+
+<p>프로그래밍에서 함수(function)란 하나의 특별한&nbsp;목적의 작업을&nbsp;수행하기 위해&nbsp;독립적으로 설계된 프로그램 코드의 집합으로 정의할 수 있습니다.</p>
+
+<p>C 프로그램은 이러한 함수들로 구성되며, 포함된 함수들을 사용하여 프로그램의 목적을 달성하게 됩니다.</p>
+
+<p>&nbsp;</p>
+
+<p>C언어에서 함수는 크게 표준 함수와 사용자 정의 함수로 구분할 수 있습니다.</p>
+
+<hr />
+<h4>함수를 사용하는 이유</h4>
+
+<p>함수를 사용하는 가장 큰 이유는 바로 반복적인 프로그래밍을 피할 수 있기 때문입니다.</p>
+
+<p>프로그램에서 특정 작업을 여러 번 반복해야&nbsp;할 때는&nbsp;해당&nbsp;작업을 수행하는 함수를 작성하면 됩니다.</p>
+
+<p>그리고서 프로그램이&nbsp;필요할 때마다 작성한 함수를 호출하면 해당 작업을 반복해서 수행할 수 있습니다.</p>
+
+<p>&nbsp;</p>
+
+<p>또한, 프로그램을 여러 개의 함수로 나누어 작성하면, 모듈화로 인해 전체적인 코드의 가독성이&nbsp;좋아집니다.</p>
+
+<p>그리고&nbsp;프로그램에 문제가 발생하거나 기능의 변경이 필요할 때에도&nbsp;손쉽게 유지보수를 할 수 있습니다.</p>
+
+<p>&nbsp;</p>
+
+<div class="content-box s5">함수의 크기에 대해서 정확히 명시된&nbsp;규칙은 없으나, 대략 하나의 기능을 하나의 함수로 만드는 것이 가장 좋습니다.</div>
+
+<hr />
+<h4>함수의 정의</h4>
+
+<p>C언어에서 사용자 정의 함수를 정의하는 방법은 다음 그림과 같습니다.</p>
+
+<p><img alt="함수 선언" src="/lectures/img_c_function_structure.png" style="width: 334px; height: 274px;" /></p>
+
+<p>1. 반환 타입(return type) : 함수가 모든 작업을 마치고 반환하는 데이터의 타입을 명시합니다.</p>
+
+<p>2. 함수 이름 : 함수를 호출하기 위한 이름을 명시합니다.</p>
+
+<p>3. 매개변수&nbsp;목록(parameters) : 함수 호출 시에 전달되는 인수의 값을 저장할 변수들을 명시합니다.</p>
+
+<p>4. 함수 몸체 : 함수의 고유 기능을 수행하는 명령문의 집합입니다.</p>
+
+<p>&nbsp;</p>
+
+<p>함수 호출 시에는 여러 개의 인수를 전달할 수 있지만, 함수가 반환할 수 있는 값은 1개를 넘지 못합니다.</p>
+
+<p>또한, 함수의 특성에 따라 인수나 반환값이 하나도 없는 함수도 존재할 수 있습니다.</p>
+
+<p>&nbsp;</p>
+
+<p>다음 예제에서는 인수로 전달받은 두 수 중에서 더 큰 수를 반환하는 bigNum() 함수를 정의하여 사용합니다.</p>
+
+<div class="codding-test">
+<h5>예제</h5>
+
+<p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+
+<p class="textarea">&nbsp;</p>
+
+<p class="textarea"><span style="color: #993333;">int</span> bigNum<span style="color: #009900;">(</span><span style="color: #993333;">int</span> num01<span style="color: #339933;">,</span> <span style="color: #993333;">int</span> num02<span style="color: #009900;">)</span> <span style="color: #666666; font-style: italic;">// 함수의 정의</span></p>
+
+<p class="textarea"><span style="color: #009900;">{</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span>num01 <span style="color: #339933;">&gt;=</span> num02<span style="color: #009900;">)</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">{</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> num01<span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">}</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">else</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">{</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> num02<span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">}</span></p>
+
+<p class="textarea"><span style="color: #009900;">}</span></p>
+
+<p class="textarea">&nbsp;</p>
+
+<p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+
+<p class="textarea"><span style="color: #009900;">{</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> result<span style="color: #339933;">;</span> &nbsp;</p>
+
+<p class="textarea">&nbsp;</p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>result <span style="color: #339933;">=</span> bigNum<span style="color: #009900;">(</span><span style="color: #0000dd;">3</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">5</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 함수의 호출</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;두 수 중 더 큰수는 %d입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> result<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>result <span style="color: #339933;">=</span> bigNum<span style="color: #009900;">(</span><span style="color: #0000dd;">3</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">1</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 함수의 호출</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;두 수 중 더 큰수는 %d입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> result<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>result <span style="color: #339933;">=</span> bigNum<span style="color: #009900;">(</span><span style="color: #0000dd;">7</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">5</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 함수의 호출</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;두 수 중 더 큰수는 %d입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> result<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #009900;">}</span>&nbsp;&nbsp;</p>
+
+<p><a class="btn02 btn_submit" href="/examples/tryit/tryC.php?filename=c_function_basic_01" target="_blank">코딩연습 ▶</a></p>
+</div>
+
+<div class="syntax">
+<h5>실행 결과</h5>
+
+<p class="textarea">두 수 중&nbsp;더 큰수는 5입니다.</p>
+
+<p class="textarea">두 수 중&nbsp;더 큰수는 3입니다.</p>
+
+<p class="textarea">두 수 중&nbsp;더 큰수는 7입니다.</p>
+</div>
+
+<hr />
+<h4>함수의 원형 선언</h4>
+
+<p>C언어에서&nbsp;함수를 정의할 때는 그 위치가 매우 중요합니다.</p>
+
+<p>&nbsp;</p>
+
+<p>다음 예제는 앞서 살펴본 예제에서 함수&nbsp;정의의 위치만을 바꾼 예제입니다.</p>
+
+<div class="syntax">
+<h5>예제</h5>
+
+<p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+
+<p class="textarea">&nbsp;</p>
+
+<p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+
+<p class="textarea"><span style="color: #009900;">{</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> result<span style="color: #339933;">;</span> &nbsp;</p>
+
+<p class="textarea">&nbsp;</p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>result <span style="color: #339933;">=</span> bigNum<span style="color: #009900;">(</span><span style="color: #0000dd;">3</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">5</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 함수의 호출</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;두 수 중 더 큰수는 %d입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> result<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>result <span style="color: #339933;">=</span> bigNum<span style="color: #009900;">(</span><span style="color: #0000dd;">3</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">1</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 함수의 호출</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;두 수 중 더 큰수는 %d입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> result<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>result <span style="color: #339933;">=</span> bigNum<span style="color: #009900;">(</span><span style="color: #0000dd;">7</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">5</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 함수의 호출</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;두 수 중 더 큰수는 %d입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> result<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+
+<p class="textarea">&nbsp;</p>
+
+<p class="textarea"><span style="color: #993333;">int</span> bigNum<span style="color: #009900;">(</span><span style="color: #993333;">int</span> num01<span style="color: #339933;">,</span> <span style="color: #993333;">int</span> num02<span style="color: #009900;">)</span> <span style="color: #666666; font-style: italic;">// 함수의 정의</span></p>
+
+<p class="textarea"><span style="color: #009900;">{</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span>num01 <span style="color: #339933;">&gt;=</span> num02<span style="color: #009900;">)</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">{</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> num01<span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">}</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">else</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">{</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> num02<span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">}</span></p>
+
+<p class="textarea"><span style="color: #009900;">}</span></p>
+</div>
+
+<p>&nbsp;</p>
+
+<p>C언어에서는 가장 먼저 main() 함수가 컴파일러에 의해 컴파일됩니다.</p>
+
+<p>&nbsp;</p>
+
+<p>위의 예제에서 컴파일러는 main() 함수에 등장하는 bigNum() 함수를 아직 알지 못하기 때문에 컴파일 오류를 발생시킵니다.</p>
+
+<p>따라서 컴파일러에&nbsp;bigNum() 함수는&nbsp;나중에 정의되어 있다고 알려줘야 합니다.</p>
+
+<p>그 역할을 하는 것이 바로 함수의 원형(prototype) 선언입니다.</p>
+
+<p>&nbsp;</p>
+
+<p>위와 같이 차례대로 한 번에 컴파일하는 방식을 단일 패스(one pass) 컴파일 방식이라고 합니다.</p>
+
+<p>하지만 하드웨어의 발달로 컴파일러에 따라 여러 번에 걸쳐 컴파일하는 다중 패스(multi-pass) 방식이&nbsp;많아지고 있습니다.</p>
+
+<p>다중 패스 방식의 컴파일러에서는 함수의 원형을 선언하지 않아도 컴파일 오류를 발생시키지 않습니다.</p>
+
+<p>하지만 오래된&nbsp;컴파일러는 대부분 단일 패스 방식으로 컴파일하므로, C 표준에서는 여전히 함수의 원형을 정의하고 있습니다.</p>
+
+<p>&nbsp;</p>
+
+<p>함수의 원형 선언은 다음과 같은 방식으로 선언됩니다.</p>
+
+<div class="syntax">
+<h5>문법</h5>
+
+<p class="textarea"><span style="color: #993333;">반환타입</span>&nbsp;함수이름<span style="color: #009900;">(</span><span style="color: #993333;">매개변수타입</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+</div>
+
+<p>&nbsp;</p>
+
+<p>다음 예제는 앞서 살펴본 예제에 함수의 원형 선언을 추가한 예제입니다.</p>
+
+<p>이렇게 함수의 원형은 main() 함수 앞에 미리 선언되어야 합니다.</p>
+
+<div class="codding-test">
+<h5>예제</h5>
+
+<p class="textarea"><span style="color: #339933;">#include &lt;stdio.h&gt;</span></p>
+
+<p class="textarea"><span style="color: #993333;">int</span> bigNum <span style="color: #009900;">(</span><span style="color: #993333;">int</span><span style="color: #339933;">,</span> <span style="color: #993333;">int</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 함수의 원형 선언</span> &nbsp;</p>
+
+<p class="textarea">&nbsp;</p>
+
+<p class="textarea"><span style="color: #993333;">int</span> main<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span></p>
+
+<p class="textarea"><span style="color: #009900;">{</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; int</span> result<span style="color: #339933;">;</span> &nbsp;</p>
+
+<p class="textarea">&nbsp;</p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>result <span style="color: #339933;">=</span> bigNum<span style="color: #009900;">(</span><span style="color: #0000dd;">3</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">5</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 함수의 호출</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;두 수 중 더 큰수는 %d입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> result<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>result <span style="color: #339933;">=</span> bigNum<span style="color: #009900;">(</span><span style="color: #0000dd;">3</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">1</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 함수의 호출</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;두 수 중 더 큰수는 %d입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> result<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span>result <span style="color: #339933;">=</span> bigNum<span style="color: #009900;">(</span><span style="color: #0000dd;">7</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">5</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 함수의 호출</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #ff0000;">&quot;두 수 중 더 큰수는 %d입니다.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> result<span style="color: #009900;">)</span><span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #009900;">}</span> &nbsp;</p>
+
+<p class="textarea">&nbsp;</p>
+
+<p class="textarea"><span style="color: #993333;">int</span> bigNum<span style="color: #009900;">(</span><span style="color: #993333;">int</span> num01<span style="color: #339933;">,</span> <span style="color: #993333;">int</span> num02<span style="color: #009900;">)</span> <span style="color: #666666; font-style: italic;">// 함수의 정의</span></p>
+
+<p class="textarea"><span style="color: #009900;">{</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span>num01 <span style="color: #339933;">&gt;=</span> num02<span style="color: #009900;">)</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">{</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> num01<span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">}</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">else</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">{</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #b1b100;">return</span> num02<span style="color: #339933;">;</span></p>
+
+<p class="textarea"><span style="color: #993333;">&nbsp; &nbsp; </span><span style="color: #009900;">}</span></p>
+
+<p class="textarea"><span style="color: #009900;">}</span></p>
+
+<p><a class="btn02 btn_submit" href="/examples/tryit/tryC.php?filename=c_function_basic_02" target="_blank">코딩연습 ▶</a></p>
+</div>
+
+<div class="syntax">
+<h5>실행 결과</h5>
+
+<p class="textarea">두 수 중&nbsp;더 큰수는 5입니다.</p>
+
+<p class="textarea">두 수 중&nbsp;더 큰수는 3입니다.</p>
+
+<p class="textarea">두 수 중&nbsp;더 큰수는 7입니다.</p>
+</div>
+
+<hr />
+<h4>연습문제</h4>
+
+<ul class="btn-exercise">
+	<li><a class="btn02" href="#" target="_blank">연습문제1</a></li>
+	<li><a class="btn02" href="#" target="_blank">연습문제2</a></li>
+	<li><a class="btn02" href="#" target="_blank">연습문제3</a></li>
+	<li><a class="btn02" href="#" target="_blank">연습문제4</a></li>
+	<li><a class="btn02" href="#" target="_blank">연습문제5</a></li>
+</ul>
+
+<hr class="margin-top20 mobile-hidden" /></div>
+<!-- /editor-template -->
+
+
+
+</body>
+
+</html>
