@@ -143,19 +143,42 @@
 				
 				· placeholder 속성
 				· value 속성
+				
+				· &lt;label&gt; &lt;/labet&gt;
+				· target 속성
+				
+				
+				· &lt;select&gt; &lt;option&gt; &lt;/option&gt; &lt;/select&gt;
+				· name, value 속성
+				
+				· &lt;textarea&gt; &lt;/textarea&gt;
+				
+				· &lt;button&gt; &lt;/button&gt;
 				</td>
 				<td> 
 				:입력양식
 				:송신URL
 				:전송방식(get-엽서/post-편지)
 				
-				:다양한 입력 양식
-				:해당 입력 양식의 이름을 지정
-				:text, email, password, button, search, 
+				:다양한 입력양식 (div태그로 구분 잘 하기!)
+				:해당 입력양식의 이름을 지정
+				:text, email, password, button, search
 				 checkbox, file, radio
 				 color, data, number, range, reset, time
 				:텍스트 입력 시 가이드 제공
 				:텍스트 상자에 입력 값 미리 제공
+				
+				:입력양식의 설명을 제공
+				:해당 입력양식의 id속성 과 매칭
+				 예) &lt;label for="<font color = "red">target</font>"&gt;아이디: &lt;/label&gt;
+				     &lt;input type="text" id=<font color = "red">"target"</font>&gt;
+				:DropDown 선택목록
+				:select의 name, option의 value속성은 필수조건
+				
+				:여러 줄로 입력 가능한 텍스트 상자로 col, row 속성 지정 
+				
+				:버튼을 input태그 없이 사용
+				 예) &lt;button type="submit">제출&lt;/button&gt;
 				</td>
 			</tr>
 			</table>
