@@ -416,6 +416,63 @@
 				</td>
 			</tr>
 			</table>
+			<b>[위치와 정렬]</b>
+			<table>
+			<tr>
+				<td> 
+				· block
+				
+				
+				
+				
+				· inline
+				
+				
+				
+				
+				· display_inline-block
+				
+				
+				· display: none
+				· position:static
+				· position:relative
+				
+				· position:absolute
+				
+				
+				
+				
+				
+				· position:fixed
+				</td>
+				<td> 
+				:옆에 다른 요소가 오지 못하도록 개행 
+				 NewLine, 기본값 width : 100%
+				 div, h1~h6, p, header, footer, section 등
+				 width, height, margin, padding 사용 가능
+				 예) <font color=blue>.display_block { margin: 0; } </font>
+				:가능한 개행없이 채움
+				 NoNewLine
+				 span, a, img 등
+				 width, height, margin, padding 사용 불가능
+				 예) <font color=blue>.display_inline { margin: 0; } </font>
+				:width, height, margin, padding 사용하기 위함
+				 block과 동일한 옵션 사용 가능
+				 예) <font color=blue>display: inline-block;</font>
+				:숨기기
+				:기본옵션
+				:상대적인 위치
+				 top, right, bottom, left 사용 가능
+				:절대적인 위치
+				 relative, absolute, fixed가 없다면, body 기준
+				 예) .absolute {
+				      position: absolute;
+				      top: 10px;
+				      left: 100px; }
+				:화면기준 고정값 설정
+				</td>
+			</tr>
+			</table>
 
 		</pre>			
 	</div>		
