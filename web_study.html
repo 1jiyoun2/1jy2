@@ -376,6 +376,7 @@
 				</td>
 			</tr>
 			</table>
+			
 			<b>[box개념]</b>
 			<table>
 			<tr>
@@ -416,6 +417,7 @@
 				</td>
 			</tr>
 			</table>
+			
 			<b>[위치와 정렬]</b>
 			<table>
 			<tr>
@@ -444,6 +446,10 @@
 				
 				
 				· position:fixed
+				· float
+				
+				
+				
 				</td>
 				<td> 
 				:옆에 다른 요소가 오지 못하도록 개행 
@@ -470,10 +476,91 @@
 				      top: 10px;
 				      left: 100px; }
 				:화면기준 고정값 설정
+				:본문과의 배치 (left, right)
+				 예) .cat-img {
+				       width: 200px;
+				       float: right;
+				      }
 				</td>
 			</tr>
 			</table>
 
+			<b>[위치 정렬]</b>
+			<table>
+			<tr>
+				<td> 
+				· 정해진 기준 방향으로 줄을 세운다.
+				· flexbox를 사용하기 위한 필수 ↓
+				   .parent { /* 배치, 정렬하고자 하는 요소를 감싸는 부모 요소 */
+				      display: flex;
+				    }
+				   .child { /* 배치, 정렬하고자 하는 대상 요소 */
+					    ... 
+				    }
+					
+					부모
+				· flex-direction
+				· flex-wrap
+				· flex-flow
+				· justify-cotent
+				· align-items
+				· align-content
+				
+				*사이즈는 flex container 가 우선 적용
+				
+				· flex-wrap: wrap
+				· flex-flow: column wrap;
+				
+				
+				
+				
+				· justify-content
+				· justify-content: flex-start
+				· justify-content: center
+				· justify-content: flex-end
+				· justify-content: space-between
+				· justify-content: space-around;
+				
+				· align-items
+				</td>
+				<td> 
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				    자식
+				:flex
+				:flex-grow
+				:flex-shrink
+				:flex-basis
+				:order
+				
+				
+				
+				:자동 개행
+				:direction과 flow 동시에 지정
+				 예) .container {
+				       display: flex;
+				       flex-flow: column wrap;
+				      }
+				:내부 정렬
+				:행 기준 - 왼쪽, 열 기준 - 위
+				:행 기준 - 가운데, 열 기준 - 가운데
+				:행 기준 - 오른쪽, 열 기준 - 아래
+				:양쪽 정렬
+				:양쪽 공백 있는 양쪽 정렬
+				
+				:flex에서 정한 방향의 수직 방향
+				 기본값 - stretch
+				</td>
+			</tr>
+			</table>
+			
 		</pre>			
 	</div>		
 
