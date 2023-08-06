@@ -15,8 +15,9 @@
 <h3>Data Base</h3>
   <div>
     <h5>ch6 실습 데이터 구축하기</h5>
-    <div>
+    <div>   <!--학생 과목 등록-->
 	    <pre>
+		<h5>create</h5>
 		CREATE TABLE STUDENT   
 		( Sno INT NOT NULL,
 		     Sname CHAR(10) NOT NULL,
@@ -45,9 +46,118 @@
 		     FOREIGN KEY(Cno) REFERENCES COURSE(Cno)
 		         ON DELETE CASCADE
 		         ON UPDATE CASCADE,
-		     CHECK(Midterm>=0 AND Midterm<=100 AND Final>=0 AND Final<=100));		    
+		     CHECK(Midterm>=0 AND Midterm<=100 AND Final>=0 AND Final<=100));	
+
+		<h5>insert</h5>
+		INSERT INTO STUDENT VALUES(100, '나수영', 4, '컴퓨터');
+		INSERT INTO STUDENT VALUES(200, '이찬수', 3, '전기');
+		INSERT INTO STUDENT VALUES(300, '정기태', 1, '컴퓨터');
+		INSERT INTO STUDENT VALUES(400, '송병길', 4, '컴퓨터');
+		INSERT INTO STUDENT VALUES(500, '박종화', 2, '산공');
+		
+		
+		
+		INSERT INTO COURSE VALUES('C123', '프로그래밍', 3, '컴퓨터', '김성국');
+		INSERT INTO COURSE VALUES('C312', '자료구조',   3, '컴퓨터', '황수관');
+		INSERT INTO COURSE VALUES('C324', '화일구조',   3, '컴퓨터', '이규찬');
+		INSERT INTO COURSE VALUES('C413', '데이타베이스', 3, '컴퓨터', '이일로');
+		INSERT INTO COURSE VALUES('E412', '반도체',     3, '전자', '홍봉진');
+		
+		
+		
+		INSERT INTO ENROL VALUES(100, 'C413', 'A', 90, 95);
+		INSERT INTO ENROL VALUES(100, 'E412', 'A', 95, 95);
+		INSERT INTO ENROL VALUES(200, 'C123', 'B', 85, 80);
+		INSERT INTO ENROL VALUES(300, 'C312', 'A', 90, 95);
+		INSERT INTO ENROL VALUES(300, 'C324', 'C', 75, 75);
+		INSERT INTO ENROL VALUES(300, 'C413', 'A', 95, 90);
+		INSERT INTO ENROL VALUES(400, 'C312', 'A', 90, 95);
+		INSERT INTO ENROL VALUES(400, 'C324', 'A', 95, 90);
+		INSERT INTO ENROL VALUES(400, 'C413', 'B', 80, 85);
+		INSERT INTO ENROL VALUES(400, 'E412', 'C', 65, 75);
+		INSERT INTO ENROL VALUES(500, 'C312', 'B', 85, 80);
+	     
 	    </pre>
     </div>
+    <div>   <!-- 납품 -->
+	    <pre>
+		    <h5>create</h5>
+			create table SUPPLIERS (
+				Sno INT NOT NULL,
+				Sname CHAR(20) NOT NULL,
+				Status CHAR(20),
+				City CHAR(20),
+				PRIMARY KEY(Sno));
+		
+			CREATE TABLE PRODUCTS 
+			   ( Pno CHAR(6) NOT NULL,
+			     Pname CHAR(20) NOT NULL,
+			     Colour CHAR(20),
+			     Weight INT,
+			     PRIMARY KEY(Pno));
+			
+			CREATE TABLE SHIPMENTS 
+			   ( Sno INT NOT NULL, 
+			     Pno CHAR(6) NOT NULL,
+			     Qty INT,
+			     PRIMARY KEY(Sno,Pno),
+			     FOREIGN KEY(Sno) REFERENCES SUPPLIERS (Sno)
+			         ON DELETE CASCADE ON UPDATE CASCADE,
+			     FOREIGN KEY(Pno) REFERENCES PRODUCTS (Pno)
+			         ON DELETE CASCADE ON UPDATE CASCADE );
+		    
+		    <h5>insert</h5>
+		    	insert into SUPPLIERS  values(101, '빙그레', 'on', 'seoul');
+		    
+			insert into PRODUCTS values('B01', '투게더', 'white', 450);
+			insert into PRODUCTS values('123', '위즐', 'choco', 350);
+					    
+			insert into SHIPMENTS values(101, 'B01', 3);
+			insert into SHIPMENTS values(101, '123', 2);
+	    </pre>
+     </div>
+
+
+			     
+    <div>   <!-- DVD -->
+	    <pre>
+		    <h5>create</h5>
+			CREATE TABLE CUSTOMER
+			   ( Cno INT NOT NULL,
+			     Cname CHAR(20) NOT NULL,
+			     Addr CHAR(20),
+			     Telno CHAR(20),
+			     PRIMARY KEY(Cno));		    
+			CREATE TABLE RENT
+			   ( Cno INT NOT NULL,
+			     Dno CHAR(20) NOT NULL,
+			     Cnt INT,
+			     PRIMARY KEY(Cno, Dno));
+		    
+		    <h5>insert</h5>	
+			insert into CUSTOMER values(1,'이성호', '신림동', '320-1124');
+			insert into CUSTOMER values(2,'정수영', '금천동', '320-1122');
+			insert into CUSTOMER values(3,'이소라', '신림동', '321-1126');
+			insert into CUSTOMER values(4,'김시영', '광안동', '320-1123');
+			insert into CUSTOMER values(5,'최우석', '금천동', '323-1125');
+			insert into CUSTOMER values(6,'김민우', '신림동', '320-1129');
+			insert into CUSTOMER values(7,'박상일', '금천동', '325-1128');
+
+			insert into RENT values(1, 'D101', 6);
+			insert into RENT values(1, 'D104', 5);
+			insert into RENT values(2, 'D101', 1);
+			insert into RENT values(2, 'D102', 2);
+			insert into RENT values(2, 'D104', 4);
+			insert into RENT values(3, 'D102',  4);
+			insert into RENT values(3, 'D104', 9);
+			insert into RENT values(4, 'D101', 6);
+			insert into RENT values(4, 'D102', 8);
+			insert into RENT values(5, 'D104', 7);		
+	    </pre>
+     </div>			     
+
+
+			     
   </div>
 
   
