@@ -15,7 +15,39 @@
 <h3>Data Base</h3>
   <div>
     <h5>ch6 실습 데이터 구축하기</h5>
-    
+    <div>
+	    <p>
+		CREATE TABLE STUDENT   
+		( Sno INT NOT NULL,
+		     Sname CHAR(10) NOT NULL,
+		     Year INT,
+		     Dept CHAR(20),
+		     PRIMARY KEY(Sno));
+		
+		CREATE TABLE COURSE
+		   ( Cno CHAR(6) NOT NULL,
+		     Cname CHAR(20) NOT NULL,
+		     Credit INT,
+		     Dept CHAR(20),
+		     PRname CHAR(10),
+		     PRIMARY KEY(Cno));
+		
+		CREATE TABLE ENROL
+		   ( Sno INT NOT NULL,
+		     Cno CHAR(6) NOT NULL,
+		     Grade CHAR(1),
+		     Midterm INT,
+		     Final INT,
+		     PRIMARY KEY(Sno, Cno),
+		     FOREIGN KEY(Sno) REFERENCES STUDENT(Sno)
+		         ON DELETE CASCADE
+		         ON UPDATE CASCADE,
+		     FOREIGN KEY(Cno) REFERENCES COURSE(Cno)
+		         ON DELETE CASCADE
+		         ON UPDATE CASCADE,
+		     CHECK(Midterm>=0 AND Midterm<=100 AND Final>=0 AND Final<=100));		    
+	    </p>
+    </div>
   </div>
 
   
