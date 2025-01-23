@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>송장번호 조회</title>
+    <title>영통회 계정확인 및 시간 조회</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #ffffff;
             margin: 0;
             padding: 0;
         }
@@ -24,7 +24,7 @@
             color: #333;
         }
         label, input, button {
-            width: 100%;
+            width: 90%;
             padding: 10px;
             font-size: 16px;
             margin-bottom: 20px;
@@ -34,13 +34,13 @@
             border: 1px solid #ccc;
         }
         button {
-            background-color: #4CAF50;
+            background-color: #f46602;
             color: white;
             border: none;
             cursor: pointer;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #CE723D;
         }
         .result {
             margin-top: 20px;
@@ -54,23 +54,23 @@
 <body>
 
     <div class="container">
-        <h1>송장번호 조회</h1>
-        <label for="phone_last_digit">전화번호 뒷자리를 입력하세요:</label>
-        <input type="text" id="phone_last_digit" placeholder="전화번호 뒷자리를 입력하세요">
-        <button onclick="fetchTrackingNumber()">조회</button>
+        <h1> 2. 영통회 계정확인 및 시간 조회 </h1>
+        <label for="phone_last_digit">인스타 계정을 입력하세요:</label>
+        <input type="text" id="phone_last_digit" placeholder="인스타 계정을 입력하세요">
+        <button onclick="fetchTrackingNumber()">조회</button><br>
         
         <div class="result" id="result"></div>
     </div>
 
     <script>
         // 구글 시트의 CSV URL
-        const googleSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRtSFl0GtuOF3prejuw9SEAfrJtLwRaGBm85RMevU-qwTAiM1I_3VrPtZlAiedOBDcWlltu8q9D27ZV/pub?gid=843718176&single=true&output=csv';
+        const googleSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTKp-6lh5i0hvbSIEPq4IPHj-SBZAIqDOS8ONxBAS6Kl5drYZgXcLwehrblDRYr_ALXSu3E6-n-QqEu/pub?gid=0&single=true&output=csv';
 
         // Google Sheets에서 데이터를 가져오는 함수
         function fetchTrackingNumber() {
             const phoneLastDigit = document.getElementById('phone_last_digit').value.trim();
             if (!phoneLastDigit) {
-                alert("전화번호 뒷자리를 입력하세요.");
+                alert("인스타 계정을 입력하세요.");
                 return;
             }
 
@@ -80,8 +80,8 @@
                 .then(csvText => {
                     const data = csvToArray(csvText);
                     const result = getTrackingNumberFromData(data, phoneLastDigit);
-                    document.getElementById('result').textContent = result ? `송장번호: ${result}` : "해당하는 송장번호를 찾을 수 없습니다. 메일로 문의주세요.";
-                })
+                    document.getElementById('result').textContent = result ? `시간: ${result}` : "찾을 수 없습니다.";
+                })  
                 .catch(error => {
                     console.error("Error fetching data: ", error);
                     alert("데이터를 가져오는 중에 오류가 발생했습니다.");
@@ -106,14 +106,15 @@
         // 전화번호 뒷자리를 기준으로 송장번호 찾기
         function getTrackingNumberFromData(data, phoneLastDigit) {
             for (let row of data) {
-                const phoneNumber = row['전화번호'].replace(/-/g, '');  // 전화번호에서 하이픈 제거
+                const phoneNumber = row['계정명'].replace(/-/g, '');  
                 if (phoneNumber.slice(-4) === phoneLastDigit) {
-                    return row['송장번호'];  // 송장번호 반환
+                    return row['시간'];  
                 }
             }
-            return null;  // 일치하는 송장번호가 없을 경우 null 반환
+            return null;  
         }
+        
     </script>
- <br><br><br><br><br><br>지속적이 오류 발생 시 문의: sandsenter785@gmail.com 
+ <br><br><br> <center> 지속적인 오류 발생 시 문의: sandsenter785@gmail.com </center> 
 </body>
 </html>
