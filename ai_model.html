@@ -1,178 +1,198 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI 손 제스처 – 실시간 분류</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>판교고등학교</title>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
   <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+
   <style>
-    body{margin:0;padding:20px;font-family:'Malgun Gothic',sans-serif;
-         background:linear-gradient(to bottom,#87CEEB,#E0F7FA);text-align:center}
-    #game{position:relative;margin:30px auto;width:600px;height:400px}
-    #webcam{position:absolute;top:10px;right:10px;z-index:10;
-            border:5px solid #ff5722;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.3)}
-    #prob{position:absolute;top:140px;right:10px;width:160px;z-index:10;
-          background:rgba(255,255,255,.95);padding:10px;border-radius:12px;
-          font-size:13px;box-shadow:0 2px 10px rgba(0,0,0,.2)}
-    .bar{height:16px;margin:4px 0;border-radius:4px;background:#e0e0e0}
-    .fill{height:100%;border-radius:4px}
-    #inst{margin:15px;padding:18px;background:#e8f5e9;border-radius:12px;
-          border:2px solid #4caf50;display:inline-block}
-    h1{color:#1b5e20}
-    .gest{font-weight:bold;color:#d50000;font-size:1.4em}
+    :root {
+      --sky1:#87CEEB; --sky2:#E0F7FA; --accent:#ff6d00;
+      --panel:#ffffff; --muted:#9e9e9e;
+      --good:#43a047; --left:#4caf50; --right:#2196f3; --fist:#ff5722;
+    }
+    body {
+      margin:0; font-family:"Malgun Gothic",sans-serif;
+      background:linear-gradient(to bottom,var(--sky1),var(--sky2));
+      color:#222;
+    }
+    header{text-align:center;padding:18px 0 6px}
+    h1{margin:0;font-size:22px}
+    #inst{
+      margin:10px auto;padding:10px 16px;border-radius:12px;
+      border:2px solid var(--good);background:#e8f5e9;text-align:center;
+      max-width:880px;
+    }
+    #gameWrap{
+      position:relative;margin:0 auto;width:min(92vw,820px);
+      aspect-ratio:3/2;
+    }
+    #hud{
+      position:absolute;right:10px;top:10px;width:180px;
+      background:rgba(255,255,255,.96);border-radius:12px;
+      box-shadow:0 4px 14px rgba(0,0,0,.15);padding:10px 10px 12px;
+      font-size:13px;z-index:20;
+    }
+    #hud h3{margin:0 0 8px;font-size:14px}
+    .row{margin:6px 0}
+    .name{display:flex;justify-content:space-between;font-weight:600}
+    .bar{height:12px;background:#ececec;border-radius:6px;overflow:hidden;margin-top:3px}
+    .fill{height:100%}
+    #cam{
+      position:absolute;right:10px;top:176px;width:180px;
+      border:5px solid var(--accent);border-radius:12px;overflow:hidden;
+      background:#000;box-shadow:0 4px 14px rgba(0,0,0,.15);z-index:10;
+    }
+    #cam video{width:100%;height:auto;display:block;transform:scaleX(-1);}
+    #status{text-align:center;margin:14px 0 8px;font-size:16px}
+    .gest{font-weight:700;color:#d50000}
   </style>
 </head>
 <body>
-  <h1>AI 손 제스처 – 실시간 콘솔 & 확률</h1>
+  <header><h1>판교고등학교 – AI 제스처 게임</h1></header>
   <div id="inst">
-    <p><strong>왼쪽 → 왼쪽 | 오른쪽 → 오른쪽 | 주먹 → 점프!</strong></p>
+    왼쪽 → 캐릭터 왼쪽 이동 · 오른쪽 → 캐릭터 오른쪽 이동 · 주먹 → 점프 · none(없음) → 정지<br>
+    팁: 조명 밝게, 배경 단순하게, 손을 화면 중앙에!
   </div>
 
-  <div id="game"></div>
-  <p>현재 판단: <span class="gest" id="gest">대기 중...</span></p>
+  <div id="gameWrap">
+    <div id="hud">
+      <h3>AI 확신도</h3>
+      <div id="prob"></div>
+    </div>
+    <div id="cam"></div>
+  </div>
+
+  <div id="status">현재 판단: <span class="gest" id="gest">모델 준비 중...</span></div>
 
   <script>
-    const MODEL_URL = 'https://teachablemachine.withgoogle.com/models/6uKiaMXZR/';
-    let classifier, video, probDiv;
-    let label = '대기 중...';
-    let conf = { Fist:0, Right:0, Left:0, None:0 };
-    let x = 275, y = 300, jumping = false;
+    const MODEL_URL = 'https://teachablemachine.withgoogle.com/models/EvIZbroaE/';
+    const labels = ['Fist','Left','Right','None'];
+    const conf = {Fist:0,Left:0,Right:0,None:0};
 
-    function preload() {
-      classifier = ml5.imageClassifier(MODEL_URL + 'model.json', modelLoaded);
-    }
+    let classifier, video;
+    let readyVideo=false, readyModel=false;
+    let label='None';
 
-    let modelReady = false;
+    // 게임 변수
+    let x=275,y=300,vx=0,vy=0,grounded=true;
+    const G=0.8,FRICTION=0.85,AIR=0.92,SPEED=1.2,JUMP_V=-14;
 
-    function modelLoaded() {
-      console.log('모델 로드 완료!');
-      modelReady = true;
-      // video가 준비되면 분류 시작
-      if (video && video.loadedmetadata) {
-        startClassifying();
-      }
-    }
-
-    function setup() {
-      let c = createCanvas(600, 400);
-      c.parent('game');
-
-      video = createCapture(VIDEO);
-      video.size(160, 120);
-      video.hide();
-
-      // 비디오 준비 완료 이벤트
-      video.elt.addEventListener('loadedmetadata', () => {
-        console.log('웹캠 준비 완료!');
-        if (modelReady) {
-          startClassifying();
-        }
+    function preload(){
+      classifier = ml5.imageClassifier(MODEL_URL+'model.json', ()=>{
+        readyModel=true;
+        if(readyVideo) startClassify();
       });
-
-      // 확률 바 DOM 한 번만 생성
-      probDiv = createDiv('');
-      probDiv.id('prob');
-      probDiv.parent('game');
     }
 
-    function startClassifying() {
-      console.log('분류 시작...');
-      classifier.classifyStart(video, gotResults);
+    function setup(){
+      const wrap=document.getElementById('gameWrap');
+      const br=wrap.getBoundingClientRect();
+      const cw=Math.min(br.width,820), ch=cw*(2/3);
+      const c=createCanvas(cw,ch);
+      c.parent('gameWrap');
+
+      pixelDensity(1);
+
+      video=createCapture({video:{facingMode:"user"},audio:false},()=>{
+        readyVideo=true;
+        if(readyModel) startClassify();
+      });
+      video.size(180,120);
+      document.getElementById('cam').appendChild(video.elt);
+
+      renderProb();
+
+      window.addEventListener('resize',()=>{
+        const br2=wrap.getBoundingClientRect();
+        const cw2=Math.min(br2.width,820),ch2=cw2*(2/3);
+        resizeCanvas(cw2,ch2);
+      });
     }
 
-    function draw() {
-      background(135, 206, 235);
-      drawFloor();
-
-      // 웹캠
-      image(video, width - 170, 10, 160, 120);
-      noFill(); stroke(255, 87, 34); strokeWeight(5);
-      rect(width - 170, 10, 160, 120, 12);
-
-      // 확률 바 업데이트
-      updateProb();
-
-      // 캐릭터
-      drawChar();
-
-      // 제스처 반응
-      if (label === 'Left') x -= 7;
-      if (label === 'Right') x += 7;
-      if (label === 'Fist' && !jumping) jump();
-
-      x = constrain(x, 0, width - 50);
-      select('#gest').html(getName(label));
+    function startClassify(){
+      classifier.classify(video, gotResults);
     }
 
-    // 실시간 확률 바
-    function updateProb() {
-      const order = ['Fist', 'Right', 'Left', 'None'];
-      const kor = { Fist: '주먹', Right: '오른쪽', Left: '왼쪽', None: '없음' };
-      const col = { Fist: '#ff5722', Right: '#2196f3', Left: '#4caf50', None: '#9e9e9e' };
+    function gotResults(err, results){
+      if(err){console.error(err);classifier.classify(video,gotResults);return;}
+      if(!results||!results.length){classifier.classify(video,gotResults);return;}
 
-      let max = 0, maxL = '';
-      order.forEach(k => { if (conf[k] > max) { max = conf[k]; maxL = k; } });
+      const current={Fist:0,Left:0,Right:0,None:0};
+      results.forEach(r=>{
+        const n=normalize(r.label);
+        if(current[n]!=undefined) current[n]=Math.max(current[n],r.confidence||0);
+      });
+      labels.forEach(k=>conf[k]=0.4*current[k]+0.6*conf[k]);
 
-      let html = '<b>AI 확신도</b><br>';
-      order.forEach(k => {
-        let w = conf[k] * 150;
-        let bold = k === maxL ? 'bold' : 'normal';
-        let c = k === maxL ? '#d50000' : '#333';
-        html += `
-          <div style="margin:5px 0;text-align:left">
-            <div style="color:${c};font-weight:${bold}">${kor[k]}: ${(conf[k]*100).toFixed(1)}%</div>
+      let maxK='None',maxV=conf.None;
+      labels.forEach(k=>{if(conf[k]>maxV){maxV=conf[k];maxK=k;}});
+      label=maxK;
+      renderProb();
+      document.getElementById('gest').textContent=kor(label);
+      classifier.classify(video,gotResults);
+    }
+
+    function draw(){
+      const sx=width/600,sy=height/400;
+      push();scale(sx,sy);
+      background(135,206,235);
+      fill(139,69,19);rect(0,350,600,50);
+      fill(34,139,34);for(let i=0;i<600;i+=30)rect(i,345,20,10);
+
+      if(label==='Left')vx-=SPEED;
+      if(label==='Right')vx+=SPEED;
+      if(label==='Fist'&&grounded){vy=JUMP_V;grounded=false;}
+
+      vy+=G;y+=vy;x+=vx;
+      if(y>=300){y=300;vy=0;grounded=true;}
+      vx*=grounded?FRICTION:AIR;
+      x=constrain(x,0,550);
+
+      drawChick(x,y);
+      pop();
+    }
+
+    function drawChick(cx,cy){
+      noStroke();fill(255,235,59);rect(cx,cy,50,50,14);
+      fill(255);ellipse(cx+15,cy+18,15,15);ellipse(cx+35,cy+18,15,15);
+      fill(0);ellipse(cx+15,cy+18,7,7);ellipse(cx+35,cy+18,7,7);
+      fill(255,109,0);triangle(cx+22,cy+26,cx+28,cy+26,cx+25,cy+33);
+      fill(255,138,128);ellipse(cx+10,cy+28,7,7);ellipse(cx+40,cy+28,7,7);
+    }
+
+    function renderProb(){
+      const korN={Fist:'주먹',Left:'왼쪽',Right:'오른쪽',None:'없음'};
+      const col={Fist:'var(--fist)',Left:'var(--left)',Right:'var(--right)',None:'var(--muted)'};
+      let maxK='None',maxV=conf.None;
+      Object.keys(conf).forEach(k=>{if(conf[k]>maxV){maxV=conf[k];maxK=k;}});
+      const el=document.getElementById('prob');
+      el.innerHTML=Object.keys(conf).map(k=>{
+        const pct=(conf[k]*100).toFixed(1);
+        const w=Math.round(conf[k]*160);
+        const bold=k===maxK?700:500;
+        const color=k===maxK?'#d50000':'#333';
+        return `
+          <div class="row">
+            <div class="name" style="color:${color};font-weight:${bold}">
+              <span>${korN[k]}</span><span>${pct}%</span>
+            </div>
             <div class="bar"><div class="fill" style="width:${w}px;background:${col[k]}"></div></div>
           </div>`;
-      });
-      probDiv.html(html);
+      }).join('');
     }
 
-    function drawFloor() {
-      fill(139, 69, 19); rect(0, 350, width, 50);
-      fill(34, 139, 34);
-      for (let i = 0; i < width; i += 30) rect(i, 345, 20, 10);
+    function kor(l){return {Left:'왼쪽',Right:'오른쪽',Fist:'주먹',None:'없음'}[l]||l;}
+    function normalize(s){
+      s=String(s).toLowerCase();
+      if(s.includes('left')||s.includes('왼'))return'Left';
+      if(s.includes('right')||s.includes('오른'))return'Right';
+      if(s.includes('fist')||s.includes('주먹'))return'Fist';
+      return'None';
     }
-
-    function drawChar() {
-      fill(76, 175, 80); rect(x, y, 50, 50, 12);
-      fill(255); ellipse(x + 15, y + 18, 16); ellipse(x + 35, y + 18, 16);
-      fill(0); ellipse(x + 15, y + 18, 8); ellipse(x + 35, y + 18, 8);
-    }
-
-    function jump() {
-      jumping = true; y = 200;
-      setTimeout(() => { y = 300; jumping = false; }, 700);
-    }
-
-    // 핵심: 연속 분류 콜백 (자동으로 계속 호출됨)
-    function gotResults(results) {
-      if (!results || results.length === 0) {
-        console.error('결과 없음');
-        return;
-      }
-
-      // 1. 콘솔에 계속 찍기
-      console.log('실시간 결과:', results);
-
-      // 2. 라벨 & 확률 업데이트
-      label = results[0].label;
-      results.forEach(r => {
-        conf[r.label] = r.confidence;
-      });
-    }
-
-    function getName(l) {
-      const m = { Left: '왼쪽', Right: '오른쪽', Fist: '주먹!', None: '없음' };
-      return m[l] || l;
-    }
-
-    // 웹캠 권한 확인
-    setTimeout(() => {
-      if (!video || video.width === 0) {
-        alert('웹캠이 안 켜졌어요!\n1. 카메라 권한 허용\n2. 페이지를 새로고침');
-      }
-    }, 5000);
   </script>
 </body>
 </html>
