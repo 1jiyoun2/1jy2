@@ -1,106 +1,89 @@
 <!DOCTYPE html>
-<html>
-<head> <title> WonJiYoun </title>
-<meta charset = "utf-8">
-<script>
-	function SirenFunction(idMyDiv){
-		 var objDiv = document.getElementById(idMyDiv);
-		 if(objDiv.style.display=="none"){ objDiv.style.display = "block"; }
-		  else{ objDiv.style.display = "none"; }
-	} </script>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Teaching Archive</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, "Malgun Gothic", sans-serif;
+            background: #f6f7fb;
+            color: #20243a;
+        }
+        main {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 56px 24px 80px;
+        }
+        h1 {
+            margin-bottom: 8px;
+            font-size: 2.6rem;
+        }
+        .subtitle {
+            margin-top: 0;
+            color: #666b7a;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 36px;
+        }
+        .card {
+            display: block;
+            padding: 22px;
+            border-radius: 14px;
+            background: #fff;
+            color: inherit;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(0,0,0,.06);
+        }
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        .card h2 {
+            margin: 0 0 8px;
+            font-size: 1.2rem;
+        }
+        .card p {
+            margin: 0;
+            color: #666b7a;
+            line-height: 1.6;
+        }
+    </style>
 </head>
-
 <body>
-	  
-	<font size = "8" color = "#2D3250">  WonJiYoun <br>  </font>
-	원지연, 2층 1학년 교무실<br>
-	<hr>
-	<font size = "6">   <b> contact </b>  </font> <br> <br>
-	<font size = "4">  
-	- email : 1jiyoun2@naver.com  |  010-9321-4371 </font> <hr> 
+<main>
+    <h1>Teaching Archive</h1>
+    <p class="subtitle">Programming · Computer Science · AI</p>
 
-	<div>
-		 <!판교고> <br>
-		<font size = "5">   <b> 판교고등학교 </b>  </font> <br> <br>
-	</div>
+    <div class="grid">
+        <a class="card" href="courses/programming/2026-grade2/">
+            <h2>2026 2학년 프로그래밍</h2>
+            <p>수업 설계와 학습 자료를 정리하는 현재 수업 아카이브</p>
+        </a>
 
-	<hr>
-	<br><br><br><br><br><br>
+        <a class="card" href="courses/ai-basics/summary.html">
+            <h2>인공지능 기초</h2>
+            <p>인공지능 개념, 활용 사례, 모델 실습 자료</p>
+        </a>
 
-	<div class="con_inner">
-		<div class="sir_singo_msg">
-			<a href="#" onclick="SirenFunction('SirenDiv'); return false;" class="blind_view">
-				이전자료들
-			</a>
-		</div>
-			<div class="singo_view" id="SirenDiv" style="display:none">
-	
-			<div>
-				<a href="https://1jiyoun2.github.io/1jy2/study_db.html" target=_blank>
-				- 데이터베이스
-				</a>  <p><p> <br><br>
-			</div>
-			<div class="sir_singo_msg">
-				<a href="#" onclick="SirenFunction('SirenDiv2'); return false;" class="blind_view">
-					인공지능
-				</a>
-			</div>
-			<div class="singo_view" id="SirenDiv2" style="display:none">		
-				<font size = "4"> <b>
-				<a href="https://forms.gle/gzhT4aWEdbavN9QN8" target=_blank>첫 시간 설문지</a> <br>
-				</font></b>  <p><p> <br><br>
-		
-				<a href="https://1jiyoun2.github.io/1jy2/ai_1.html" target=_blank>
-				- 첫 시간 영상</a> <br><br>
-				
-				<a href="https://1jiyoun2.github.io/1jy2/ai_main.html" target=_blank>
-				- 내용정리</a> <br><br>
-		
-				<a href="https://padlet.com/2hong9_34/l2ll7r5j8d5wffez" target=_blank>
-				- 페들렛</a> <br><br>
-						
-				<a href="https://classroom.google.com/c/NDY4MjU0MTU2NjA3?cjc=n6k6tyt" target=_blank>
-				- 구글 클래스룸으로 이동
-				</a>   <br><br>
-		
-				<a href="https://1jiyoun2.github.io/1jy2/sign.html" target=_blank>
-				- 수어 테스트
-				</a>
-			</div>				
-	
-	 <br> <br> <br> <hr>
-	
-	
-		<div class="singo_view" id="SirenDiv" style="display:none">
+        <a class="card" href="courses/c-programming/function.html">
+            <h2>C Programming</h2>
+            <p>함수, 배열, 포인터 등 C 언어 문법 수업 자료</p>
+        </a>
 
-			<div>
-			<font size = "6">   <b> study </b>  </font> <br> <br>
+        <a class="card" href="courses/database/">
+            <h2>Database</h2>
+            <p>데이터베이스와 SQL 수업 자료</p>
+        </a>
 
-			<a href = "https://1drv.ms/u/s!AhiJ6Yo-lIwQmBcvGCvqBGJlGA0U">
-			<font size = "4">  - Note </a> <br>
-			-------------------------------------------<br>  </div>
-
-			<div>
-			<a href = "https://1jiyoun2.github.io/1jy2/function.html" target="_blank">
-			<font size = "4">  - 함수  </a> <br> <br>
-
-			<a href = "https://1jiyoun2.github.io/1jy2/array.html" target="_blank">
-			<font size = "4">  - 배열과 포인터  </a> <br> <br>
-
-			<a href = "https://dojang.io/mod/page/view.php?id=408" target="_blank">
-			<font size = "4">  - 구조체  </a> <br> <br>	
-
-			<a href = "https://ehclub.co.kr/1840">
-			<font size = "4">  - 정렬 알고리즘  </a> <br> <br>	
-			-------------------------------------------<br>	</div>	
-
-			<div>
-			<a href = "https://1jiyoun2.github.io/1jy2/web_study.html" target="_blank">
-			<font size = "4">  - 웹프로그래밍  </a> <br> <br>
-			-------------------------------------------<br>	</div>	
-
-		</div>
-	</div>			
+        <a class="card" href="courses/web-programming/">
+            <h2>Web Programming</h2>
+            <p>HTML과 CSS 기초 수업 자료</p>
+        </a>
+    </div>
+</main>
 </body>
-
 </html>
