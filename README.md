@@ -5,9 +5,11 @@
 ## Courses
 
 - 2022개정 프로그래밍
-- 2022개정 인공지능 기촟
+- 2022개정 인공지능 기초
 - 제2020-236호 인공지능 기초
-- 예전자료)C Programming
-- 예전자료)Database
-- 예전자료)Web Programming
 
+## Archive
+
+- C Programming
+- Database
+- Web Programming
