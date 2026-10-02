@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python 기초 문법 - 파일 처리</title><link rel="stylesheet" href="../../style.css"></head>
+<body><main>
+<p class="back"><a href="./">← Python 기초 문법</a></p>
+<h1>5. 파일 처리</h1>
+<p class="subtitle">File · open() · read() · write() · TXT · CSV</p>
+
+<h2>파일 처리 흐름</h2>
+<p>파일 이름과 모드를 지정해 파일을 열고 → 데이터를 읽거나 쓰고 → 작업이 끝나면 파일을 닫는 흐름으로 처리한다.</p>
+
+<h2>주요 파일 모드</h2>
+<table class="list"><thead><tr><th class="name">모드</th><th class="description">의미</th></tr></thead><tbody>
+<tr><td><code>r</code></td><td class="description">읽기. 대상 파일이 필요하다.</td></tr>
+<tr><td><code>w</code></td><td class="description">쓰기. 기존 파일이 있으면 새 내용으로 덮어쓴다.</td></tr>
+<tr><td><code>x</code></td><td class="description">새 파일 생성. 같은 이름의 파일이 있으면 생성하지 않는다.</td></tr>
+<tr><td><code>a</code></td><td class="description">파일의 마지막에 내용을 추가한다.</td></tr>
+<tr><td><code>b</code></td><td class="description">바이너리 모드</td></tr>
+<tr><td><code>t</code></td><td class="description">텍스트 모드</td></tr>
+<tr><td><code>+</code></td><td class="description">읽기와 쓰기를 함께 사용하는 업데이트 모드</td></tr>
+</tbody></table>
+
+<h2>TXT 파일 쓰기와 읽기</h2>
+<div class="code-embed" data-src="code/07_file_io.py" data-label="TXT 파일 저장 후 읽기"></div>
+
+<h2>추가 모드</h2>
+<div class="code-embed" data-src="code/21_append.py" data-label="a 모드로 내용 추가"></div>
+
+<h2>CSV 파일</h2>
+<p>CSV는 한 줄의 여러 값을 쉼표로 구분해 저장하는 텍스트 형식이다.</p>
+<div class="code-embed" data-src="code/22_csv.py" data-label="간단한 CSV 저장과 읽기"></div>
+
+<h2>확인하기</h2>
+<ol>
+<li>없는 파일을 <code>r</code> 모드로 열 때와 <code>w</code> 모드로 열 때의 차이를 확인한다.</li>
+<li><code>w</code>와 <code>a</code>가 기존 파일 내용에 미치는 차이를 설명한다.</li>
+<li>CSV 한 줄을 읽은 뒤 <code>split(",")</code>한 결과를 확인한다.</li>
+</ol>
+<p><a href="../exception/">파일 처리에서 발생하는 예외 보기 →</a></p>
+<script src="../../code-embed.js"></script>
+</main></body></html>
