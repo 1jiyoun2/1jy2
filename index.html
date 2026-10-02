@@ -5,51 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Teaching Archive</title>
     <style>
+        :root {
+            color-scheme: light;
+        }
+
         body {
             margin: 0;
-            font-family: Arial, "Malgun Gothic", sans-serif;
-            background: #f6f7fb;
-            color: #20243a;
+            font-family: "Malgun Gothic", Arial, sans-serif;
+            background: #ffffff;
+            color: #202124;
         }
+
         main {
-            max-width: 920px;
+            max-width: 980px;
             margin: 0 auto;
-            padding: 56px 24px 80px;
+            padding: 48px 28px 80px;
         }
+
         h1 {
-            margin-bottom: 8px;
-            font-size: 2.6rem;
-        }
-        .subtitle {
-            margin-top: 0;
-            color: #666b7a;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px;
-            margin-top: 36px;
-        }
-        .card {
-            display: block;
-            padding: 22px;
-            border-radius: 14px;
-            background: #fff;
-            color: inherit;
-            text-decoration: none;
-            box-shadow: 0 4px 16px rgba(0,0,0,.06);
-        }
-        .card:hover {
-            transform: translateY(-2px);
-        }
-        .card h2 {
-            margin: 0 0 8px;
-            font-size: 1.2rem;
-        }
-        .card p {
             margin: 0;
-            color: #666b7a;
-            line-height: 1.6;
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            margin: 8px 0 34px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        h2 {
+            margin: 30px 0 10px;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .list {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            border-top: 1px solid #d8dbe2;
+            border-bottom: 1px solid #d8dbe2;
+        }
+
+        .list th,
+        .list td {
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: middle;
+            border-bottom: 1px solid #eceef2;
+            font-size: 14px;
+        }
+
+        .list th {
+            background: #f7f7f8;
+            color: #4b5563;
+            font-weight: 600;
+        }
+
+        .list tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .list tbody tr:hover {
+            background: #f5f8fc;
+        }
+
+        .name {
+            width: 34%;
+        }
+
+        .description {
+            width: 66%;
+            color: #5f6368;
+        }
+
+        a {
+            color: #1f4f8a;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 640px) {
+            main {
+                padding: 32px 16px 56px;
+            }
+
+            .name {
+                width: 42%;
+            }
+
+            .description {
+                width: 58%;
+            }
         }
     </style>
 </head>
@@ -58,32 +109,38 @@
     <h1>Teaching Archive</h1>
     <p class="subtitle">Programming · Computer Science · AI</p>
 
-    <div class="grid">
-        <a class="card" href="courses/programming/2026-grade2/">
-            <h2>2026 2학년 프로그래밍</h2>
-            <p>수업 설계와 학습 자료를 정리하는 현재 수업 아카이브</p>
-        </a>
+    <h2>Courses</h2>
 
-        <a class="card" href="courses/ai-basics/summary.html">
-            <h2>인공지능 기초</h2>
-            <p>인공지능 개념, 활용 사례, 모델 실습 자료</p>
-        </a>
-
-        <a class="card" href="courses/c-programming/function.html">
-            <h2>C Programming</h2>
-            <p>함수, 배열, 포인터 등 C 언어 문법 수업 자료</p>
-        </a>
-
-        <a class="card" href="courses/database/">
-            <h2>Database</h2>
-            <p>데이터베이스와 SQL 수업 자료</p>
-        </a>
-
-        <a class="card" href="courses/web-programming/">
-            <h2>Web Programming</h2>
-            <p>HTML과 CSS 기초 수업 자료</p>
-        </a>
-    </div>
+    <table class="list">
+        <thead>
+            <tr>
+                <th class="name">이름</th>
+                <th class="description">내용</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="courses/programming/2026-grade2/">2026 2학년 프로그래밍</a></td>
+                <td class="description">수업 설계 · 학습 자료 · 수행평가 · 수업 기록</td>
+            </tr>
+            <tr>
+                <td><a href="courses/ai-basics/summary.html">인공지능 기초</a></td>
+                <td class="description">인공지능 개념 · 활용 사례 · 모델 실습</td>
+            </tr>
+            <tr>
+                <td><a href="courses/c-programming/function.html">C Programming</a></td>
+                <td class="description">함수 · 배열 · 포인터</td>
+            </tr>
+            <tr>
+                <td><a href="courses/database/">Database</a></td>
+                <td class="description">데이터베이스 · SQL</td>
+            </tr>
+            <tr>
+                <td><a href="courses/web-programming/">Web Programming</a></td>
+                <td class="description">HTML · CSS</td>
+            </tr>
+        </tbody>
+    </table>
 </main>
 </body>
 </html>
