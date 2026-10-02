@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python 기초 문법 - 함수</title><link rel="stylesheet" href="../../style.css"></head>
+<body><main>
+<p class="back"><a href="./">← Python 기초 문법</a></p>
+<h1>4. 함수</h1>
+<p class="subtitle">Built-in · Library · User-defined · Parameter · Return</p>
+
+<h2>함수의 종류</h2>
+<table class="list"><thead><tr><th class="name">종류</th><th class="description">수업에서 읽는 방법</th></tr></thead><tbody>
+<tr><td>내장 함수</td><td class="description"><code>print()</code>, <code>len()</code>, <code>max()</code>처럼 바로 사용할 수 있는 함수</td></tr>
+<tr><td>라이브러리 함수</td><td class="description"><code>math</code> 같은 모듈을 먼저 불러온 뒤 사용하는 함수</td></tr>
+<tr><td>사용자 정의 함수</td><td class="description"><code>def</code>로 필요한 기능을 직접 정의한 함수</td></tr>
+</tbody></table>
+<div class="code-embed" data-src="code/17_function_types.py" data-label="내장 함수와 라이브러리 함수"></div>
+
+<h2>정의와 호출</h2>
+<p>함수는 정의했다고 바로 실행되지 않는다. 함수 이름과 괄호를 이용해 호출할 때 내부 코드가 실행된다.</p>
+<div class="code-embed" data-src="code/18_define_call.py" data-label="함수 정의와 호출"></div>
+
+<h2>매개변수와 반환값</h2>
+<p>함수 실행에 필요한 값은 매개변수로 전달하고, 처리한 결과를 호출한 위치에서 다시 사용하려면 <code>return</code>으로 반환한다.</p>
+<div class="code-embed" data-src="code/06_function.py" data-label="텍스트 RPG의 clamp() 함수"></div>
+<div class="code-embed" data-src="code/19_parameter_return.py" data-label="매개변수와 반환값"></div>
+
+<h2>지역 변수와 전역 변수</h2>
+<p>함수 안에서 만들어진 지역 변수와 함수 바깥의 전역 변수는 사용할 수 있는 범위가 다르다.</p>
+<div class="code-embed" data-src="code/20_scope.py" data-label="지역 변수와 전역 변수"></div>
+
+<h2>확인하기</h2>
+<ol>
+<li>함수 정의 부분과 실제 호출 부분을 각각 찾아 표시한다.</li>
+<li>인자로 전달된 값이 어떤 매개변수에 저장되는지 추적한다.</li>
+<li><code>return</code> 값이 호출 위치에서 어떻게 다시 사용되는지 확인한다.</li>
+<li>같은 이름의 변수가 함수 안과 밖에서 사용될 때 범위를 구분한다.</li>
+</ol>
+<script src="../../code-embed.js"></script>
+</main></body></html>
