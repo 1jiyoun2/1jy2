@@ -67,3 +67,23 @@ ul { padding-left: 22px; }
     .description { width: 57%; }
     .meta td:first-child { width: 120px; }
 }
+
+pre {
+    margin: 12px 0 20px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    background: #f7f7f8;
+    border: 1px solid #e1e4e8;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.55;
+}
+pre.flow {
+    white-space: pre-wrap;
+}
+code {
+    font-family: Consolas, "Courier New", monospace;
+}
+ol {
+    padding-left: 24px;
+}
