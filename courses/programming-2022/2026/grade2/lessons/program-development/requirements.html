@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>01. 요구 사항 분석</title><link rel="stylesheet" href="../../style.css"></head>
+<title>01. 요구분석명세</title><link rel="stylesheet" href="../../style.css"></head>
 <body><main>
 <p class="back"><a href="./">← 프로그램의 설계와 구현</a></p>
-<h1>01. 요구 사항 분석</h1>
-<p class="subtitle">프로그램이 해결해야 할 문제와 필요한 기능을 명확하게 정리한다.</p>
-<h2>확인할 내용</h2>
-<ul><li>프로그램의 목적과 대상 확인</li><li>필요한 기능을 구체적인 문장으로 표현</li><li>입력과 결과에 필요한 조건 확인</li><li>모호하거나 서로 충돌하는 요구 사항 점검</li></ul>
+<h1>01. 요구분석명세</h1>
+<p class="subtitle">프로그램이 왜 필요한지, 무엇을 해야 하는지 먼저 명확하게 기록한다.</p>
+
+<h2>작성할 내용</h2>
+<table class="list"><thead><tr><th class="name">항목</th><th class="description">확인할 내용</th></tr></thead><tbody>
+<tr><td>문제와 목적</td><td class="description">어떤 문제를 해결하며 프로그램을 왜 만드는가?</td></tr>
+<tr><td>사용 대상</td><td class="description">누가 어떤 상황에서 사용하는가?</td></tr>
+<tr><td>핵심 기능</td><td class="description">프로그램이 반드시 수행해야 하는 기능은 무엇인가?</td></tr>
+<tr><td>입력</td><td class="description">사용자가 무엇을 입력하며 어떤 조건을 만족해야 하는가?</td></tr>
+<tr><td>출력</td><td class="description">어떤 결과가 어떤 형태로 출력되어야 하는가?</td></tr>
+<tr><td>제약 조건</td><td class="description">입력 범위, 처리 조건, 반드시 지켜야 할 규칙은 무엇인가?</td></tr>
+</tbody></table>
+
+<h2>작성 원칙</h2>
+<ul>
+<li>“편리하게 만든다”처럼 해석이 달라질 수 있는 표현보다 확인 가능한 기능으로 적는다.</li>
+<li>한 문장에는 한 가지 요구를 중심으로 작성한다.</li>
+<li>나중에 테스트할 수 있도록 입력·처리·출력 조건을 구체적으로 적는다.</li>
+</ul>
+
+<h2>확인 활동</h2>
+<ol>
+<li>내가 적은 요구 사항만 읽어도 다른 사람이 프로그램의 동작을 예상할 수 있는가?</li>
+<li>각 요구 사항을 구현 후 실제 실행으로 확인할 수 있는가?</li>
+<li>서로 충돌하거나 빠진 요구 사항은 없는가?</li>
+</ol>
 </main></body></html>
