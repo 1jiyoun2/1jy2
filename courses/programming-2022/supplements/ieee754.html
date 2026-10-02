@@ -10,35 +10,232 @@
 <main>
     <p class="back"><a href="./">← 보충 개념</a></p>
     <h1>IEEE 754</h1>
-    <p class="subtitle">컴퓨터가 실수를 표현하는 방법을 이해하기 위한 추가 설명</p>
+    <p class="subtitle">실수의 2진 표현을 코드 구현까지 연결한 수업용 추가 설명</p>
 
-    <p class="note">이 페이지는 2진수와 실수 표현을 연결하기 위한 보충 설명이다. 수업에서 필요한 범위만 다룬다.</p>
+    <p class="note">삼양 프로그래밍 교과서에는 실수가 IEEE 754 방식에 따라 부호·지수부·가수부로 저장된다는 내용이 간단히 제시되어 있습니다. 이 페이지는 그 내용을 실제 수업에서 다룬 수준으로 확장하여 정리합니다.</p>
 
-    <h2>왜 필요한가?</h2>
-    <p>컴퓨터는 모든 데이터를 0과 1로 저장한다. 정수가 아닌 실수도 그대로 저장할 수 없기 때문에, 부호와 크기를 일정한 규칙에 따라 나누어 표현한다.</p>
-
-    <h2>단정도 32비트의 기본 구조</h2>
+    <h2>단정도 32비트 구조</h2>
     <table class="list">
         <thead><tr><th class="name">부분</th><th class="description">역할</th></tr></thead>
         <tbody>
-            <tr><td>부호 비트</td><td class="description">양수와 음수를 구분한다.</td></tr>
-            <tr><td>지수부</td><td class="description">2의 몇 제곱만큼 이동했는지를 저장한다.</td></tr>
-            <tr><td>가수부</td><td class="description">정규화된 2진수의 유효한 부분을 저장한다.</td></tr>
+            <tr><td>부호 비트 · 1비트</td><td class="description">양수와 음수를 구분</td></tr>
+            <tr><td>지수부 · 8비트</td><td class="description">정규화 과정에서 얻은 실제 지수에 bias 127을 더해 저장</td></tr>
+            <tr><td>가수부 · 23비트</td><td class="description">정규화된 1.xxxxx에서 맨 앞의 1을 제외한 비트를 저장</td></tr>
         </tbody>
     </table>
 
-    <h2>예: 5.75</h2>
-    <p><code>5.75</code>를 2진수로 나타내면 <code>101.11₂</code>이고, 이를 정규화하면 <code>1.0111 × 2²</code>로 볼 수 있다.</p>
-    <ul>
-        <li>부호: 양수이므로 0</li>
-        <li>지수: 2</li>
-        <li>가수: 정규화한 값의 소수점 아래 부분인 0111...</li>
-    </ul>
+    <h2>수업에서 사용한 구현 흐름</h2>
+    <table class="list">
+        <thead><tr><th class="name">단계</th><th class="description">처리</th></tr></thead>
+        <tbody>
+            <tr><td>1. 입력 처리</td><td class="description">수업에서 사용할 입력 범위를 확인하고 부호 비트를 준비</td></tr>
+            <tr><td>2. 정수 부분 변환</td><td class="description"><code>int_bits</code>에 정수 부분의 2진 비트를 저장</td></tr>
+            <tr><td>3. 소수 부분 변환</td><td class="description"><code>frac_bits</code>에 소수 부분의 2진 비트를 저장</td></tr>
+            <tr><td>4. 정규화</td><td class="description"><code>first_one</code>을 찾고 <code>real_exp</code>, <code>normalized_bits</code> 생성</td></tr>
+            <tr><td>5. 지수부</td><td class="description"><code>stored_exp = real_exp + 127</code> 후 8비트 <code>exponent_bits</code> 생성</td></tr>
+            <tr><td>6. 가수부</td><td class="description"><code>normalized_bits</code>를 이용해 23비트 <code>mantissa_bits</code> 생성</td></tr>
+            <tr><td>7. 최종 결합</td><td class="description">부호 + 지수부 + 가수부 순으로 연결하여 <code>ieee754</code> 완성</td></tr>
+        </tbody>
+    </table>
 
-    <h2>수업에서 연결되는 과정</h2>
-    <p>입력한 10진수 실수를 부호, 정수부, 소수부로 나눈 뒤 2진수로 변환하고, 정규화하여 지수부와 가수부를 만드는 순서로 구현할 수 있다.</p>
+    <h2>수업용 구현 코드</h2>
+    <p>아래 코드는 실제 수업과 후속 코드 분석에서 사용한 기준 코드의 흐름을 그대로 두고, 공개 아카이브에서 읽기 쉽도록 설명 주석을 추가한 버전입니다.</p>
 
-    <p class="note">특수값(NaN, 무한대, 비정규화 수 등)은 기본 변환 원리를 이해한 뒤 별도로 다룰 수 있는 확장 내용이다.</p>
+    <p class="note">이 코드는 IEEE 754를 처리하는 유일한 정답이나 범용 변환기가 아닙니다. 학생이 각 처리 단계를 직접 추적할 수 있도록 조건과 구현 방식을 단순화한 교육용 코드입니다. 수업에서는 0보다 크고 16보다 작은 양의 실수, 2진수로 유한하게 표현되는 소수, 가수 후보가 23비트를 넘지 않는 경우만 다룹니다.</p>
+
+    <pre><code># IEEE 754 단정도(32비트) 변환 - 수업용 단계별 구현
+#
+# 이 코드는 IEEE 754 변환의 유일한 정답이나 범용 변환기가 아닙니다.
+# 수업에서 '10진수 실수 → 2진수 → 정규화 → 지수부 → 가수부 → 32비트 결합'
+# 흐름을 단계별로 확인하기 위해 구성한 교육용 코드입니다.
+#
+# 수업에서 사용하는 전제 조건
+# - 0보다 크고 16보다 작은 양의 실수
+# - 소수 부분이 2진수로 유한하게 표현되는 값
+# - 정규화 후 가수 후보가 23비트를 넘지 않는 값
+# - 음수, 0, 16 이상, 무한 반복 소수, 반올림이 필요한 경우는 다루지 않음
+
+
+# 1. 입력 처리
+sign_bit = "0"
+
+while True:
+    try:
+        value = float(input("입력 : "))
+
+        if value &gt;= 16 or value &lt;= 0:
+            print("다시 입력하세요.")
+        else:
+            sign_bit = "0"
+            break
+
+    except ValueError:
+        print("숫자를 입력하세요.")
+
+print("부호 비트:", sign_bit)
+print("입력한 값:", value)
+
+
+# 2. 정수 부분의 2진수 변환
+# 정수 부분을 2로 계속 나눈 나머지를 거꾸로 배열한다.
+int_bits = []
+int_part = int(value)
+n = int_part
+
+if n == 0:
+    int_bits = [0]
+else:
+    while n &gt; 0:
+        int_bits.append(n % 2)
+        n = n // 2
+
+    int_bits.reverse()
+
+print("정수 부분:", int_part)
+print("정수 부분의 비트:", int_bits)
+
+
+# 3. 소수 부분의 2진수 변환
+# 소수 부분에 2를 반복해서 곱하며 정수 부분으로 나온 0 또는 1을 저장한다.
+frac_bits = []
+frac_part = value - int_part
+frac = frac_part
+
+if frac == 0:
+    frac_bits = [0]
+else:
+    while frac != 0:
+        frac = frac * 2
+
+        if frac &gt;= 1:
+            frac_bits.append(1)
+            frac = frac - 1
+        else:
+            frac_bits.append(0)
+
+print("소수 부분:", frac_part)
+print("소수 부분의 비트:", frac_bits)
+
+binary_text = ""
+
+for bit in int_bits:
+    binary_text = binary_text + str(bit)
+
+binary_text = binary_text + "."
+
+for bit in frac_bits:
+    binary_text = binary_text + str(bit)
+
+print("최종 연결된 2진수 :", binary_text)
+
+
+# 4. 정규화 및 실제 지수 계산
+# 처음 등장하는 1을 기준으로 1.xxxxx × 2^n 형태를 만든다.
+normalized_bits = []
+first_one = -1
+
+for i in range(len(int_bits)):
+    if int_bits[i] == 1:
+        first_one = i
+        break
+
+if first_one != -1:
+    # 정수 부분에 1이 있는 경우
+    real_exp = len(int_bits) - first_one - 1
+
+    # 맨 앞의 1은 숨은 비트로 보고 제외한다.
+    for i in range(first_one + 1, len(int_bits)):
+        normalized_bits.append(int_bits[i])
+
+    for i in range(len(frac_bits)):
+        normalized_bits.append(frac_bits[i])
+
+else:
+    # 1보다 작은 수처럼 정수 부분에서 1을 찾지 못한 경우
+    first_one = -1
+
+    for i in range(len(frac_bits)):
+        if frac_bits[i] == 1:
+            first_one = i
+            break
+
+    real_exp = -(first_one + 1)
+
+    # 처음 찾은 1 다음 비트부터 가수 후보로 저장한다.
+    for i in range(first_one + 1, len(frac_bits)):
+        normalized_bits.append(frac_bits[i])
+
+normalized_text = "1."
+
+if len(normalized_bits) == 0:
+    normalized_text = normalized_text + "0"
+else:
+    for bit in normalized_bits:
+        normalized_text = normalized_text + str(bit)
+
+normalized_text = normalized_text + " × 2^" + str(real_exp)
+
+print("정규화 결과:", normalized_text)
+print("실제 지수:", real_exp)
+print("정규화 후 가수 후보:", normalized_bits)
+
+
+# 5. 지수부 생성
+# IEEE 754 단정도에서는 실제 지수에 bias 127을 더해 저장 지수를 만든다.
+exponent_bits = []
+stored_exp = real_exp + 127
+n = stored_exp
+
+if n == 0:
+    exponent_bits = [0]
+else:
+    while n &gt; 0:
+        exponent_bits.append(n % 2)
+        n = n // 2
+
+    exponent_bits.reverse()
+
+# 지수부가 8비트가 되도록 앞쪽에 0을 채운다.
+while len(exponent_bits) &lt; 8:
+    exponent_bits = [0] + exponent_bits
+
+print("저장 지수:", stored_exp)
+print("지수부:", exponent_bits)
+print("지수부 비트 수:", len(exponent_bits))
+
+
+# 6. 가수부 생성
+# 정규화 과정에서 만든 가수 후보 뒤에 0을 채워 23비트로 만든다.
+mantissa_bits = []
+
+for bit in normalized_bits:
+    mantissa_bits.append(bit)
+
+while len(mantissa_bits) &lt; 23:
+    mantissa_bits.append(0)
+
+print("가수부:", mantissa_bits)
+print("가수부 비트 수:", len(mantissa_bits))
+
+
+# 7. 최종 32비트 결합
+# 부호 1비트 + 지수부 8비트 + 가수부 23비트를 순서대로 연결한다.
+ieee754 = sign_bit
+
+for i in exponent_bits:
+    ieee754 = ieee754 + str(i)
+
+for i in mantissa_bits:
+    ieee754 = ieee754 + str(i)
+
+print("IEEE 754:", ieee754)
+print("전체 비트 수:", len(ieee754))
+
+for data in ieee754:
+    print(data, end=" ")
+</code></pre>
+
+    <p><a href="code/ieee754_teaching.py">Python 파일로 보기 →</a></p>
 </main>
 </body>
 </html>
