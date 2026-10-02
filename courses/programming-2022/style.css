@@ -47,3 +47,16 @@ a:hover { text-decoration: underline; }
     .name { width: 43%; }
     .description { width: 57%; }
 }
+
+pre {
+    margin: 12px 0 24px;
+    padding: 16px;
+    overflow-x: auto;
+    background: #f7f7f8;
+    border: 1px solid #e1e4e8;
+    line-height: 1.55;
+    font-size: 13px;
+}
+code {
+    font-family: Consolas, "Courier New", monospace;
+}
