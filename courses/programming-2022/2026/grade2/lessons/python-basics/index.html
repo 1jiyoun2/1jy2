@@ -10,59 +10,23 @@
 <main>
     <p class="back"><a href="../../">← 2026 2학년 프로그래밍</a></p>
     <h1>Python 기초 문법</h1>
-    <p class="subtitle">Input · Operators · Control Flow · Function · File I/O</p>
+    <p class="subtitle">Data I/O · Operations · Control Structure · Functions · File I/O</p>
 
-    <p>수업 실습에서 사용한 예제를 중심으로 Python의 기본 문법을 다시 확인한다. 각각의 문법을 따로 외우기보다 값이 저장되고, 조건에 따라 실행되고, 반복되며, 함수와 파일 처리로 연결되는 흐름을 본다.</p>
-
+    <p>교과서 Ⅱ단원 「프로그래밍의 기초」의 흐름에 맞추어, 실제 수업에서 사용한 Python 예제와 실습을 다시 정리한다.</p>
     <p><a href="../../resources/notebooks/python_basics_review.ipynb">수업용 Colab 파일 보기 →</a></p>
 
     <table class="list">
-        <thead><tr><th class="name">개념</th><th class="description">수업에서 확인하는 내용</th></tr></thead>
+        <thead><tr><th class="name">영역</th><th class="description">내용</th></tr></thead>
         <tbody>
-            <tr><td>입력과 변수</td><td class="description"><code>input()</code>, 자료형 변환, 변수에 값 저장</td></tr>
-            <tr><td>연산자</td><td class="description">산술 연산과 <code>%</code>, <code>//</code>를 이용한 계산</td></tr>
-            <tr><td>리스트</td><td class="description">여러 값을 순서대로 저장하고 <code>append()</code>로 추가</td></tr>
-            <tr><td>선택 구조</td><td class="description"><code>if / else</code>로 조건에 따라 실행 경로 결정</td></tr>
-            <tr><td>반복 구조</td><td class="description"><code>while</code>을 이용해 같은 처리를 반복</td></tr>
-            <tr><td>함수</td><td class="description">함수 정의와 호출, 매개변수 전달, <code>return</code> 값 사용</td></tr>
-            <tr><td>파일 입출력</td><td class="description"><code>open()</code>, <code>write()</code>, <code>read()</code>로 파일 저장·읽기</td></tr>
+            <tr><td><a href="data-io.html">1. 데이터 입출력</a></td><td class="description">자료형 · 변수 · 자료형 변환 · input() · print() · split() · 리스트 입력</td></tr>
+            <tr><td><a href="operations.html">2. 데이터 연산</a></td><td class="description">산술 · 비교 · 논리 · 비트 단위 연산 · 연산자 우선순위</td></tr>
+            <tr><td><a href="control.html">3. 제어 구조</a></td><td class="description">순차 · 선택 · 다중 선택 · for · while · 중첩 · break</td></tr>
+            <tr><td><a href="functions.html">4. 함수</a></td><td class="description">내장·라이브러리·사용자 정의 함수 · 정의와 호출 · 매개변수 · 반환값 · 변수 범위</td></tr>
+            <tr><td><a href="files.html">5. 파일 처리</a></td><td class="description">파일 개념 · open() · 파일 모드 · read() · write() · TXT · CSV</td></tr>
         </tbody>
     </table>
 
-    <h2>입력과 변수</h2>
-    <div class="code-embed" data-src="code/01_input_variable.py" data-label="입력과 변수"></div>
-
-    <h2>연산자</h2>
-    <div class="code-embed" data-src="code/02_operators.py" data-label="연산자"></div>
-
-    <h2>리스트</h2>
-    <div class="code-embed" data-src="code/03_list.py" data-label="리스트"></div>
-
-    <h2>선택 구조</h2>
-    <div class="code-embed" data-src="code/04_selection.py" data-label="선택 구조"></div>
-
-    <h2>반복 구조</h2>
-    <div class="code-embed" data-src="code/05_repetition.py" data-label="반복 구조"></div>
-
-    <h2>함수 · 매개변수 · 반환값</h2>
-    <div class="code-embed" data-src="code/06_function.py" data-label="함수 · 매개변수 · 반환값"></div>
-    <p>이 예제의 <code>clamp()</code>는 텍스트 RPG에서 실제로 사용하는 공통 함수다. 함수를 따로 배운 뒤 큰 프로그램 안에서 같은 구조가 어떻게 쓰이는지 다시 연결한다.</p>
-
-    <h2>파일 입출력</h2>
-    <div class="code-embed" data-src="code/07_file_io.py" data-label="파일 입출력"></div>
-
-    <h2>다음 수업과 연결</h2>
-    <table class="list">
-        <tbody>
-            <tr><td><a href="../exception/">예외 처리</a></td><td class="description">입력과 파일 처리에서 발생할 수 있는 예외를 처리하기</td></tr>
-            <tr><td><a href="../rpg/">텍스트 RPG</a></td><td class="description">기초 문법이 하나의 큰 프로그램 안에서 연결되는 방식 읽기</td></tr>
-            <tr><td><a href="../ieee754/">IEEE 754</a></td><td class="description">기초 문법을 실제 변환 알고리즘 구현에 적용하기</td></tr>
-        </tbody>
-    </table>
-
-    <p class="note">예제 코드는 문법과 값의 흐름을 수업에서 확인하기 위해 구성한 코드이며, 같은 기능은 다른 방식으로도 구현할 수 있다.</p>
-
-    <script src="../../code-embed.js"></script>
+    <p class="note">예제 코드는 개념과 실행 흐름을 확인하기 위해 수업용으로 구성한 코드이며, 같은 기능은 다른 방식으로도 구현할 수 있다.</p>
 </main>
 </body>
 </html>
