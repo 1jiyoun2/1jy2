@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python 기초 문법 - 제어 구조</title><link rel="stylesheet" href="../../style.css"></head>
+<body><main>
+<p class="back"><a href="./">← Python 기초 문법</a></p>
+<h1>3. 제어 구조</h1>
+<p class="subtitle">Sequence · Selection · Iteration</p>
+
+<h2>순차 구조</h2>
+<p>코드를 위에서 아래로 순서대로 실행하는 기본 흐름이다. 입력 → 처리 → 출력과 같이 처리 순서를 추적한다.</p>
+
+<h2>선택 구조</h2>
+<p><code>if</code>, <code>elif</code>, <code>else</code>를 이용해 조건에 따라 실행할 코드를 선택한다.</p>
+<div class="code-embed" data-src="code/04_selection.py" data-label="if / else 선택 구조"></div>
+<div class="code-embed" data-src="code/14_multi_selection.py" data-label="if / elif / else 다중 선택"></div>
+
+<h2>반복 구조</h2>
+<p><code>for</code>는 정해진 범위나 데이터의 항목을 순서대로 반복할 때, <code>while</code>은 조건이 참인 동안 반복할 때 사용한다.</p>
+<div class="code-embed" data-src="code/15_for_loop.py" data-label="for 반복"></div>
+<div class="code-embed" data-src="code/05_repetition.py" data-label="while 반복"></div>
+
+<h2>중첩과 반복 중단</h2>
+<p>선택 구조와 반복 구조는 서로 안에 넣어 사용할 수 있다. 반복 도중 조건을 만족하면 <code>break</code>로 반복을 끝낼 수도 있다.</p>
+<div class="code-embed" data-src="code/16_break_nested.py" data-label="반복 안의 선택과 break"></div>
+
+<h2>확인하기</h2>
+<ol>
+<li>같은 반복 작업을 <code>for</code>와 <code>while</code>로 각각 표현해 본다.</li>
+<li>조건문의 들여쓰기가 달라지면 실행 범위가 어떻게 달라지는지 확인한다.</li>
+<li><code>break</code>가 실행되는 조건과 반복이 끝난 뒤 실행될 코드를 추적한다.</li>
+</ol>
+<script src="../../code-embed.js"></script>
+</main></body></html>
