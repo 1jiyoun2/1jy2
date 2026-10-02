@@ -33,7 +33,11 @@ except 예외종류:
     # 해당 예외가 발생했을 때 실행할 코드
     ...</code></pre>
 
-    <h2>텍스트 RPG에서 실제로 사용한 예</h2>
+    <h2>IEEE 754에서 실제로 사용한 ValueError</h2>
+    <div class="code-embed" data-src="code/value_error_input.py" data-label="ValueError · 숫자 입력 확인"></div>
+    <p><code>float()</code>로 바꿀 수 없는 문자열이 입력되면 <code>ValueError</code>가 발생한다. 이때 프로그램을 끝내지 않고 안내 문장을 출력한 뒤 다시 입력받는다.</p>
+
+    <h2>텍스트 RPG에서 실제로 사용한 FileNotFoundError</h2>
     <div class="code-embed" data-src="../rpg/code/load_exception.py" data-label="모듈 12 · FileNotFoundError 처리"></div>
     <p>저장 파일을 <code>r</code> 모드로 읽으려고 했는데 파일이 없으면 <code>FileNotFoundError</code>가 발생한다. 이 코드는 프로그램을 중단하는 대신 <code>False</code>를 반환하고, 호출한 쪽에서 그 값을 이용해 “저장 파일이 없습니다.”라는 흐름으로 이어지게 한다.</p>
 
