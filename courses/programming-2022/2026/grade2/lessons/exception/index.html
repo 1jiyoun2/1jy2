@@ -1,21 +1,66 @@
 <!DOCTYPE html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>예외 처리</title><link rel="stylesheet" href="../../style.css"></head>
-<body><main>
-<p class="back"><a href="../../">← 2026 2학년 프로그래밍</a></p>
-<h1>예외 처리</h1>
-<p class="subtitle">Exception Handling</p>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>예외 처리</title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<main>
+    <p class="back"><a href="../../">← 2026 2학년 프로그래밍</a></p>
+    <h1>예외 처리</h1>
+    <p class="subtitle">Exception Handling</p>
 
-<p>프로그램이 항상 예상대로 실행된다는 가정에서 벗어나, 실행 중 발생할 수 있는 예외를 확인하고 프로그램이 적절하게 대응하도록 작성한다.</p>
+    <p>프로그램이 항상 예상대로 실행된다는 가정에서 벗어나, 실행 중 발생할 수 있는 예외를 확인하고 프로그램이 중단되지 않도록 필요한 상황을 처리한다.</p>
 
-<h2>학습 내용</h2>
-<ul>
-<li>예외와 일반적인 실행 오류의 의미</li>
-<li><span class="path">try</span> / <span class="path">except</span> 구조</li>
-<li>입력값 변환 과정에서 발생하는 예외</li>
-<li>파일을 읽는 과정에서 발생할 수 있는 예외</li>
-<li>예외 발생 상황을 직접 만들고 처리 결과 확인</li>
-</ul>
+    <h2>수업에서 확인한 예외</h2>
+    <table class="list">
+        <thead><tr><th class="name">예외</th><th class="description">확인한 상황</th></tr></thead>
+        <tbody>
+            <tr><td><code>IndexError</code></td><td class="description">리스트에 없는 위치에 접근하는 경우</td></tr>
+            <tr><td><code>ValueError</code></td><td class="description">입력값을 원하는 자료형으로 변환할 수 없는 경우</td></tr>
+            <tr><td><code>ZeroDivisionError</code></td><td class="description">0으로 나누는 계산을 하는 경우</td></tr>
+            <tr><td><code>FileNotFoundError</code></td><td class="description">읽기 모드로 열려는 파일이 존재하지 않는 경우</td></tr>
+        </tbody>
+    </table>
 
-<p class="note">공개 아카이브에는 수업용 설명과 실습 자료만 제공하며, 평가 문항·정답·채점 자료는 포함하지 않는다.</p>
-</main></body></html>
+    <h2>기본 구조</h2>
+    <pre><code>try:
+    # 예외가 발생할 수 있는 코드
+    ...
+except 예외종류:
+    # 해당 예외가 발생했을 때 실행할 코드
+    ...</code></pre>
+
+    <h2>텍스트 RPG에서 실제로 사용한 예</h2>
+    <pre><code>file_name = file_name or SaveManager.SAVE_FILE
+
+try:
+    with open(file_name, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+except FileNotFoundError:
+    return False</code></pre>
+    <p>저장 파일을 <code>r</code> 모드로 읽으려고 했는데 파일이 없으면 <code>FileNotFoundError</code>가 발생한다. 이 코드는 프로그램을 중단하는 대신 <code>False</code>를 반환하고, 호출한 쪽에서 그 값을 이용해 “저장 파일이 없습니다.”라는 흐름으로 이어지게 한다.</p>
+
+    <h2>파일 모드와 예외</h2>
+    <table class="list">
+        <thead><tr><th class="name">모드</th><th class="description">파일이 없을 때 / 있을 때</th></tr></thead>
+        <tbody>
+            <tr><td><code>r</code></td><td class="description">없는 파일을 읽으려 하면 <code>FileNotFoundError</code>가 발생한다.</td></tr>
+            <tr><td><code>w</code></td><td class="description">없으면 새 파일을 만들고, 있으면 기존 내용을 지우고 새로 쓴다.</td></tr>
+            <tr><td><code>a</code></td><td class="description">없으면 새 파일을 만들고, 있으면 기존 내용 뒤에 이어 쓴다.</td></tr>
+        </tbody>
+    </table>
+
+    <h2>연습</h2>
+    <ol>
+        <li>위 RPG 코드에서 <code>except FileNotFoundError:</code> 부분을 제거하면 저장 파일이 없을 때 프로그램 흐름이 어떻게 달라질지 설명해 보자.</li>
+        <li><code>SaveManager.load()</code>가 <code>False</code>를 반환한 뒤 <code>Game.process_command()</code>에서 어떤 조건으로 이어지는지 찾아보자.</li>
+        <li>파일을 처음 만드는 상황에서 <code>r</code>, <code>w</code>, <code>a</code> 중 어떤 모드를 사용할 수 있는지 비교해 보자.</li>
+    </ol>
+
+    <p class="note">이 페이지에는 실제 2학년 수업에서 다룬 내용과 텍스트 RPG의 실제 코드를 사용한다. 별도의 평가 문항·정답·채점 자료는 공개하지 않는다.</p>
+</main>
+</body>
+</html>
