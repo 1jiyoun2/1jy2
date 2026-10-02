@@ -21,7 +21,12 @@
 </tbody></table>
 
 <h2>TXT 파일 쓰기와 읽기</h2>
+<p><code>write()</code>로 문자열을 기록하고 <code>read()</code>로 전체 내용을 읽을 수 있다. 텍스트 파일에서는 <code>encoding="utf-8"</code>처럼 문자 인코딩도 지정할 수 있다.</p>
 <div class="code-embed" data-src="code/07_file_io.py" data-label="TXT 파일 저장 후 읽기"></div>
+
+<h2>readline()과 seek()</h2>
+<p><code>readline()</code>은 한 줄씩 읽고, <code>seek()</code>는 파일에서 읽고 쓸 위치를 이동할 때 사용한다.</p>
+<div class="code-embed" data-src="code/31_readline_seek.py" data-label="readline() · seek()"></div>
 
 <h2>추가 모드</h2>
 <div class="code-embed" data-src="code/21_append.py" data-label="a 모드로 내용 추가"></div>
@@ -34,6 +39,8 @@
 <ol>
 <li>없는 파일을 <code>r</code> 모드로 열 때와 <code>w</code> 모드로 열 때의 차이를 확인한다.</li>
 <li><code>w</code>와 <code>a</code>가 기존 파일 내용에 미치는 차이를 설명한다.</li>
+<li><code>read()</code>와 <code>readline()</code>의 차이를 실행 결과로 확인한다.</li>
+<li><code>seek(0)</code>을 실행한 뒤 다시 읽으면 어떤 결과가 나오는지 확인한다.</li>
 <li>CSV 한 줄을 읽은 뒤 <code>split(",")</code>한 결과를 확인한다.</li>
 </ol>
 <p><a href="../exception/">파일 처리에서 발생하는 예외 보기 →</a></p>
