@@ -17,11 +17,20 @@
 <h2>자료형 변환</h2>
 <p><code>int()</code>, <code>float()</code>, <code>str()</code>, <code>bool()</code>을 이용해 필요한 자료형으로 바꾼다. 문자와 정수 코드의 변환에는 <code>ord()</code>, <code>chr()</code>도 사용할 수 있다.</p>
 
+<h2>변수 이름과 주석</h2>
+<p>변수 이름은 영문자·숫자·<code>_</code>를 사용할 수 있고, 숫자로 시작할 수 없다. 대문자와 소문자를 구분하며 예약어나 내장 함수 이름은 변수 이름으로 사용하지 않는다. 코드 설명은 <code>#</code> 주석으로 남길 수 있다.</p>
+<div class="code-embed" data-src="code/24_variable_comment.py" data-label="변수 이름과 주석"></div>
+
 <h2>입력과 변수</h2>
 <div class="code-embed" data-src="code/01_input_variable.py" data-label="입력값을 변수에 저장하기"></div>
 
 <h2>여러 값 입력하기</h2>
 <div class="code-embed" data-src="code/08_split_input.py" data-label="split()을 이용한 여러 값 입력"></div>
+<div class="code-embed" data-src="code/25_map_list_input.py" data-label="map()과 list()를 이용한 여러 정수 입력"></div>
+
+<h2>출력 형식</h2>
+<p><code>print()</code>의 <code>sep</code>과 <code>end</code>를 이용하면 값 사이의 구분 문자와 출력 마지막 문자를 바꿀 수 있다. <code>\n</code>은 새 줄로 바꾸는 데 사용한다.</p>
+<div class="code-embed" data-src="code/23_output_options.py" data-label="sep · end · 줄 바꿈"></div>
 
 <h2>리스트와 인덱스</h2>
 <div class="code-embed" data-src="code/03_list.py" data-label="리스트에 여러 값 저장하기"></div>
@@ -31,6 +40,7 @@
 <li><code>input()</code>의 결과는 기본적으로 어떤 자료형인지 확인해 본다.</li>
 <li><code>"10"</code>과 <code>10</code>의 차이를 자료형과 연산 결과로 설명해 본다.</li>
 <li>공백으로 입력한 세 단어를 리스트에 저장한 뒤 인덱스를 이용해 순서를 바꾸어 출력해 본다.</li>
+<li><code>sep</code>과 <code>end</code>를 바꾸었을 때 출력 결과가 어떻게 달라지는지 확인한다.</li>
 </ol>
 <script src="../../code-embed.js"></script>
 </main></body></html>
