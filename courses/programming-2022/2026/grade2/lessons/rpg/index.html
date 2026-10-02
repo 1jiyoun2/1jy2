@@ -56,55 +56,15 @@ Game.process_command()
     </table>
 
     <h2>예제 1 · 입력값이 프로그램 시작으로 이어지는 과정</h2>
-    <pre><code>player_name = input('플레이어 이름을 입력하세요&gt; ').strip()
-
-if player_name == '':
-    player_name = '용사'
-
-game = Game(player_name)
-game.run()</code></pre>
+    <div class="code-embed" data-src="code/start.py" data-label="모듈 15 · 프로그램 시작"></div>
     <p><code>input()</code>으로 받은 문자열을 확인한 뒤, 빈 문자열이면 기본 이름을 저장한다. 그 값을 이용해 게임을 만들고 <code>run()</code>을 호출하면서 전체 프로그램이 시작된다.</p>
 
     <h2>예제 2 · 입력 → 분석 → 실행</h2>
-    <pre><code>def run(self):
-    while True:
-        if self.state == GameState.GAME_OVER:
-            break
-        if self.state == GameState.CLEAR:
-            break
-
-        self.render()
-        text = input('\n명령&gt; ')
-        command = CommandParser.parse(text)
-        should_continue = self.process_command(command)
-
-        if not should_continue:
-            break</code></pre>
+    <div class="code-embed" data-src="code/run.py" data-label="모듈 14 · 게임 반복 실행"></div>
     <p>반복문 안에서 입력을 받고, 입력 문자열을 명령으로 바꾼 뒤, 해당 기능을 실행한다. 종료 조건이 만족되면 <code>break</code>로 반복을 끝낸다.</p>
 
     <h2>예제 3 · 조건에 따른 명령 분기</h2>
-    <pre><code>def process_command(self, command):
-    action = command.action
-    target = command.target
-
-    if action == '이동':
-        self.move_player(target)
-    elif action == '전투':
-        self.start_battle()
-    elif action == '상태':
-        print(self.player.status_text())
-    elif action == '저장':
-        file_name = SaveManager.save(self)
-        print(f'💾 저장 완료: {file_name}')
-    elif action == '불러오기':
-        if SaveManager.load(self):
-            print('📂 저장 데이터를 불러왔습니다.')
-        else:
-            print('❌ 저장 파일이 없습니다.')
-    elif action == '종료':
-        return False
-
-    return True</code></pre>
+    <div class="code-embed" data-src="code/process_command.py" data-label="모듈 14 · 명령 분기"></div>
     <p>하나의 입력이 여러 기능 중 어디로 이동하는지를 <code>if / elif</code>로 확인할 수 있다. 각 분기에서는 필요한 함수를 호출하고, 일부 함수의 반환값은 다음 판단에 다시 사용된다.</p>
 
     <h2>연습</h2>
@@ -113,6 +73,7 @@ game.run()</code></pre>
         <li><code>상태</code>를 입력했을 때 <code>input()</code>부터 출력까지 어떤 함수와 조건을 거치는지 순서대로 적어 보자.</li>
         <li><code>불러오기</code>를 실행했는데 저장 파일이 없다면 어떤 반환값이 어떤 조건 판단에 사용되는지 추적해 보자.</li>
     </ol>
+    <script src="../../code-embed.js"></script>
 </main>
 </body>
 </html>
