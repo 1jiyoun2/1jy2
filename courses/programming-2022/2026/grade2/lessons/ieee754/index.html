@@ -251,6 +251,34 @@ for data in ieee754:
 
     <p><a href="code/ieee754_teaching.py">Python 파일로 보기 →</a></p>
 
+    <h2>수업 예시 · 10.625 추적</h2>
+    <table class="list">
+        <thead><tr><th class="name">값</th><th class="description">결과</th></tr></thead>
+        <tbody>
+            <tr><td>10진수 입력</td><td class="description"><code>10.625</code></td></tr>
+            <tr><td>2진수</td><td class="description"><code>1010.101₂</code></td></tr>
+            <tr><td>정규화</td><td class="description"><code>1.010101₂ × 2³</code></td></tr>
+            <tr><td>부호 비트</td><td class="description"><code>0</code></td></tr>
+            <tr><td>저장 지수</td><td class="description"><code>130</code></td></tr>
+            <tr><td>지수부</td><td class="description"><code>10000010</code></td></tr>
+            <tr><td>가수부</td><td class="description"><code>01010100000000000000000</code></td></tr>
+            <tr><td>최종 32비트</td><td class="description"><code>01000001001010100000000000000000</code></td></tr>
+        </tbody>
+    </table>
+    <p>한 입력값을 끝까지 따라가면서 “지금 만든 값이 다음 단계에서 어디에 쓰이는가?”를 계속 확인한다.</p>
+
+    <h2>연습 · 0.15625</h2>
+    <p><code>0.15625</code>를 같은 코드에 입력하고 다음 값을 직접 추적한다.</p>
+    <ol>
+        <li><code>sign_bit</code></li>
+        <li><code>frac_bits</code></li>
+        <li><code>real_exp</code></li>
+        <li><code>stored_exp</code>와 <code>exponent_bits</code></li>
+        <li><code>mantissa_bits</code></li>
+        <li>최종 IEEE 754 32비트</li>
+    </ol>
+    <p class="note">완성 코드를 외우는 것이 아니라, 각 값이 어디에서 만들어지고 다음 단계에서 어떻게 사용되는지를 설명하는 것이 목적이다.</p>
+
     <h2>수업 기록에서 확인된 점</h2>
     <p>코드 구현에 예상보다 시간이 많이 필요한 경우가 있어, 구현 과정과 실행 결과 분석을 한 차시에 모두 처리하기보다 코드 분석과 결과 분석을 분리하여 진행하는 방식으로 수업을 조정하였다.</p>
 </main>
