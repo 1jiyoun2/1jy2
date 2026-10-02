@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>보충 개념 - 클래스</title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<main>
+    <p class="back"><a href="./">← 텍스트 RPG</a></p>
+    <h1>보충 개념: 클래스</h1>
+    <p class="subtitle">텍스트 RPG 코드를 읽기 위한 최소한의 개념</p>
+
+    <p class="note">
+        이 내용은 2022 개정 프로그래밍 교과서의 핵심 학습 범위로 다루는 내용이 아니다.
+        텍스트 RPG 코드에 등장하는 구조를 읽을 수 있도록 필요한 만큼만 간단히 설명한다.
+    </p>
+
+    <h2>클래스는 무엇인가?</h2>
+    <p>
+        관련된 데이터와 기능을 하나의 틀로 묶어 표현하는 방법이다.
+        여기서는 클래스를 새로 설계하는 방법보다, 이미 작성된 코드 안에서
+        “어떤 값과 기능이 한 묶음으로 관리되고 있는지” 읽는 데 초점을 둔다.
+    </p>
+
+    <h2>아주 간단한 예</h2>
+    <pre><code>class Player:
+    def __init__(self, name):
+        self.name = name
+        self.hp = 100
+
+    def show_status(self):
+        print(self.name, self.hp)
+
+player = Player("용사")
+player.show_status()</code></pre>
+
+    <h2>코드 읽기</h2>
+    <table class="list">
+        <thead>
+            <tr>
+                <th class="name">코드</th>
+                <th class="description">가볍게 이해하기</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>class Player:</code></td>
+                <td class="description">플레이어와 관련된 값과 기능을 묶는 틀</td>
+            </tr>
+            <tr>
+                <td><code>__init__</code></td>
+                <td class="description">플레이어가 처음 만들어질 때 필요한 값을 준비하는 부분</td>
+            </tr>
+            <tr>
+                <td><code>self.name</code></td>
+                <td class="description">각 플레이어가 가지고 있는 이름 값</td>
+            </tr>
+            <tr>
+                <td><code>show_status()</code></td>
+                <td class="description">플레이어 상태를 보여 주는 기능</td>
+            </tr>
+            <tr>
+                <td><code>Player("용사")</code></td>
+                <td class="description">Player 틀을 이용해 실제 플레이어 하나를 만드는 부분</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>텍스트 RPG에서 볼 때</h2>
+    <p>
+        텍스트 RPG에는 플레이어, 게임 진행, 전투, 퀘스트처럼 서로 관련된 값과 기능을
+        한 묶음으로 관리하기 위해 클래스가 사용된다. 수업에서는 클래스 문법 전체를 배우기보다,
+        “이 부분이 어떤 역할을 맡고 있는가”를 함수와 기능 단위로 읽으면 충분하다.
+    </p>
+
+    <p class="note">
+        핵심은 클래스 문법 암기가 아니라, 큰 프로그램에서 관련된 데이터와 기능을 묶어 관리할 수 있다는 점을 이해하는 것이다.
+    </p>
+</main>
+</body>
+</html>
