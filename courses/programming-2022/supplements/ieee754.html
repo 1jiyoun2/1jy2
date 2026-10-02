@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>보충 개념 - IEEE 754</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main>
+    <p class="back"><a href="./">← 보충 개념</a></p>
+    <h1>IEEE 754</h1>
+    <p class="subtitle">컴퓨터가 실수를 표현하는 방법을 이해하기 위한 추가 설명</p>
+
+    <p class="note">이 페이지는 2진수와 실수 표현을 연결하기 위한 보충 설명이다. 수업에서 필요한 범위만 다룬다.</p>
+
+    <h2>왜 필요한가?</h2>
+    <p>컴퓨터는 모든 데이터를 0과 1로 저장한다. 정수가 아닌 실수도 그대로 저장할 수 없기 때문에, 부호와 크기를 일정한 규칙에 따라 나누어 표현한다.</p>
+
+    <h2>단정도 32비트의 기본 구조</h2>
+    <table class="list">
+        <thead><tr><th class="name">부분</th><th class="description">역할</th></tr></thead>
+        <tbody>
+            <tr><td>부호 비트</td><td class="description">양수와 음수를 구분한다.</td></tr>
+            <tr><td>지수부</td><td class="description">2의 몇 제곱만큼 이동했는지를 저장한다.</td></tr>
+            <tr><td>가수부</td><td class="description">정규화된 2진수의 유효한 부분을 저장한다.</td></tr>
+        </tbody>
+    </table>
+
+    <h2>예: 5.75</h2>
+    <p><code>5.75</code>를 2진수로 나타내면 <code>101.11₂</code>이고, 이를 정규화하면 <code>1.0111 × 2²</code>로 볼 수 있다.</p>
+    <ul>
+        <li>부호: 양수이므로 0</li>
+        <li>지수: 2</li>
+        <li>가수: 정규화한 값의 소수점 아래 부분인 0111...</li>
+    </ul>
+
+    <h2>수업에서 연결되는 과정</h2>
+    <p>입력한 10진수 실수를 부호, 정수부, 소수부로 나눈 뒤 2진수로 변환하고, 정규화하여 지수부와 가수부를 만드는 순서로 구현할 수 있다.</p>
+
+    <p class="note">특수값(NaN, 무한대, 비정규화 수 등)은 기본 변환 원리를 이해한 뒤 별도로 다룰 수 있는 확장 내용이다.</p>
+</main>
+</body>
+</html>
