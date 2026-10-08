@@ -1,0 +1,26 @@
+{
+  "number": "018",
+  "title": "구구단 한 단",
+  "category": "제어 구조 > 반복 구조",
+  "level": "기초",
+  "description": "2 이상 9 이하의 정수 n을 입력받아 n×1부터 n×9까지의 결과를 한 줄에 하나씩 출력하세요.",
+  "input": "첫째 줄에 2 이상 9 이하의 정수 n이 주어집니다.",
+  "output": "n*1의 결과부터 n*9의 결과까지 한 줄에 하나씩 출력합니다.",
+  "starter_code": "n = int(input())\n\n# 1부터 9까지 반복하세요.\n",
+  "examples": [
+    {
+      "input": "2",
+      "output": "2\n4\n6\n8\n10\n12\n14\n16\n18"
+    }
+  ],
+  "tests": [
+    {
+      "input": "2",
+      "output": "2\n4\n6\n8\n10\n12\n14\n16\n18"
+    },
+    {
+      "input": "3",
+      "output": "3\n6\n9\n12\n15\n18\n21\n24\n27"
+    }
+  ]
+}
