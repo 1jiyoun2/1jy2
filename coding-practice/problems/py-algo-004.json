@@ -1,0 +1,30 @@
+{
+  "number": "064",
+  "title": "버블 정렬",
+  "category": "알고리즘 > 정렬",
+  "level": "기초",
+  "description": "버블 정렬 방식으로 정수 리스트를 오름차순 정렬한 뒤 출력하세요. sorted()와 sort()는 사용하지 않습니다.",
+  "input": "첫째 줄에 공백으로 구분된 정수들이 주어집니다.",
+  "output": "정렬된 값을 공백으로 구분해 출력합니다.",
+  "starter_code": "numbers = list(map(int, input().split()))\n\n# 인접한 두 값을 비교하며 버블 정렬을 구현하세요.\n\nprint(*numbers)\n",
+  "examples": [
+    {
+      "input": "5 1 4 2",
+      "output": "1 2 4 5"
+    }
+  ],
+  "tests": [
+    {
+      "input": "5 1 4 2",
+      "output": "1 2 4 5"
+    },
+    {
+      "input": "2 1",
+      "output": "1 2"
+    },
+    {
+      "input": "3 2 3 1",
+      "output": "1 2 3 3"
+    }
+  ]
+}
