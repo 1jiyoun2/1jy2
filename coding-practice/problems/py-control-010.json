@@ -26,5 +26,11 @@
       "input": "3 2",
       "output": "**\n**\n**"
     }
-  ]
+  ],
+  "rule_note": "반복 구조를 사용해 여러 줄을 출력하세요.",
+  "rules": {
+    "required_nodes": [
+      "For"
+    ]
+  }
 }
