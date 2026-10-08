@@ -1,0 +1,26 @@
+{
+  "number": "037",
+  "title": "단어 길이 사전",
+  "category": "자료 구조 > 딕셔너리",
+  "level": "기초",
+  "description": "공백으로 구분된 단어들을 입력받아 각 단어를 키, 단어 길이를 값으로 하는 딕셔너리를 만들고 '단어:길이' 형식으로 입력 순서대로 출력하세요.",
+  "input": "첫째 줄에 서로 다른 단어들이 공백으로 구분되어 주어집니다.",
+  "output": "각 항목을 단어:길이 형식으로 한 줄에 하나씩 출력합니다.",
+  "starter_code": "words = input().split()\nlengths = {}\n\n# 딕셔너리를 완성하고 출력하세요.\n",
+  "examples": [
+    {
+      "input": "cat python",
+      "output": "cat:3\npython:6"
+    }
+  ],
+  "tests": [
+    {
+      "input": "cat python",
+      "output": "cat:3\npython:6"
+    },
+    {
+      "input": "a bb ccc",
+      "output": "a:1\nbb:2\nccc:3"
+    }
+  ]
+}
