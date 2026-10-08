@@ -26,5 +26,14 @@
       "input": "7 5",
       "output": "1"
     }
-  ]
+  ],
+  "rule_note": "math.gcd()를 사용하지 않고 나머지를 이용한 반복으로 구하세요.",
+  "rules": {
+    "required_nodes": [
+      "While"
+    ],
+    "forbidden_calls": [
+      "gcd"
+    ]
+  }
 }
