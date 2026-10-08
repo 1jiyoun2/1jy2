@@ -1,0 +1,23 @@
+{
+  "number": "075",
+  "title": "문을 열 수 있을까?",
+  "category": "수업 실습 > 논리 연산",
+  "level": "기초",
+  "source": "2학년 프로그래밍 2단원 Colab 실습",
+  "description": "레벨이 3 이상이고 열쇠가 있을 때만 문을 열 수 있습니다. 주어진 변수로 논리 연산 결과를 출력하세요.",
+  "input": "입력은 없습니다.",
+  "output": "조건의 결과를 True 또는 False로 출력합니다.",
+  "starter_code": "level = 3\nhas_key = True\n\n# 두 조건을 and로 연결해 출력하세요.\n",
+  "examples": [
+    {
+      "input": "",
+      "output": "True"
+    }
+  ],
+  "tests": [
+    {
+      "input": "",
+      "output": "True"
+    }
+  ]
+}
