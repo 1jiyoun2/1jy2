@@ -26,5 +26,13 @@
       "input": "-2,3,4",
       "output": "5"
     }
-  ]
+  ],
+  "rule_note": "CSV 문자열을 파일에 저장하고 다시 읽어 처리하세요.",
+  "rules": {
+    "required_calls": [
+      "open",
+      "write",
+      "read"
+    ]
+  }
 }
