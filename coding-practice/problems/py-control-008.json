@@ -25,8 +25,9 @@
   ],
   "rule_note": "반복문을 사용해 1부터 9까지 처리하세요.",
   "rules": {
-    "required_nodes": [
-      "For"
+    "required_any_nodes": [
+      "For",
+      "While"
     ]
   }
 }
