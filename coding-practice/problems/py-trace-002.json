@@ -1,0 +1,33 @@
+{
+  "number": "092",
+  "type": "trace",
+  "title": "피해량과 HP 변화 추적",
+  "category": "기초 문법 > 산술 · 비교 연산",
+  "level": "기초",
+  "description": "Colab의 피해량 계산 코드를 읽고 연산 결과와 상태 변화를 추적하세요.",
+  "back_link": "python/basic/",
+  "code": "def calculate_damage(attack, defense, power=0):\n    return max(1, attack + power - defense)\n\nmonster_hp = 50\ndamage = calculate_damage(20, 7, 5)\nmonster_hp = monster_hp - damage\n\nprint(\"damage =\", damage)\nprint(\"남은 HP =\", monster_hp)\nprint(\"생존 =\", monster_hp > 0)",
+  "questions": [
+    {
+      "prompt": "damage의 값은?",
+      "answers": [
+        "18"
+      ],
+      "display_answer": "18"
+    },
+    {
+      "prompt": "공격 후 monster_hp의 값은?",
+      "answers": [
+        "32"
+      ],
+      "display_answer": "32"
+    },
+    {
+      "prompt": "monster_hp > 0의 결과는?",
+      "answers": [
+        "true"
+      ],
+      "display_answer": "True"
+    }
+  ]
+}
