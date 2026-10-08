@@ -1,0 +1,23 @@
+{
+  "number": "074",
+  "title": "리스트에서 강타 출력하기",
+  "category": "수업 실습 > 리스트 · 인덱스",
+  "level": "기초",
+  "source": "2학년 프로그래밍 2단원 Colab 실습",
+  "description": "skills 리스트에서 '강타'를 인덱스로 선택해 출력하세요.",
+  "input": "입력은 없습니다.",
+  "output": "강타를 출력합니다.",
+  "starter_code": "skills = [\"파이어볼\", \"강타\", \"회복\"]\n\n# 인덱스를 이용해 강타를 출력하세요.\n",
+  "examples": [
+    {
+      "input": "",
+      "output": "강타"
+    }
+  ],
+  "tests": [
+    {
+      "input": "",
+      "output": "강타"
+    }
+  ]
+}
