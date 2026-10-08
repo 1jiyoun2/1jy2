@@ -179,6 +179,11 @@ if tree is not None:
     if any_nodes and not any(name in node_names for name in any_nodes):
         violations.append("다음 중 하나의 문법을 사용하세요: " + " / ".join(labels.get(name, name) for name in any_nodes))
 
+    for node_name, minimum in rules.get("min_node_counts", {}).items():
+        count = sum(1 for n in nodes if type(n).__name__ == node_name)
+        if count < minimum:
+            violations.append(labels.get(node_name, node_name) + f"을(를) {minimum}개 이상 사용하세요.")
+
     call_names = []
     call_keywords = []
     for n in nodes:
@@ -307,15 +312,33 @@ async function loadManifest(currentId) {
         const response = await fetch("problems/index.json");
         if (!response.ok) return;
         problemManifest = await response.json();
-        const index = problemManifest.findIndex(x => x.id === currentId);
-        if (index < 0) return;
+
+        const current = problemManifest.find(x => x.id === currentId);
+        if (!current) return;
+
+        const groupUrls = {
+            "basic": "python/basic/",
+            "control": "python/control/",
+            "functions": "python/functions/",
+            "data-structures": "python/data-structures/",
+            "files-exceptions": "python/files-exceptions/",
+            "classes": "python/classes/",
+            "algorithms": "python/algorithms/"
+        };
+
+        if (!problem.back_link && groupUrls[current.group]) {
+            backLink.href = groupUrls[current.group];
+        }
+
+        const sameGroup = problemManifest.filter(x => x.group === current.group);
+        const index = sameGroup.findIndex(x => x.id === currentId);
 
         if (index > 0) {
-            prevLink.href = `problem.html?id=${problemManifest[index - 1].id}`;
+            prevLink.href = `problem.html?id=${sameGroup[index - 1].id}`;
             prevLink.hidden = false;
         }
-        if (index < problemManifest.length - 1) {
-            nextLink.href = `problem.html?id=${problemManifest[index + 1].id}`;
+        if (index >= 0 && index < sameGroup.length - 1) {
+            nextLink.href = `problem.html?id=${sameGroup[index + 1].id}`;
             nextLink.hidden = false;
         }
     } catch (_) {}
