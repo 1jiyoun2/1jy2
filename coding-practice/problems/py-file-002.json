@@ -1,0 +1,30 @@
+{
+  "number": "042",
+  "title": "0으로 나누기 예외",
+  "category": "파일·예외 > 예외 처리",
+  "level": "기초",
+  "description": "두 정수 a와 b를 입력받아 a // b를 출력하세요. b가 0이면 DIVISION ERROR를 출력하세요.",
+  "input": "첫째 줄에 두 정수 a와 b가 주어집니다.",
+  "output": "몫 또는 DIVISION ERROR를 출력합니다.",
+  "starter_code": "a, b = map(int, input().split())\n\ntry:\n    # 몫을 출력하세요.\n    pass\nexcept ZeroDivisionError:\n    print('DIVISION ERROR')\n",
+  "examples": [
+    {
+      "input": "10 2",
+      "output": "5"
+    }
+  ],
+  "tests": [
+    {
+      "input": "10 2",
+      "output": "5"
+    },
+    {
+      "input": "7 0",
+      "output": "DIVISION ERROR"
+    },
+    {
+      "input": "-9 3",
+      "output": "-3"
+    }
+  ]
+}
