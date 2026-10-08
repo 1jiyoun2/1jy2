@@ -1,32 +1,46 @@
 <!DOCTYPE html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>프로그램의 설계와 구현</title><link rel="stylesheet" href="../../style.css"></head>
-<body><main>
-<p class="back"><a href="../../">← 2026 2학년 프로그래밍</a></p>
-<h1>프로그램의 설계와 구현</h1>
-<p class="subtitle">Requirements · Planning · Design · Implementation · Testing</p>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>프로그램의 설계와 구현</title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<main>
+    <p class="back"><a href="../../">← 2026 2학년 프로그래밍</a></p>
+    <h1>프로그램의 설계와 구현</h1>
+    <p class="subtitle">Program Development · Requirements · Design · Implementation · Testing</p>
 
-<p>프로그램을 바로 코딩하지 않고, 문제와 요구를 먼저 정리한 뒤 기획·설계·구현·테스트를 단계별로 진행한다. 각 단계의 결과가 다음 단계의 근거가 되도록 연결하는 것이 핵심이다.</p>
+    <p>프로그램 개발은 코드를 작성하는 것만으로 끝나지 않는다. 무엇을 만들 것인지 정하고 사용자의 요구를 분석한 뒤, 프로그램의 구조와 알고리즘을 설계하고 구현한 다음 테스트를 통해 동작을 확인하고 수정하는 과정을 거친다.</p>
 
-<table class="list"><thead><tr><th class="name">단계</th><th class="description">핵심</th></tr></thead><tbody>
-<tr><td><a href="requirements.html">01. 요구분석명세</a></td><td class="description">프로그램의 목적·사용자·필요 기능·조건을 명확하게 기록</td></tr>
-<tr><td><a href="planning.html">02. 기획</a></td><td class="description">주제와 기능 범위, 함수·매개변수 사용 계획, 전체 실행 흐름 결정</td></tr>
-<tr><td><a href="design.html">03. 설계</a></td><td class="description">입력·출력·변수·함수·매개변수·알고리즘을 구현 가능한 수준으로 구체화</td></tr>
-<tr><td><a href="implementation.html">04. 구현</a></td><td class="description">설계를 바탕으로 Python 코드 작성 및 기능 단위 실행 확인</td></tr>
-<tr><td><a href="testing.html">05. 테스트</a></td><td class="description">단위·통합·시스템 관점에서 실행 결과를 검증하고 오류 수정</td></tr>
-</tbody></table>
+    <h2>프로그램 개발 과정</h2>
+    <table class="list">
+        <thead><tr><th class="name">단계</th><th class="description">학습 내용</th></tr></thead>
+        <tbody>
+            <tr><td><a href="requirements.html">요구 사항 분석과 명세</a></td><td class="description">사용자의 요구를 수집·분류·분석하고 필요한 기능과 제약 조건을 명확하게 기록</td></tr>
+            <tr><td><a href="planning.html">프로그램 기획</a></td><td class="description">프로그램의 목적, 대상 사용자, 기능 요구 사항, 사용자 인터페이스 등 개발 방향 결정</td></tr>
+            <tr><td><a href="design.html">프로그램 설계</a></td><td class="description">입력·출력과 해결 방법을 정리하고 프로그램의 구조와 알고리즘을 구체화</td></tr>
+            <tr><td><a href="implementation.html">프로그램 구현</a></td><td class="description">설계한 구조와 알고리즘을 프로그래밍 언어로 표현하여 실제 프로그램 작성</td></tr>
+            <tr><td><a href="testing.html">프로그램 테스트</a></td><td class="description">예상 결과와 실제 실행 결과를 비교하고 단위·통합·시스템 테스트를 통해 오류 확인 및 수정</td></tr>
+        </tbody>
+    </table>
 
-<h2>수업에서의 진행 방식</h2>
-<p>주제를 정한 뒤 모든 산출물을 한 번에 작성하지 않고, 요구분석명세부터 테스트까지 한 단계씩 완성한다. 교과서의 프로젝트 주제를 활용할 수도 있고 별도의 주제를 정할 수도 있지만, 수업에서 정한 공통 구현 조건은 동일하게 적용한다.</p>
+    <h2>개발 방법은 하나가 아니다</h2>
+    <p>프로그램 개발 과정은 프로젝트의 성격에 따라 다르게 구성할 수 있다. 단계별로 순차적으로 진행하는 폭포수 모형, 견본 프로그램을 만들고 수정·보완하는 프로토타입 모형, 반복 개발에 위험 분석을 더한 나선형 모형처럼 다양한 방법이 사용된다.</p>
 
-<h2>공통 구현 조건</h2>
-<ul>
-<li>프로그램의 기능과 입력·출력이 요구분석명세와 연결되어야 한다.</li>
-<li>기획 단계에서 어떤 기능을 함수로 구현할지 미리 정한다.</li>
-<li>함수에 필요한 값은 매개변수로 전달하는 구조를 설계한다.</li>
-<li>구현 코드는 설계한 알고리즘과 함수 구조를 따라 작성한다.</li>
-<li>테스트에서는 실제 입력값과 실행 결과를 근거로 오류 여부와 수정 과정을 확인한다.</li>
-</ul>
+    <h2>이 단원에서 연결해서 보는 것</h2>
+    <table class="list">
+        <thead><tr><th class="name">관점</th><th class="description">핵심 질문</th></tr></thead>
+        <tbody>
+            <tr><td>요구</td><td class="description">사용자는 무엇을 필요로 하는가?</td></tr>
+            <tr><td>설계</td><td class="description">그 요구를 어떤 구조와 절차로 해결할 것인가?</td></tr>
+            <tr><td>구현</td><td class="description">설계한 내용을 코드로 정확하게 표현했는가?</td></tr>
+            <tr><td>테스트</td><td class="description">프로그램이 요구 사항을 만족하며 예상대로 동작하는가?</td></tr>
+        </tbody>
+    </table>
 
-<p class="note">이 과정은 하나의 정답 코드를 만드는 활동이 아니라, 자신이 정한 문제를 개발 절차에 따라 설명하고 구현할 수 있도록 구성한 수업이다.</p>
-</main></body></html>
+    <p class="note">각 단계는 서로 독립된 작업이 아니라 연결된 개발 과정이다. 앞 단계에서 정한 내용은 다음 단계의 기준이 되고, 테스트에서 발견한 문제는 다시 설계와 구현의 수정으로 이어질 수 있다.</p>
+</main>
+</body>
+</html>
