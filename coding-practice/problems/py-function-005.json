@@ -1,0 +1,30 @@
+{
+  "number": "025",
+  "title": "짝수 판별 함수",
+  "category": "함수 > 반환값",
+  "level": "기초",
+  "description": "정수 n을 매개변수로 받아 짝수이면 True, 홀수이면 False를 반환하는 is_even(n) 함수를 작성하세요.",
+  "input": "첫째 줄에 정수 n이 주어집니다.",
+  "output": "is_even(n)의 반환값을 출력합니다.",
+  "starter_code": "def is_even(n):\n    # True 또는 False를 반환하세요.\n    pass\n\nn = int(input())\nprint(is_even(n))\n",
+  "examples": [
+    {
+      "input": "8",
+      "output": "True"
+    }
+  ],
+  "tests": [
+    {
+      "input": "8",
+      "output": "True"
+    },
+    {
+      "input": "7",
+      "output": "False"
+    },
+    {
+      "input": "0",
+      "output": "True"
+    }
+  ]
+}
