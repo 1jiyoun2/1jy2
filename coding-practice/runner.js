@@ -4,6 +4,17 @@ let starterCode = "";
 
 const codeEl = document.getElementById("code");
 const stdinEl = document.getElementById("stdin");
+const editor = CodeMirror.fromTextArea(codeEl, {
+    mode: "python",
+    theme: "material-darker",
+    lineNumbers: true,
+    indentUnit: 4,
+    tabSize: 4,
+    indentWithTabs: false,
+    lineWrapping: false,
+    matchBrackets: true,
+    autoCloseBrackets: true
+});
 const outputEl = document.getElementById("output");
 const judgeEl = document.getElementById("judge-result");
 const runBtn = document.getElementById("run-btn");
@@ -62,10 +73,12 @@ async function loadProblem() {
     document.getElementById("problem-subtitle").textContent = `Python · ${problem.category}`;
     document.getElementById("problem-meta").textContent =
         `문제 ${problem.number} · ${problem.category} · 난이도 ${problem.level}`;
+    document.getElementById("top-meta").textContent =
+        `Python · ${problem.number}`;
     document.getElementById("description").textContent = problem.description;
     document.getElementById("input-desc").textContent = problem.input;
     document.getElementById("output-desc").textContent = problem.output;
-    codeEl.value = starterCode;
+    editor.setValue(starterCode);
     stdinEl.value = problem.examples[0]?.input || "";
 
     const examples = document.getElementById("examples");
@@ -96,7 +109,7 @@ runBtn.addEventListener("click", async () => {
     if (!pyodide) return;
     outputEl.textContent = "실행 중...";
     try {
-        const result = await executePython(codeEl.value, stdinEl.value);
+        const result = await executePython(editor.getValue(), stdinEl.value);
         outputEl.textContent = String(result) || "(출력 없음)";
     } catch (error) {
         outputEl.textContent = `실행 환경 오류: ${error.message}`;
@@ -115,7 +128,7 @@ judgeBtn.addEventListener("click", async () => {
     for (let i = 0; i < problem.tests.length; i++) {
         const test = problem.tests[i];
         try {
-            const actual = normalizeOutput(await executePython(codeEl.value, test.input));
+            const actual = normalizeOutput(await executePython(editor.getValue(), test.input));
             const expected = normalizeOutput(test.output);
             if (actual === expected) {
                 passed++;
@@ -137,7 +150,7 @@ judgeBtn.addEventListener("click", async () => {
 });
 
 resetBtn.addEventListener("click", () => {
-    codeEl.value = starterCode;
+    editor.setValue(starterCode);
     stdinEl.value = problem?.examples[0]?.input || "";
     outputEl.textContent = pyodide ? "초기화했습니다." : "Python 실행 환경을 준비하는 중입니다...";
     judgeEl.textContent = "아직 채점하지 않았습니다.";
