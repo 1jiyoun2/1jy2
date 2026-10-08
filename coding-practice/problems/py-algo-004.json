@@ -26,5 +26,15 @@
       "input": "3 2 3 1",
       "output": "1 2 3 3"
     }
-  ]
+  ],
+  "rule_note": "sorted()와 sort()를 사용하지 않고 버블 정렬 과정을 구현하세요.",
+  "rules": {
+    "required_nodes": [
+      "For"
+    ],
+    "forbidden_calls": [
+      "sorted",
+      "sort"
+    ]
+  }
 }
