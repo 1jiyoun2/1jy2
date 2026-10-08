@@ -1,0 +1,26 @@
+{
+  "number": "048",
+  "title": "seek()로 다시 읽기",
+  "category": "파일·예외 > seek()",
+  "level": "기초",
+  "description": "문자열을 파일에 저장한 뒤 파일 전체를 한 번 읽고, seek(0)으로 처음으로 이동하여 다시 읽은 값을 출력하세요.",
+  "input": "첫째 줄에 문자열이 주어집니다.",
+  "output": "같은 문자열을 두 줄에 걸쳐 출력합니다.",
+  "starter_code": "text = input()\n\n# 파일에 저장하고 read(), seek(0), read()를 순서대로 사용하세요.\n",
+  "examples": [
+    {
+      "input": "python",
+      "output": "python\npython"
+    }
+  ],
+  "tests": [
+    {
+      "input": "python",
+      "output": "python\npython"
+    },
+    {
+      "input": "abc",
+      "output": "abc\nabc"
+    }
+  ]
+}
