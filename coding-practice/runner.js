@@ -116,13 +116,87 @@ runBtn.addEventListener("click", async () => {
     }
 });
 
+function makeResultValue(label, value, className = "") {
+    const row = document.createElement("div");
+    row.className = "judge-detail-row";
+
+    const key = document.createElement("span");
+    key.className = "judge-detail-label";
+    key.textContent = label;
+
+    const content = document.createElement("code");
+    content.className = className;
+    content.textContent = value || "(없음)";
+
+    row.append(key, content);
+    return row;
+}
+
+function renderJudgeResults(results, passed, total) {
+    judgeEl.innerHTML = "";
+    judgeEl.className = "console judge-console";
+
+    const summary = document.createElement("div");
+    summary.className = "judge-summary";
+
+    const score = document.createElement("strong");
+    score.className = passed === total ? "judge-score pass-text" : "judge-score fail-text";
+    score.textContent = passed === total ? "모두 통과" : `${passed} / ${total} 통과`;
+
+    const hint = document.createElement("span");
+    hint.textContent = passed === total ? "모든 테스트를 통과했습니다." : "실패한 테스트를 확인하고 코드를 수정해 보세요.";
+
+    summary.append(score, hint);
+    judgeEl.appendChild(summary);
+
+    const list = document.createElement("div");
+    list.className = "judge-list";
+
+    results.forEach((result, index) => {
+        const item = document.createElement("div");
+        item.className = `judge-item ${result.ok ? "is-pass" : "is-fail"}`;
+
+        const head = document.createElement("div");
+        head.className = "judge-item-head";
+
+        const name = document.createElement("span");
+        name.textContent = `테스트 ${index + 1}`;
+
+        const state = document.createElement("strong");
+        state.className = result.ok ? "pass-text" : "fail-text";
+        state.textContent = result.ok ? "통과" : (result.error ? "실행 오류" : "실패");
+
+        head.append(name, state);
+        item.appendChild(head);
+
+        if (!result.ok) {
+            const detail = document.createElement("div");
+            detail.className = "judge-details";
+
+            if (result.error) {
+                detail.appendChild(makeResultValue("오류", result.error, "actual-value"));
+            } else {
+                detail.appendChild(makeResultValue("입력", result.input));
+                detail.appendChild(makeResultValue("기대", result.expected, "expected-value"));
+                detail.appendChild(makeResultValue("결과", result.actual, "actual-value"));
+            }
+            item.appendChild(detail);
+        }
+
+        list.appendChild(item);
+    });
+
+    judgeEl.appendChild(list);
+}
+
 judgeBtn.addEventListener("click", async () => {
     if (!pyodide || !problem) return;
     judgeBtn.disabled = true;
     runBtn.disabled = true;
+    judgeEl.className = "console judge-console";
     judgeEl.textContent = "채점 중...";
 
-    const lines = [];
+    const results = [];
     let passed = 0;
 
     for (let i = 0; i < problem.tests.length; i++) {
@@ -130,21 +204,25 @@ judgeBtn.addEventListener("click", async () => {
         try {
             const actual = normalizeOutput(await executePython(editor.getValue(), test.input));
             const expected = normalizeOutput(test.output);
-            if (actual === expected) {
-                passed++;
-                lines.push(`테스트 ${i + 1}: 통과`);
-            } else {
-                lines.push(
-                    `테스트 ${i + 1}: 실패\n  입력: ${test.input.replace(/\n/g, " / ")}\n  기대: ${expected.replace(/\n/g, " / ")}\n  결과: ${actual.replace(/\n/g, " / ")}`
-                );
-            }
+            const ok = actual === expected;
+
+            if (ok) passed++;
+
+            results.push({
+                ok,
+                input: test.input,
+                expected,
+                actual
+            });
         } catch (error) {
-            lines.push(`테스트 ${i + 1}: 실행 오류 - ${error.message}`);
+            results.push({
+                ok: false,
+                error: error.message
+            });
         }
     }
 
-    judgeEl.textContent = `${passed} / ${problem.tests.length} 통과\n\n${lines.join("\n")}`;
-    judgeEl.className = passed === problem.tests.length ? "pass" : "fail";
+    renderJudgeResults(results, passed, problem.tests.length);
     judgeBtn.disabled = false;
     runBtn.disabled = false;
 });
@@ -154,7 +232,7 @@ resetBtn.addEventListener("click", () => {
     stdinEl.value = problem?.examples[0]?.input || "";
     outputEl.textContent = pyodide ? "초기화했습니다." : "Python 실행 환경을 준비하는 중입니다...";
     judgeEl.textContent = "아직 채점하지 않았습니다.";
-    judgeEl.className = "";
+    judgeEl.className = "console judge-console";
 });
 
 (async () => {
