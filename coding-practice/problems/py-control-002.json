@@ -1,5 +1,5 @@
 {
-  "number": "007",
+  "number": "012",
   "title": "더 큰 수",
   "category": "제어 구조 > 선택 구조",
   "level": "기초",
@@ -8,11 +8,23 @@
   "output": "두 수 중 더 큰 값을 출력합니다.",
   "starter_code": "a, b = map(int, input().split())\n\n# if문을 사용해 보세요.\n",
   "examples": [
-    { "input": "4 9", "output": "9" }
+    {
+      "input": "4 9",
+      "output": "9"
+    }
   ],
   "tests": [
-    { "input": "4 9", "output": "9" },
-    { "input": "12 3", "output": "12" },
-    { "input": "-2 -7", "output": "-2" }
+    {
+      "input": "4 9",
+      "output": "9"
+    },
+    {
+      "input": "12 3",
+      "output": "12"
+    },
+    {
+      "input": "-2 -7",
+      "output": "-2"
+    }
   ]
 }
