@@ -19,5 +19,14 @@
       "input": "",
       "output": "2026.08.19"
     }
-  ]
+  ],
+  "rule_note": "print()의 sep= 인자를 사용하세요.",
+  "rules": {
+    "required_call_keywords": [
+      {
+        "call": "print",
+        "keyword": "sep"
+      }
+    ]
+  }
 }
