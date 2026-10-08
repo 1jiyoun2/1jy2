@@ -1,0 +1,41 @@
+{
+  "number": "104",
+  "title": "전역 변수에 팩토리얼 저장",
+  "category": "함수 > 전역 변수",
+  "level": "적용",
+  "description": "전역 변수 result를 사용하여 1부터 n까지의 곱을 result에 저장하는 factorial_to_global(n) 함수를 작성하세요. 함수 안에서 global을 사용하세요.",
+  "input": "첫째 줄에 양의 정수 n이 주어집니다.",
+  "output": "함수 호출 후 전역 변수 result의 값을 출력합니다.",
+  "starter_code": "result = 1\n\ndef factorial_to_global(n):\n    # global result를 선언하고 1부터 n까지 곱해 저장하세요.\n    pass\n\nn = int(input())\nfactorial_to_global(n)\nprint(result)\n",
+  "examples": [
+    {
+      "input": "5",
+      "output": "120"
+    }
+  ],
+  "tests": [
+    {
+      "input": "5",
+      "output": "120"
+    },
+    {
+      "input": "1",
+      "output": "1"
+    },
+    {
+      "input": "6",
+      "output": "720"
+    }
+  ],
+  "hints": [
+    "함수 내부에서 전역 변수 result를 바꾸려면 global result가 필요합니다.",
+    "1부터 n까지 반복하면서 result에 곱해 저장하세요."
+  ],
+  "rule_note": "함수 안에서 global을 사용해 전역 변수를 수정하세요.",
+  "rules": {
+    "required_nodes": [
+      "Global",
+      "For"
+    ]
+  }
+}
