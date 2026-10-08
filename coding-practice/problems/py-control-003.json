@@ -1,5 +1,5 @@
 {
-  "number": "008",
+  "number": "013",
   "title": "1부터 N까지의 합",
   "category": "제어 구조 > 반복 구조",
   "level": "기초",
@@ -8,11 +8,23 @@
   "output": "1부터 n까지의 합을 출력합니다.",
   "starter_code": "n = int(input())\ntotal = 0\n\n# 반복문을 사용해 합을 구해 보세요.\n",
   "examples": [
-    { "input": "5", "output": "15" }
+    {
+      "input": "5",
+      "output": "15"
+    }
   ],
   "tests": [
-    { "input": "5", "output": "15" },
-    { "input": "1", "output": "1" },
-    { "input": "10", "output": "55" }
+    {
+      "input": "5",
+      "output": "15"
+    },
+    {
+      "input": "1",
+      "output": "1"
+    },
+    {
+      "input": "10",
+      "output": "55"
+    }
   ]
 }
