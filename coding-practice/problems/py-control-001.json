@@ -1,5 +1,5 @@
 {
-  "number": "006",
+  "number": "011",
   "title": "짝수와 홀수",
   "category": "제어 구조 > 선택 구조",
   "level": "기초",
@@ -8,11 +8,23 @@
   "output": "n이 짝수이면 EVEN, 홀수이면 ODD를 출력합니다.",
   "starter_code": "n = int(input())\n\n# if문을 사용해 보세요.\n",
   "examples": [
-    { "input": "8", "output": "EVEN" }
+    {
+      "input": "8",
+      "output": "EVEN"
+    }
   ],
   "tests": [
-    { "input": "8", "output": "EVEN" },
-    { "input": "7", "output": "ODD" },
-    { "input": "-4", "output": "EVEN" }
+    {
+      "input": "8",
+      "output": "EVEN"
+    },
+    {
+      "input": "7",
+      "output": "ODD"
+    },
+    {
+      "input": "-4",
+      "output": "EVEN"
+    }
   ]
 }
