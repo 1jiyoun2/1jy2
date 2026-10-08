@@ -26,5 +26,12 @@
       "input": "7 1",
       "output": "1\n7"
     }
-  ]
+  ],
+  "rule_note": "비트 AND(&)와 OR(|) 연산자를 사용하세요.",
+  "rules": {
+    "required_nodes": [
+      "BitAnd",
+      "BitOr"
+    ]
+  }
 }
