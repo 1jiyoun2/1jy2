@@ -1,0 +1,31 @@
+{
+  "number": "086",
+  "title": "나이 입력 ValueError 처리",
+  "category": "수업 실습 > 예외 처리",
+  "level": "기초",
+  "source": "예외처리 학생실습 Colab",
+  "description": "나이를 입력받아 정수로 변환해 출력하세요. 숫자가 아니면 '숫자로 입력하세요.'를 출력하세요.",
+  "input": "첫째 줄에 나이 또는 문자열이 주어집니다.",
+  "output": "정상 입력이면 '입력한 나이: 값', 잘못된 입력이면 안내 문구를 출력합니다.",
+  "starter_code": "try:\n    age = int(input())\n    print('입력한 나이:', age)\nexcept ValueError:\n    # 안내 문구를 출력하세요.\n    pass\n",
+  "examples": [
+    {
+      "input": "스무살",
+      "output": "숫자로 입력하세요."
+    }
+  ],
+  "tests": [
+    {
+      "input": "18",
+      "output": "입력한 나이: 18"
+    },
+    {
+      "input": "20",
+      "output": "입력한 나이: 20"
+    },
+    {
+      "input": "스무살",
+      "output": "숫자로 입력하세요."
+    }
+  ]
+}
