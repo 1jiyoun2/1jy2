@@ -33,7 +33,8 @@
   ],
   "rule_note": "함수 내부의 지역 변수를 이용해 반복하세요.",
   "rules": {
-    "required_nodes": [
+    "required_any_nodes": [
+      "For",
       "While"
     ]
   }
