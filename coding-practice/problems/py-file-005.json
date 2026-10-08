@@ -26,5 +26,13 @@
       "input": "12345",
       "output": "12345"
     }
-  ]
+  ],
+  "rule_note": "파일에 저장한 뒤 다시 읽는 과정을 코드로 작성하세요.",
+  "rules": {
+    "required_calls": [
+      "open",
+      "write",
+      "read"
+    ]
+  }
 }
