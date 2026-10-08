@@ -1,0 +1,31 @@
+{
+  "number": "076",
+  "title": "구매 가능 판정",
+  "category": "수업 실습 > 선택 구조",
+  "level": "기초",
+  "source": "2학년 프로그래밍 2단원 Colab 실습",
+  "description": "gold가 50 이상이면 '구매 가능', 아니면 '골드 부족'을 출력하세요.",
+  "input": "첫째 줄에 현재 골드가 주어집니다.",
+  "output": "조건에 따라 구매 가능 또는 골드 부족을 출력합니다.",
+  "starter_code": "gold = int(input())\n\n# if문을 작성하세요.\n",
+  "examples": [
+    {
+      "input": "35",
+      "output": "골드 부족"
+    }
+  ],
+  "tests": [
+    {
+      "input": "35",
+      "output": "골드 부족"
+    },
+    {
+      "input": "50",
+      "output": "구매 가능"
+    },
+    {
+      "input": "120",
+      "output": "구매 가능"
+    }
+  ]
+}
