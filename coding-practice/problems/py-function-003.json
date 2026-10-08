@@ -1,0 +1,30 @@
+{
+  "number": "023",
+  "title": "두 수의 차이 함수",
+  "category": "함수 > 매개변수 · 반환값",
+  "level": "기초",
+  "description": "두 정수 a와 b를 매개변수로 받아 두 수의 차이의 절댓값을 반환하는 difference(a, b) 함수를 작성하세요.",
+  "input": "첫째 줄에 두 정수 a와 b가 공백으로 구분되어 주어집니다.",
+  "output": "difference(a, b)가 반환한 값을 출력합니다.",
+  "starter_code": "def difference(a, b):\n    # 두 수의 차이의 절댓값을 반환하세요.\n    pass\n\na, b = map(int, input().split())\nprint(difference(a, b))\n",
+  "examples": [
+    {
+      "input": "8 3",
+      "output": "5"
+    }
+  ],
+  "tests": [
+    {
+      "input": "8 3",
+      "output": "5"
+    },
+    {
+      "input": "2 10",
+      "output": "8"
+    },
+    {
+      "input": "-4 5",
+      "output": "9"
+    }
+  ]
+}
