@@ -1,0 +1,26 @@
+{
+  "number": "054",
+  "title": "Student 평균",
+  "category": "클래스 > 속성 · 메서드",
+  "level": "기초",
+  "description": "Student 클래스에 scores 리스트를 저장하고 average() 메서드가 평균을 반환하도록 작성하세요.",
+  "input": "첫째 줄에 공백으로 구분된 정수 점수들이 주어집니다.",
+  "output": "평균을 소수점 아래 한 자리까지 출력합니다.",
+  "starter_code": "class Student:\n    def __init__(self, scores):\n        self.scores = scores\n\n    def average(self):\n        # 평균을 반환하세요.\n        pass\n\nscores = list(map(int, input().split()))\ns = Student(scores)\nprint(f'{s.average():.1f}')\n",
+  "examples": [
+    {
+      "input": "80 90 100",
+      "output": "90.0"
+    }
+  ],
+  "tests": [
+    {
+      "input": "80 90 100",
+      "output": "90.0"
+    },
+    {
+      "input": "70 80",
+      "output": "75.0"
+    }
+  ]
+}
