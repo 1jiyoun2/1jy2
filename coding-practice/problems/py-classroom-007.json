@@ -1,0 +1,23 @@
+{
+  "number": "077",
+  "title": "5부터 1까지 출력",
+  "category": "수업 실습 > 반복 구조",
+  "level": "기초",
+  "source": "2학년 프로그래밍 2단원 Colab 실습",
+  "description": "반복문을 사용해 5부터 1까지 한 줄에 하나씩 출력하세요.",
+  "input": "입력은 없습니다.",
+  "output": "5, 4, 3, 2, 1을 한 줄에 하나씩 출력합니다.",
+  "starter_code": "# 반복문을 사용하세요.\n",
+  "examples": [
+    {
+      "input": "",
+      "output": "5\n4\n3\n2\n1"
+    }
+  ],
+  "tests": [
+    {
+      "input": "",
+      "output": "5\n4\n3\n2\n1"
+    }
+  ]
+}
