@@ -19,5 +19,12 @@
       "input": "",
       "output": "5\n4\n3\n2\n1"
     }
-  ]
+  ],
+  "rule_note": "반복문을 사용해 5부터 1까지 출력하세요.",
+  "rules": {
+    "required_any_nodes": [
+      "For",
+      "While"
+    ]
+  }
 }
