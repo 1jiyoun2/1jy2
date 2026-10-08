@@ -159,7 +159,11 @@ labels = {
     "Continue": "continue",
     "Import": "import",
     "ImportFrom": "from ... import",
-    "Global": "global"
+    "Global": "global",
+    "And": "and",
+    "Or": "or",
+    "BitAnd": "비트 AND(&)",
+    "BitOr": "비트 OR(|)"
 }
 
 try:
