@@ -1,0 +1,30 @@
+{
+  "number": "019",
+  "title": "짝수의 합",
+  "category": "제어 구조 > 반복 구조",
+  "level": "기초",
+  "description": "양의 정수 n을 입력받아 1부터 n까지의 짝수만 더한 값을 출력하세요.",
+  "input": "첫째 줄에 양의 정수 n이 주어집니다.",
+  "output": "1부터 n까지의 짝수 합을 출력합니다.",
+  "starter_code": "n = int(input())\ntotal = 0\n\n# 반복문과 조건문을 함께 사용하세요.\n",
+  "examples": [
+    {
+      "input": "6",
+      "output": "12"
+    }
+  ],
+  "tests": [
+    {
+      "input": "6",
+      "output": "12"
+    },
+    {
+      "input": "1",
+      "output": "0"
+    },
+    {
+      "input": "10",
+      "output": "30"
+    }
+  ]
+}
