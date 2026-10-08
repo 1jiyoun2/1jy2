@@ -26,5 +26,11 @@
       "input": "7",
       "output": "7"
     }
-  ]
+  ],
+  "rule_note": "max()를 사용하지 않고 값을 직접 비교하세요.",
+  "rules": {
+    "forbidden_calls": [
+      "max"
+    ]
+  }
 }
