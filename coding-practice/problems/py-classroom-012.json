@@ -1,0 +1,27 @@
+{
+  "number": "082",
+  "title": "책 가격 예외 처리",
+  "category": "수업 실습 > 예외 처리",
+  "level": "기초",
+  "source": "클래스와 예외처리 파일-2 Colab",
+  "description": "책 제목과 가격을 입력받습니다. 가격을 정수로 바꿀 수 없으면 '가격은 숫자로 입력하세요.'를 출력하세요.",
+  "input": "첫째 줄에 책 제목, 둘째 줄에 가격 문자열이 주어집니다.",
+  "output": "정상 입력이면 '제목 가격', 잘못된 가격이면 안내 문구를 출력합니다.",
+  "starter_code": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n    def show(self):\n        print(self.title, self.price)\n\ntry:\n    title = input()\n    price = int(input())\n    book = Book(title, price)\n    book.show()\nexcept ValueError:\n    # 안내 문구를 출력하세요.\n    pass\n",
+  "examples": [
+    {
+      "input": "파이썬\nabc",
+      "output": "가격은 숫자로 입력하세요."
+    }
+  ],
+  "tests": [
+    {
+      "input": "파이썬\n12000",
+      "output": "파이썬 12000"
+    },
+    {
+      "input": "파이썬\nabc",
+      "output": "가격은 숫자로 입력하세요."
+    }
+  ]
+}
