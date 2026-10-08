@@ -29,8 +29,9 @@
   ],
   "rule_note": "반복문을 사용해 합을 누적하세요.",
   "rules": {
-    "required_nodes": [
-      "For"
+    "required_any_nodes": [
+      "For",
+      "While"
     ]
   }
 }
