@@ -1,0 +1,26 @@
+{
+  "number": "052",
+  "title": "Rectangle 넓이",
+  "category": "클래스 > 메서드",
+  "level": "기초",
+  "description": "Rectangle 클래스에 width와 height를 저장하고 area() 메서드가 넓이를 반환하도록 작성하세요.",
+  "input": "첫째 줄에 width와 height가 공백으로 구분되어 주어집니다.",
+  "output": "area()의 반환값을 출력합니다.",
+  "starter_code": "class Rectangle:\n    def __init__(self, width, height):\n        self.width = width\n        self.height = height\n\n    def area(self):\n        # 넓이를 반환하세요.\n        pass\n\nw, h = map(int, input().split())\nr = Rectangle(w, h)\nprint(r.area())\n",
+  "examples": [
+    {
+      "input": "4 6",
+      "output": "24"
+    }
+  ],
+  "tests": [
+    {
+      "input": "4 6",
+      "output": "24"
+    },
+    {
+      "input": "2 9",
+      "output": "18"
+    }
+  ]
+}
