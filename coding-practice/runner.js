@@ -29,10 +29,11 @@ async function executePython(code, stdinText) {
     pyodide.globals.set("user_code", code);
     pyodide.globals.set("stdin_text", stdinText);
 
-    return await pyodide.runPythonAsync(`
+    const raw = await pyodide.runPythonAsync(`
 import builtins
 import contextlib
 import io
+import json
 
 _input_lines = iter(stdin_text.splitlines())
 
@@ -45,18 +46,23 @@ def _practice_input(prompt=""):
 _old_input = builtins.input
 builtins.input = _practice_input
 _buffer = io.StringIO()
+_error = None
 
 try:
     with contextlib.redirect_stdout(_buffer):
         exec(user_code, {})
-    _practice_result = _buffer.getvalue()
 except Exception as e:
-    _practice_result = f"{type(e).__name__}: {e}"
+    _error = f"{type(e).__name__}: {e}"
 finally:
     builtins.input = _old_input
 
-_practice_result
+json.dumps({
+    "output": _buffer.getvalue(),
+    "error": _error
+}, ensure_ascii=False)
 `);
+
+    return JSON.parse(String(raw));
 }
 
 async function loadProblem() {
@@ -110,7 +116,7 @@ runBtn.addEventListener("click", async () => {
     outputEl.textContent = "실행 중...";
     try {
         const result = await executePython(editor.getValue(), stdinEl.value);
-        outputEl.textContent = String(result) || "(출력 없음)";
+        outputEl.textContent = result.error || result.output || "(출력 없음)";
     } catch (error) {
         outputEl.textContent = `실행 환경 오류: ${error.message}`;
     }
@@ -202,8 +208,18 @@ judgeBtn.addEventListener("click", async () => {
     for (let i = 0; i < problem.tests.length; i++) {
         const test = problem.tests[i];
         try {
-            const actual = normalizeOutput(await executePython(editor.getValue(), test.input));
+            const runResult = await executePython(editor.getValue(), test.input);
             const expected = normalizeOutput(test.output);
+
+            if (runResult.error) {
+                results.push({
+                    ok: false,
+                    error: runResult.error
+                });
+                continue;
+            }
+
+            const actual = normalizeOutput(runResult.output);
             const ok = actual === expected;
 
             if (ok) passed++;
