@@ -26,5 +26,15 @@
       "input": "-1 5 0",
       "output": "-1 0 5"
     }
-  ]
+  ],
+  "rule_note": "sorted()와 sort()를 사용하지 않고 선택 정렬 과정을 구현하세요.",
+  "rules": {
+    "required_nodes": [
+      "For"
+    ],
+    "forbidden_calls": [
+      "sorted",
+      "sort"
+    ]
+  }
 }
