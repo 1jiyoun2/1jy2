@@ -1,0 +1,30 @@
+{
+  "number": "038",
+  "title": "문자 빈도 세기",
+  "category": "자료 구조 > 딕셔너리",
+  "level": "기초",
+  "description": "공백이 없는 문자열을 입력받아 각 문자가 나타난 횟수를 사전에 저장하고, 처음 등장한 순서대로 '문자:횟수'를 출력하세요.",
+  "input": "첫째 줄에 공백이 없는 문자열이 주어집니다.",
+  "output": "문자:횟수를 처음 등장한 순서대로 한 줄에 하나씩 출력합니다.",
+  "starter_code": "text = input()\ncounts = {}\n\n# 문자의 등장 횟수를 저장하세요.\n",
+  "examples": [
+    {
+      "input": "banana",
+      "output": "b:1\na:3\nn:2"
+    }
+  ],
+  "tests": [
+    {
+      "input": "banana",
+      "output": "b:1\na:3\nn:2"
+    },
+    {
+      "input": "abc",
+      "output": "a:1\nb:1\nc:1"
+    },
+    {
+      "input": "aabb",
+      "output": "a:2\nb:2"
+    }
+  ]
+}
