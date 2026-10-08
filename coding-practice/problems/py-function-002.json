@@ -1,0 +1,18 @@
+{
+  "number": "010",
+  "title": "직사각형의 넓이 함수",
+  "category": "함수 > 매개변수 · 반환값",
+  "level": "기초",
+  "description": "가로 길이 width와 세로 길이 height를 매개변수로 받아 넓이를 반환하는 rectangle_area(width, height) 함수를 작성하세요.",
+  "input": "첫째 줄에 두 양의 정수 width와 height가 공백으로 구분되어 주어집니다.",
+  "output": "rectangle_area(width, height)가 반환한 넓이를 출력합니다.",
+  "starter_code": "def rectangle_area(width, height):\n    # 넓이를 반환하도록 작성하세요.\n    pass\n\nwidth, height = map(int, input().split())\nprint(rectangle_area(width, height))\n",
+  "examples": [
+    { "input": "4 6", "output": "24" }
+  ],
+  "tests": [
+    { "input": "4 6", "output": "24" },
+    { "input": "1 9", "output": "9" },
+    { "input": "12 5", "output": "60" }
+  ]
+}
