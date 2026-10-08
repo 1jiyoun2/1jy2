@@ -30,8 +30,11 @@
   "rule_note": "반복문과 조건문을 함께 사용하세요.",
   "rules": {
     "required_nodes": [
-      "For",
       "If"
+    ],
+    "required_any_nodes": [
+      "For",
+      "While"
     ]
   }
 }
