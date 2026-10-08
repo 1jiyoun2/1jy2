@@ -1,0 +1,422 @@
+[
+  {
+    "number": "001",
+    "id": "py-basic-001"
+  },
+  {
+    "number": "002",
+    "id": "py-basic-002"
+  },
+  {
+    "number": "003",
+    "id": "py-basic-003"
+  },
+  {
+    "number": "004",
+    "id": "py-basic-004"
+  },
+  {
+    "number": "005",
+    "id": "py-basic-005"
+  },
+  {
+    "number": "006",
+    "id": "py-basic-006"
+  },
+  {
+    "number": "007",
+    "id": "py-basic-007"
+  },
+  {
+    "number": "008",
+    "id": "py-basic-008"
+  },
+  {
+    "number": "009",
+    "id": "py-basic-009"
+  },
+  {
+    "number": "010",
+    "id": "py-basic-010"
+  },
+  {
+    "number": "011",
+    "id": "py-control-001"
+  },
+  {
+    "number": "012",
+    "id": "py-control-002"
+  },
+  {
+    "number": "013",
+    "id": "py-control-003"
+  },
+  {
+    "number": "014",
+    "id": "py-control-004"
+  },
+  {
+    "number": "015",
+    "id": "py-control-005"
+  },
+  {
+    "number": "016",
+    "id": "py-control-006"
+  },
+  {
+    "number": "017",
+    "id": "py-control-007"
+  },
+  {
+    "number": "018",
+    "id": "py-control-008"
+  },
+  {
+    "number": "019",
+    "id": "py-control-009"
+  },
+  {
+    "number": "020",
+    "id": "py-control-010"
+  },
+  {
+    "number": "021",
+    "id": "py-function-001"
+  },
+  {
+    "number": "022",
+    "id": "py-function-002"
+  },
+  {
+    "number": "023",
+    "id": "py-function-003"
+  },
+  {
+    "number": "024",
+    "id": "py-function-004"
+  },
+  {
+    "number": "025",
+    "id": "py-function-005"
+  },
+  {
+    "number": "026",
+    "id": "py-function-006"
+  },
+  {
+    "number": "027",
+    "id": "py-function-007"
+  },
+  {
+    "number": "028",
+    "id": "py-function-008"
+  },
+  {
+    "number": "029",
+    "id": "py-function-009"
+  },
+  {
+    "number": "030",
+    "id": "py-function-010"
+  },
+  {
+    "number": "031",
+    "id": "py-data-001"
+  },
+  {
+    "number": "032",
+    "id": "py-data-002"
+  },
+  {
+    "number": "033",
+    "id": "py-data-003"
+  },
+  {
+    "number": "034",
+    "id": "py-data-004"
+  },
+  {
+    "number": "035",
+    "id": "py-data-005"
+  },
+  {
+    "number": "036",
+    "id": "py-data-006"
+  },
+  {
+    "number": "037",
+    "id": "py-data-007"
+  },
+  {
+    "number": "038",
+    "id": "py-data-008"
+  },
+  {
+    "number": "039",
+    "id": "py-data-009"
+  },
+  {
+    "number": "040",
+    "id": "py-data-010"
+  },
+  {
+    "number": "041",
+    "id": "py-file-001"
+  },
+  {
+    "number": "042",
+    "id": "py-file-002"
+  },
+  {
+    "number": "043",
+    "id": "py-file-003"
+  },
+  {
+    "number": "044",
+    "id": "py-file-004"
+  },
+  {
+    "number": "045",
+    "id": "py-file-005"
+  },
+  {
+    "number": "046",
+    "id": "py-file-006"
+  },
+  {
+    "number": "047",
+    "id": "py-file-007"
+  },
+  {
+    "number": "048",
+    "id": "py-file-008"
+  },
+  {
+    "number": "049",
+    "id": "py-file-009"
+  },
+  {
+    "number": "050",
+    "id": "py-file-010"
+  },
+  {
+    "number": "051",
+    "id": "py-class-001"
+  },
+  {
+    "number": "052",
+    "id": "py-class-002"
+  },
+  {
+    "number": "053",
+    "id": "py-class-003"
+  },
+  {
+    "number": "054",
+    "id": "py-class-004"
+  },
+  {
+    "number": "055",
+    "id": "py-class-005"
+  },
+  {
+    "number": "056",
+    "id": "py-class-006"
+  },
+  {
+    "number": "057",
+    "id": "py-class-007"
+  },
+  {
+    "number": "058",
+    "id": "py-class-008"
+  },
+  {
+    "number": "059",
+    "id": "py-class-009"
+  },
+  {
+    "number": "060",
+    "id": "py-class-010"
+  },
+  {
+    "number": "061",
+    "id": "py-algo-001"
+  },
+  {
+    "number": "062",
+    "id": "py-algo-002"
+  },
+  {
+    "number": "063",
+    "id": "py-algo-003"
+  },
+  {
+    "number": "064",
+    "id": "py-algo-004"
+  },
+  {
+    "number": "065",
+    "id": "py-algo-005"
+  },
+  {
+    "number": "066",
+    "id": "py-algo-006"
+  },
+  {
+    "number": "067",
+    "id": "py-algo-007"
+  },
+  {
+    "number": "068",
+    "id": "py-algo-008"
+  },
+  {
+    "number": "069",
+    "id": "py-algo-009"
+  },
+  {
+    "number": "070",
+    "id": "py-algo-010"
+  },
+  {
+    "number": "071",
+    "id": "py-classroom-001"
+  },
+  {
+    "number": "072",
+    "id": "py-classroom-002"
+  },
+  {
+    "number": "073",
+    "id": "py-classroom-003"
+  },
+  {
+    "number": "074",
+    "id": "py-classroom-004"
+  },
+  {
+    "number": "075",
+    "id": "py-classroom-005"
+  },
+  {
+    "number": "076",
+    "id": "py-classroom-006"
+  },
+  {
+    "number": "077",
+    "id": "py-classroom-007"
+  },
+  {
+    "number": "078",
+    "id": "py-classroom-008"
+  },
+  {
+    "number": "079",
+    "id": "py-classroom-009"
+  },
+  {
+    "number": "080",
+    "id": "py-classroom-010"
+  },
+  {
+    "number": "081",
+    "id": "py-classroom-011"
+  },
+  {
+    "number": "082",
+    "id": "py-classroom-012"
+  },
+  {
+    "number": "083",
+    "id": "py-classroom-013"
+  },
+  {
+    "number": "084",
+    "id": "py-classroom-014"
+  },
+  {
+    "number": "085",
+    "id": "py-classroom-015"
+  },
+  {
+    "number": "086",
+    "id": "py-classroom-016"
+  },
+  {
+    "number": "087",
+    "id": "py-classroom-017"
+  },
+  {
+    "number": "088",
+    "id": "py-classroom-018"
+  },
+  {
+    "number": "089",
+    "id": "py-classroom-019"
+  },
+  {
+    "number": "090",
+    "id": "py-classroom-020"
+  },
+  {
+    "number": "091",
+    "id": "py-trace-001"
+  },
+  {
+    "number": "092",
+    "id": "py-trace-002"
+  },
+  {
+    "number": "093",
+    "id": "py-trace-003"
+  },
+  {
+    "number": "094",
+    "id": "py-trace-004"
+  },
+  {
+    "number": "095",
+    "id": "py-trace-005"
+  },
+  {
+    "number": "096",
+    "id": "py-trace-006"
+  },
+  {
+    "number": "097",
+    "id": "py-trace-007"
+  },
+  {
+    "number": "098",
+    "id": "py-control-011"
+  },
+  {
+    "number": "099",
+    "id": "py-control-012"
+  },
+  {
+    "number": "100",
+    "id": "py-control-013"
+  },
+  {
+    "number": "101",
+    "id": "py-control-014"
+  },
+  {
+    "number": "102",
+    "id": "py-function-011"
+  },
+  {
+    "number": "103",
+    "id": "py-function-012"
+  },
+  {
+    "number": "104",
+    "id": "py-function-013"
+  },
+  {
+    "number": "105",
+    "id": "py-function-014"
+  }
+]
