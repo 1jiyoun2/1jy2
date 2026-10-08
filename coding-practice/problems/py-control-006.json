@@ -1,0 +1,30 @@
+{
+  "number": "016",
+  "title": "3 또는 5의 배수",
+  "category": "제어 구조 > 선택 구조",
+  "level": "기초",
+  "description": "정수 n이 3의 배수이거나 5의 배수이면 YES, 아니면 NO를 출력하세요.",
+  "input": "첫째 줄에 정수 n이 주어집니다.",
+  "output": "조건을 만족하면 YES, 아니면 NO를 출력합니다.",
+  "starter_code": "n = int(input())\n\n# 나머지 연산과 논리 연산을 사용해 보세요.\n",
+  "examples": [
+    {
+      "input": "10",
+      "output": "YES"
+    }
+  ],
+  "tests": [
+    {
+      "input": "10",
+      "output": "YES"
+    },
+    {
+      "input": "9",
+      "output": "YES"
+    },
+    {
+      "input": "7",
+      "output": "NO"
+    }
+  ]
+}
