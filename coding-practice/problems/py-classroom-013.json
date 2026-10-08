@@ -23,5 +23,13 @@
       "input": "알고리즘\n18000",
       "output": "알고리즘,18000"
     }
-  ]
+  ],
+  "rule_note": "book.txt에 write()로 저장하고 다시 read()로 확인하세요.",
+  "rules": {
+    "required_calls": [
+      "open",
+      "write",
+      "read"
+    ]
+  }
 }
