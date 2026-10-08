@@ -1,0 +1,26 @@
+{
+  "number": "057",
+  "title": "Item 총가격",
+  "category": "클래스 > 속성 · 메서드",
+  "level": "기초",
+  "description": "Item 클래스에 price와 quantity를 저장하고 total() 메서드가 총가격을 반환하도록 작성하세요.",
+  "input": "첫째 줄에 price와 quantity가 공백으로 구분되어 주어집니다.",
+  "output": "총가격을 출력합니다.",
+  "starter_code": "class Item:\n    def __init__(self, price, quantity):\n        self.price = price\n        self.quantity = quantity\n\n    def total(self):\n        # 총가격을 반환하세요.\n        pass\n\nprice, quantity = map(int, input().split())\nitem = Item(price, quantity)\nprint(item.total())\n",
+  "examples": [
+    {
+      "input": "3000 4",
+      "output": "12000"
+    }
+  ],
+  "tests": [
+    {
+      "input": "3000 4",
+      "output": "12000"
+    },
+    {
+      "input": "500 10",
+      "output": "5000"
+    }
+  ]
+}
