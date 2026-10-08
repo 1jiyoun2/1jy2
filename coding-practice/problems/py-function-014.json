@@ -1,0 +1,40 @@
+{
+  "number": "105",
+  "title": "지역 변수로 카운트다운",
+  "category": "함수 > 지역 변수",
+  "level": "적용",
+  "description": "정수 n을 전달받아 n부터 1까지 한 줄에 하나씩 출력하는 countdown(n) 함수를 작성하세요. 함수 내부의 지역 변수를 사용하세요.",
+  "input": "첫째 줄에 양의 정수 n이 주어집니다.",
+  "output": "n부터 1까지 한 줄에 하나씩 출력합니다.",
+  "starter_code": "def countdown(n):\n    # 함수 내부의 지역 변수를 사용해 카운트다운하세요.\n    pass\n\nn = int(input())\ncountdown(n)\n",
+  "examples": [
+    {
+      "input": "3",
+      "output": "3\n2\n1"
+    }
+  ],
+  "tests": [
+    {
+      "input": "3",
+      "output": "3\n2\n1"
+    },
+    {
+      "input": "1",
+      "output": "1"
+    },
+    {
+      "input": "5",
+      "output": "5\n4\n3\n2\n1"
+    }
+  ],
+  "hints": [
+    "함수 안에서 k 같은 지역 변수를 만들어 시작값을 저장하세요.",
+    "반복할 때마다 지역 변수의 값을 1씩 줄이세요."
+  ],
+  "rule_note": "함수 내부의 지역 변수를 이용해 반복하세요.",
+  "rules": {
+    "required_nodes": [
+      "While"
+    ]
+  }
+}
