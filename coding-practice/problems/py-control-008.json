@@ -22,5 +22,11 @@
       "input": "3",
       "output": "3\n6\n9\n12\n15\n18\n21\n24\n27"
     }
-  ]
+  ],
+  "rule_note": "반복문을 사용해 1부터 9까지 처리하세요.",
+  "rules": {
+    "required_nodes": [
+      "For"
+    ]
+  }
 }
