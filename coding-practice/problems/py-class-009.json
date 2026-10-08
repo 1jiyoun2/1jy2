@@ -1,0 +1,26 @@
+{
+  "number": "059",
+  "title": "Character 피해 처리",
+  "category": "클래스 > 조건 · 상태",
+  "level": "기초",
+  "description": "Character 클래스의 take_damage(amount) 메서드가 hp를 amount만큼 줄이되 0보다 작아지지 않도록 작성하세요.",
+  "input": "첫째 줄에 초기 hp, 둘째 줄에 피해량이 주어집니다.",
+  "output": "피해 적용 후 hp를 출력합니다.",
+  "starter_code": "class Character:\n    def __init__(self, hp):\n        self.hp = hp\n\n    def take_damage(self, amount):\n        # hp를 줄이되 0보다 작아지지 않게 하세요.\n        pass\n\nhp = int(input())\ndamage = int(input())\nc = Character(hp)\nc.take_damage(damage)\nprint(c.hp)\n",
+  "examples": [
+    {
+      "input": "100\n30",
+      "output": "70"
+    }
+  ],
+  "tests": [
+    {
+      "input": "100\n30",
+      "output": "70"
+    },
+    {
+      "input": "20\n50",
+      "output": "0"
+    }
+  ]
+}
