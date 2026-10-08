@@ -321,3 +321,42 @@ button:disabled { opacity: .45; cursor: default; }
 .trace-answer-input:focus { border-color: #7aa2f7; }
 .trace-answer-input.is-correct { border-color: #3fb950; }
 .trace-answer-input.is-wrong { border-color: #f85149; }
+
+.problem-nav {
+    display: flex;
+    gap: 12px;
+    margin-left: 6px;
+}
+.problem-nav a {
+    color: #475569;
+}
+.rule-note {
+    margin-top: 14px;
+    padding: 10px 12px;
+    border-left: 3px solid #94a3b8;
+    background: #f8fafc;
+    color: #475569;
+    font-size: 13px;
+    line-height: 1.6;
+}
+.hint-box {
+    margin-top: 22px;
+    border-top: 1px solid #e2e5ea;
+    padding-top: 10px;
+}
+.hint-box p {
+    margin: 8px 0;
+    padding: 9px 11px;
+    background: #f7f7f8;
+    border-left: 3px solid #c4b5fd;
+    color: #374151;
+    font-size: 13px;
+}
+@media (max-width: 640px) {
+    .problem-nav {
+        margin-left: auto;
+    }
+    .workspace-brand {
+        display: none;
+    }
+}
