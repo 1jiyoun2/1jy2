@@ -22,5 +22,12 @@
       "input": "A\nB",
       "output": "A\nB"
     }
-  ]
+  ],
+  "rule_note": "파일의 w 모드와 a 모드를 실제로 사용하세요.",
+  "rules": {
+    "required_calls": [
+      "open",
+      "write"
+    ]
+  }
 }
