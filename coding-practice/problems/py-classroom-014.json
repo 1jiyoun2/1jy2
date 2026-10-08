@@ -23,5 +23,12 @@
       "input": "자료구조,15000",
       "output": "저장된 내용: 자료구조,15000"
     }
-  ]
+  ],
+  "rule_note": "파일을 읽기 모드로 열어 read() 결과를 data에 저장하세요.",
+  "rules": {
+    "required_calls": [
+      "open",
+      "read"
+    ]
+  }
 }
