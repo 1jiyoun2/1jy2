@@ -31,11 +31,14 @@
     "함수 내부에서 전역 변수 result를 바꾸려면 global result가 필요합니다.",
     "1부터 n까지 반복하면서 result에 곱해 저장하세요."
   ],
-  "rule_note": "함수 안에서 global을 사용해 전역 변수를 수정하세요.",
+  "rule_note": "함수 안에서 global을 사용하고 반복문으로 곱을 누적하세요.",
   "rules": {
     "required_nodes": [
-      "Global",
-      "For"
+      "Global"
+    ],
+    "required_any_nodes": [
+      "For",
+      "While"
     ]
   }
 }
