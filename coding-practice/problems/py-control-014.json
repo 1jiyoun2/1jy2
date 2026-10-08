@@ -1,0 +1,40 @@
+{
+  "number": "101",
+  "title": "중첩 조건으로 입장 판정",
+  "category": "제어 구조 > 중첩 선택",
+  "level": "적용",
+  "description": "나이와 티켓 보유 여부를 입력받습니다. 나이가 14 이상일 때만 티켓 여부를 다시 확인하여, 티켓이 있으면 ENTER, 없으면 NO TICKET을 출력하세요. 나이가 14 미만이면 TOO YOUNG을 출력하세요.",
+  "input": "첫째 줄에 나이, 둘째 줄에 티켓 보유 여부(True 또는 False)가 주어집니다.",
+  "output": "ENTER, NO TICKET, TOO YOUNG 중 하나를 출력합니다.",
+  "starter_code": "age = int(input())\nhas_ticket = input() == 'True'\n\n# if문 안에 또 다른 if문을 사용하세요.\n",
+  "examples": [
+    {
+      "input": "16\nTrue",
+      "output": "ENTER"
+    }
+  ],
+  "tests": [
+    {
+      "input": "16\nTrue",
+      "output": "ENTER"
+    },
+    {
+      "input": "16\nFalse",
+      "output": "NO TICKET"
+    },
+    {
+      "input": "12\nTrue",
+      "output": "TOO YOUNG"
+    }
+  ],
+  "hints": [
+    "먼저 나이를 확인하세요.",
+    "나이 조건을 만족한 경우에만 티켓 여부를 다시 검사하세요."
+  ],
+  "rule_note": "중첩 if 구조로 작성하세요.",
+  "rules": {
+    "required_nodes": [
+      "If"
+    ]
+  }
+}
