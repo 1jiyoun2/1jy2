@@ -1,0 +1,27 @@
+{
+  "number": "084",
+  "title": "책 정보 파일 불러오기",
+  "category": "수업 실습 > 파일 처리",
+  "level": "기초",
+  "source": "클래스와 예외처리 파일-2 Colab",
+  "description": "book.txt에 저장한 내용을 읽어 data에 저장한 뒤 '저장된 내용: '과 함께 출력하세요.",
+  "input": "첫째 줄에 파일에 저장할 문자열이 주어집니다.",
+  "output": "저장된 내용: 문자열 형식으로 출력합니다.",
+  "starter_code": "text = input()\nwith open('book.txt', 'w', encoding='utf-8') as f:\n    f.write(text)\n\n# 읽기 모드로 다시 열고 data에 저장하세요.\n",
+  "examples": [
+    {
+      "input": "파이썬,12000",
+      "output": "저장된 내용: 파이썬,12000"
+    }
+  ],
+  "tests": [
+    {
+      "input": "파이썬,12000",
+      "output": "저장된 내용: 파이썬,12000"
+    },
+    {
+      "input": "자료구조,15000",
+      "output": "저장된 내용: 자료구조,15000"
+    }
+  ]
+}
