@@ -268,3 +268,56 @@ button:disabled { opacity: .45; cursor: default; }
     #top-meta { display: none; }
     .problem-pane { padding: 24px 18px 40px; }
 }
+.trace-guide {
+    margin-top: 24px;
+    padding: 12px 14px;
+    border-left: 3px solid #8b949e;
+    background: #f7f7f8;
+    color: #4b5563;
+    font-size: 13px;
+    line-height: 1.6;
+}
+.trace-mode .CodeMirror {
+    background: #1b1c1f;
+}
+.trace-answers {
+    background: #1e1f22;
+}
+.trace-answer-row {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 8px;
+    padding: 12px 14px;
+    border-bottom: 1px solid #34373d;
+}
+.trace-answer-row:last-child { border-bottom: 0; }
+.trace-question-number {
+    color: #8b949e;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    padding-top: 3px;
+}
+.trace-question-body {
+    display: block;
+}
+.trace-question-prompt {
+    display: block;
+    margin-bottom: 8px;
+    color: #d7dae0;
+    font-family: "Malgun Gothic", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.55;
+}
+.trace-answer-input {
+    width: 100%;
+    border: 1px solid #555b66;
+    background: #151619;
+    color: #f8fafc;
+    padding: 8px 10px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    outline: none;
+}
+.trace-answer-input:focus { border-color: #7aa2f7; }
+.trace-answer-input.is-correct { border-color: #3fb950; }
+.trace-answer-input.is-wrong { border-color: #f85149; }
