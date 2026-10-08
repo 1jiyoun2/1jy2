@@ -5,48 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>문제 | Coding Practice</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/theme/material-darker.css">
     <script src="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/python/python.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/edit/closebrackets.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/edit/matchbrackets.js"></script>
 </head>
-<body>
-<main>
-    <p class="back"><a id="back-link" href="python/basic/">← 문제 목록</a></p>
-    <h1 id="problem-title">문제를 불러오는 중...</h1>
-    <p class="subtitle" id="problem-subtitle"></p>
+<body class="practice-workspace">
+<header class="workspace-topbar">
+    <a href="python/basic/">← 문제 목록</a>
+    <span class="workspace-brand">Coding Practice</span>
+    <span id="top-meta"></span>
+</header>
 
-    <div class="problem-meta" id="problem-meta"></div>
+<main class="workspace">
+    <section class="problem-pane">
+        <h1 id="problem-title">문제를 불러오는 중...</h1>
+        <p class="subtitle" id="problem-subtitle"></p>
+        <div class="problem-meta" id="problem-meta"></div>
 
-    <h2>문제</h2>
-    <p id="description"></p>
+        <h2>문제</h2>
+        <p id="description"></p>
 
-    <h2>입력</h2>
-    <p id="input-desc"></p>
+        <h2>입력</h2>
+        <p id="input-desc"></p>
 
-    <h2>출력</h2>
-    <p id="output-desc"></p>
+        <h2>출력</h2>
+        <p id="output-desc"></p>
 
-    <h2>예제</h2>
-    <div id="examples"></div>
+        <h2>예제</h2>
+        <div id="examples"></div>
+    </section>
 
-    <div class="editor-label">코드</div>
-    <textarea id="code" spellcheck="false"></textarea>
+    <section class="editor-pane">
+        <div class="file-tab">main.py</div>
+        <div class="editor-wrap">
+            <textarea id="code" spellcheck="false"></textarea>
+        </div>
 
-    <div class="editor-label">직접 입력</div>
-    <textarea id="stdin" spellcheck="false"></textarea>
+        <div class="panel-title">stdin</div>
+        <textarea id="stdin" class="stdin-box" spellcheck="false"></textarea>
 
-    <div class="toolbar">
-        <button id="run-btn" disabled>실행</button>
-        <button id="judge-btn" disabled>채점</button>
-        <button id="reset-btn">초기화</button>
-    </div>
+        <div class="toolbar">
+            <button id="run-btn" class="primary" disabled>▶ 실행</button>
+            <button id="judge-btn" disabled>채점</button>
+            <button id="reset-btn">초기화</button>
+        </div>
 
-    <div class="editor-label">실행 결과</div>
-    <div id="output">Python 실행 환경을 준비하는 중입니다...</div>
+        <div class="panel-title">Console</div>
+        <div id="output" class="console">Python 실행 환경을 준비하는 중입니다...</div>
 
-    <div class="editor-label">채점 결과</div>
-    <div id="judge-result">아직 채점하지 않았습니다.</div>
-
-    <p class="note">현재 채점은 브라우저에서 공개 테스트를 실행하는 연습용 방식입니다.</p>
+        <div class="panel-title">Judge</div>
+        <div id="judge-result" class="console judge-console">아직 채점하지 않았습니다.</div>
+    </section>
 </main>
+
 <script src="runner.js"></script>
 </body>
 </html>
