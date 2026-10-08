@@ -1,0 +1,30 @@
+{
+  "number": "049",
+  "title": "CSV 값 합계",
+  "category": "파일·예외 > CSV",
+  "level": "기초",
+  "description": "쉼표로 구분된 정수 문자열을 CSV 파일에 저장한 뒤 다시 읽어 모든 값의 합을 출력하세요.",
+  "input": "첫째 줄에 쉼표로 구분된 정수들이 주어집니다.",
+  "output": "모든 정수의 합을 출력합니다.",
+  "starter_code": "line = input()\n\n# CSV 파일에 저장하고 다시 읽어 합을 구하세요.\n",
+  "examples": [
+    {
+      "input": "1,2,3,4",
+      "output": "10"
+    }
+  ],
+  "tests": [
+    {
+      "input": "1,2,3,4",
+      "output": "10"
+    },
+    {
+      "input": "5,10,15",
+      "output": "30"
+    },
+    {
+      "input": "-2,3,4",
+      "output": "5"
+    }
+  ]
+}
