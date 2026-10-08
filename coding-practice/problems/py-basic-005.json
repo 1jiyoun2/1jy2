@@ -1,0 +1,18 @@
+{
+  "number": "005",
+  "title": "문자열 반복 출력",
+  "category": "기초 문법 > 문자열 연산",
+  "level": "기초",
+  "description": "문자열 word와 정수 n을 입력받아 word를 n번 이어 붙인 결과를 출력하세요.",
+  "input": "첫째 줄에 문자열 word가, 둘째 줄에 양의 정수 n이 주어집니다.",
+  "output": "word를 n번 반복한 문자열을 출력합니다.",
+  "starter_code": "word = input()\nn = int(input())\n\n# 문자열의 * 연산을 사용해 보세요.\n",
+  "examples": [
+    { "input": "Hi\n3", "output": "HiHiHi" }
+  ],
+  "tests": [
+    { "input": "Hi\n3", "output": "HiHiHi" },
+    { "input": "A\n5", "output": "AAAAA" },
+    { "input": "go\n2", "output": "gogo" }
+  ]
+}
