@@ -1,0 +1,44 @@
+{
+  "number": "093",
+  "type": "trace",
+  "title": "전투 반복 흐름 추적",
+  "category": "제어 구조 > while · break",
+  "level": "기초",
+  "description": "Colab의 전투 루프를 읽고 반복 횟수와 HP 변화를 추적하세요.",
+  "back_link": "python/control/",
+  "code": "player_hp = 50\nmonster_hp = 35\n\nwhile player_hp > 0 and monster_hp > 0:\n    command = \"공격\"\n\n    if command == \"공격\":\n        monster_hp -= 15\n        print(\"몬스터 HP:\", monster_hp)\n\n    if monster_hp <= 0:\n        print(\"몬스터 처치\")\n        break\n\n    player_hp -= 8\n    print(\"플레이어 HP:\", player_hp)\n\nprint(\"최종 플레이어 HP:\", player_hp)\nprint(\"최종 몬스터 HP:\", monster_hp)",
+  "questions": [
+    {
+      "prompt": "공격은 총 몇 번 실행되는가?",
+      "answers": [
+        "3",
+        "3번"
+      ],
+      "display_answer": "3번"
+    },
+    {
+      "prompt": "반복이 끝난 뒤 player_hp는?",
+      "answers": [
+        "34"
+      ],
+      "display_answer": "34"
+    },
+    {
+      "prompt": "반복이 끝난 뒤 monster_hp는?",
+      "answers": [
+        "-10"
+      ],
+      "display_answer": "-10"
+    },
+    {
+      "prompt": "break가 실행되는 공격 횟수는?",
+      "answers": [
+        "3",
+        "3번",
+        "세번째",
+        "세 번째"
+      ],
+      "display_answer": "3번째 공격"
+    }
+  ]
+}
