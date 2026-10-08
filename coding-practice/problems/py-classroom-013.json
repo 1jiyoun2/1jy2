@@ -1,0 +1,27 @@
+{
+  "number": "083",
+  "title": "책 정보 파일 저장",
+  "category": "수업 실습 > 파일 처리",
+  "level": "기초",
+  "source": "클래스와 예외처리 파일-2 Colab",
+  "description": "제목과 가격을 '제목,가격' 형식으로 book.txt에 저장한 뒤 다시 읽어 출력하세요.",
+  "input": "첫째 줄에 제목, 둘째 줄에 정수 가격이 주어집니다.",
+  "output": "파일에 저장된 내용을 그대로 출력합니다.",
+  "starter_code": "title = input()\nprice = int(input())\n\n# book.txt에 제목,가격 형식으로 저장한 뒤 다시 읽어 출력하세요.\n",
+  "examples": [
+    {
+      "input": "파이썬\n12000",
+      "output": "파이썬,12000"
+    }
+  ],
+  "tests": [
+    {
+      "input": "파이썬\n12000",
+      "output": "파이썬,12000"
+    },
+    {
+      "input": "알고리즘\n18000",
+      "output": "알고리즘,18000"
+    }
+  ]
+}
