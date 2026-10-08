@@ -10,63 +10,48 @@
 <main>
     <p class="back"><a href="../../">← 2026 2학년 프로그래밍</a></p>
     <h1>IEEE 754</h1>
-    <p class="subtitle">Floating-point representation and implementation</p>
+    <p class="subtitle">Floating-point Representation</p>
 
-    <p>10진수 실수가 컴퓨터 내부에서 어떻게 표현되는지 살펴보고, 변환 절차를 단계별 알고리즘으로 정리한 뒤 Python 코드로 구현한다.</p>
-
-    <p class="note">삼양 프로그래밍 교과서에는 실수가 IEEE 754 방식에 따라 부호·지수부·가수부로 저장된다는 내용이 간단히 제시되어 있다. 이 페이지는 그 내용을 실제 수업에서 다룬 수준으로 확장하여 정리한 것이다.</p>
+    <p>실수는 정수와 달리 소수점 아래의 값까지 표현해야 하므로 컴퓨터 내부에서 별도의 저장 방식이 필요하다. 삼양미디어 『프로그래밍』에서는 실수를 2진수로 바꾼 뒤 IEEE 754 표준에 따라 부호, 지수부, 가수부로 나누어 저장하는 방법을 소개한다.</p>
 
     <p><a href="https://colab.research.google.com/github/1jiyoun2/1jy2/blob/main/courses/programming-2022/2026/grade2/resources/notebooks/ieee754_lesson.ipynb" target="_blank" rel="noopener">Colab에서 열기 →</a> · <a href="../../resources/notebooks/ieee754_lesson.ipynb">Notebook 파일 보기 →</a></p>
-
-    <h2>학습 흐름</h2>
-    <table class="list">
-        <thead><tr><th class="name">단계</th><th class="description">내용</th></tr></thead>
-        <tbody>
-            <tr><td>문제 분해</td><td class="description">부호, 정수부, 소수부, 정규화, 지수부, 가수부로 변환 과정을 나누기</td></tr>
-            <tr><td>알고리즘</td><td class="description">각 단계의 입력·처리·출력을 순서대로 표현</td></tr>
-            <tr><td>코드 구현</td><td class="description">작은 기능 단위로 구현하고 전체 변환 과정으로 결합</td></tr>
-            <tr><td>실행 결과 분석</td><td class="description">입력값에 따른 실행 결과를 확인하고 예상과 다른 경우 원인 분석</td></tr>
-            <tr><td>수정</td><td class="description">발견한 문제를 코드와 알고리즘 수준에서 수정</td></tr>
-        </tbody>
-    </table>
 
     <h2>단정도 32비트 구조</h2>
     <table class="list">
         <thead><tr><th class="name">부분</th><th class="description">역할</th></tr></thead>
         <tbody>
             <tr><td>부호 비트 · 1비트</td><td class="description">양수와 음수를 구분</td></tr>
-            <tr><td>지수부 · 8비트</td><td class="description">정규화 과정에서 얻은 실제 지수에 bias 127을 더해 저장</td></tr>
-            <tr><td>가수부 · 23비트</td><td class="description">정규화된 1.xxxxx에서 맨 앞의 1을 제외한 비트를 저장</td></tr>
+            <tr><td>지수부 · 8비트</td><td class="description">정규화된 2진수의 지수를 bias 127을 이용해 저장</td></tr>
+            <tr><td>가수부 · 23비트</td><td class="description">정규화된 유효 숫자의 소수 부분을 저장</td></tr>
         </tbody>
     </table>
 
-    <h2>수업에서 사용한 구현 흐름</h2>
+    <h2>10진수 실수를 저장하는 흐름</h2>
     <table class="list">
-        <thead><tr><th class="name">단계</th><th class="description">처리</th></tr></thead>
+        <thead><tr><th class="name">과정</th><th class="description">내용</th></tr></thead>
         <tbody>
-            <tr><td>1. 입력 처리</td><td class="description">수업에서 사용할 입력 범위를 확인하고 부호 비트를 준비</td></tr>
-            <tr><td>2. 정수 부분 변환</td><td class="description"><code>int_bits</code>에 정수 부분의 2진 비트를 저장</td></tr>
-            <tr><td>3. 소수 부분 변환</td><td class="description"><code>frac_bits</code>에 소수 부분의 2진 비트를 저장</td></tr>
-            <tr><td>4. 정규화</td><td class="description"><code>first_one</code>을 찾고 <code>real_exp</code>, <code>normalized_bits</code> 생성</td></tr>
-            <tr><td>5. 지수부</td><td class="description"><code>stored_exp = real_exp + 127</code> 후 8비트 <code>exponent_bits</code> 생성</td></tr>
-            <tr><td>6. 가수부</td><td class="description"><code>normalized_bits</code>를 이용해 23비트 <code>mantissa_bits</code> 생성</td></tr>
-            <tr><td>7. 최종 결합</td><td class="description">부호 + 지수부 + 가수부 순으로 연결하여 <code>ieee754</code> 완성</td></tr>
+            <tr><td>1. 2진수 변환</td><td class="description">10진수의 정수 부분과 소수 부분을 2진수로 표현</td></tr>
+            <tr><td>2. 정규화</td><td class="description">2진수를 <code>1.xxxxx × 2ⁿ</code> 형태로 정리</td></tr>
+            <tr><td>3. 부호 결정</td><td class="description">양수는 0, 음수는 1을 부호 비트에 저장</td></tr>
+            <tr><td>4. 지수부 결정</td><td class="description">실제 지수에 bias 127을 더해 8비트로 표현</td></tr>
+            <tr><td>5. 가수부 결정</td><td class="description">정규화된 수에서 맨 앞의 1을 제외한 비트를 가수부에 저장</td></tr>
+            <tr><td>6. 결합</td><td class="description">부호 비트 + 지수부 + 가수부를 이어 32비트 실수 표현 완성</td></tr>
         </tbody>
     </table>
 
-    <h2>수업용 구현 코드</h2>
-    <p>아래 코드는 실제 수업과 후속 코드 분석에서 사용한 기준 코드의 흐름을 그대로 두고, 공개 아카이브에서 읽기 쉽도록 설명 주석을 추가한 버전이다.</p>
+    <h2>교과서 예시와 연결</h2>
+    <p><code>0.15625</code>는 2진수로 <code>0.00101₂</code>이고, 이를 정규화하면 <code>1.01₂ × 2⁻³</code>이 된다. 이때 부호는 양수이므로 0, 실제 지수는 -3이므로 저장 지수는 124가 되며, 가수부에는 정규화된 수에서 맨 앞의 1을 제외한 비트를 저장한다.</p>
 
-    <p class="note">이 코드는 IEEE 754를 처리하는 유일한 정답이나 범용 변환기가 아니다. 학생이 각 처리 단계를 직접 추적할 수 있도록 조건과 구현 방식을 단순화한 교육용 코드다. 수업에서는 0보다 크고 16보다 작은 양의 실수, 2진수로 유한하게 표현되는 소수, 가수 후보가 23비트를 넘지 않는 경우만 다룬다.</p>
+    <h2>Python으로 과정 확인하기</h2>
+    <p>수업에서는 교과서의 개념을 확장하여 10진수 실수가 32비트 표현으로 바뀌는 과정을 단계별 코드로 확인한다. 완성된 결과만 보는 것이 아니라 정수 부분 변환, 소수 부분 변환, 정규화, 지수부와 가수부 생성이 어떻게 이어지는지 살펴본다.</p>
 
-    <div class="code-embed" data-src="code/ieee754_teaching.py" data-label="IEEE 754 · 수업용 단계별 구현"></div>
+    <div class="code-embed" data-src="code/ieee754_teaching.py" data-label="IEEE 754 · 단계별 구현"></div>
 
-    <h2>수업 예시 · 10.625 추적</h2>
+    <h2>예시 · 10.625</h2>
     <table class="list">
-        <thead><tr><th class="name">값</th><th class="description">결과</th></tr></thead>
+        <thead><tr><th class="name">과정</th><th class="description">결과</th></tr></thead>
         <tbody>
-            <tr><td>10진수 입력</td><td class="description"><code>10.625</code></td></tr>
-            <tr><td>2진수</td><td class="description"><code>1010.101₂</code></td></tr>
+            <tr><td>2진수 표현</td><td class="description"><code>1010.101₂</code></td></tr>
             <tr><td>정규화</td><td class="description"><code>1.010101₂ × 2³</code></td></tr>
             <tr><td>부호 비트</td><td class="description"><code>0</code></td></tr>
             <tr><td>저장 지수</td><td class="description"><code>130</code></td></tr>
@@ -75,22 +60,9 @@
             <tr><td>최종 32비트</td><td class="description"><code>01000001001010100000000000000000</code></td></tr>
         </tbody>
     </table>
-    <p>한 입력값을 끝까지 따라가면서 “지금 만든 값이 다음 단계에서 어디에 쓰이는가?”를 계속 확인한다.</p>
 
-    <h2>연습 · 0.15625</h2>
-    <p><code>0.15625</code>를 같은 코드에 입력하고 다음 값을 직접 추적한다.</p>
-    <ol>
-        <li><code>sign_bit</code></li>
-        <li><code>frac_bits</code></li>
-        <li><code>real_exp</code></li>
-        <li><code>stored_exp</code>와 <code>exponent_bits</code></li>
-        <li><code>mantissa_bits</code></li>
-        <li>최종 IEEE 754 32비트</li>
-    </ol>
-    <p class="note">완성 코드를 외우는 것이 아니라, 각 값이 어디에서 만들어지고 다음 단계에서 어떻게 사용되는지를 설명하는 것이 목적이다.</p>
+    <p class="note">이 페이지의 Python 구현은 교과서의 IEEE 754 개념을 단계별로 확인하기 위한 수업용 확장 자료이다. IEEE 754 전체 규격이나 모든 특수한 실수 표현을 다루는 범용 변환기를 설명하는 것은 아니다.</p>
 
-    <h2>수업 기록에서 확인된 점</h2>
-    <p>코드 구현에 예상보다 시간이 많이 필요한 경우가 있어, 구현 과정과 실행 결과 분석을 한 차시에 모두 처리하기보다 코드 분석과 결과 분석을 분리하여 진행하는 방식으로 수업을 조정하였다.</p>
     <script src="../../code-embed.js"></script>
 </main>
 </body>
