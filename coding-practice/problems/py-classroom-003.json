@@ -1,0 +1,23 @@
+{
+  "number": "073",
+  "title": "sep로 날짜 출력하기",
+  "category": "수업 실습 > 출력",
+  "level": "기초",
+  "source": "2학년 프로그래밍 2단원 Colab 실습",
+  "description": "print()의 sep 매개변수를 사용해 2026.08.19를 출력하세요.",
+  "input": "입력은 없습니다.",
+  "output": "2026.08.19를 출력합니다.",
+  "starter_code": "# print()의 sep를 사용하세요.\n",
+  "examples": [
+    {
+      "input": "",
+      "output": "2026.08.19"
+    }
+  ],
+  "tests": [
+    {
+      "input": "",
+      "output": "2026.08.19"
+    }
+  ]
+}
