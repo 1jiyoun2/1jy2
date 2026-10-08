@@ -165,6 +165,10 @@ if tree is not None:
         if node_name not in node_names:
             violations.append(f"필수 문법이 없습니다: {node_name}")
 
+    any_nodes = rules.get("required_any_nodes", [])
+    if any_nodes and not any(name in node_names for name in any_nodes):
+        violations.append("다음 중 하나의 문법을 사용하세요: " + " / ".join(any_nodes))
+
     call_names = []
     call_keywords = []
     for n in nodes:
