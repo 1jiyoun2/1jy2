@@ -26,5 +26,11 @@
       "input": "1 2 3\n5",
       "output": "-1"
     }
-  ]
+  ],
+  "rule_note": "정렬된 리스트의 범위를 절반씩 줄이는 반복 구조로 탐색하세요.",
+  "rules": {
+    "required_nodes": [
+      "While"
+    ]
+  }
 }
