@@ -1,0 +1,30 @@
+{
+  "number": "066",
+  "title": "회문 판별",
+  "category": "알고리즘 > 문자열 알고리즘",
+  "level": "기초",
+  "description": "문자열을 입력받아 앞에서 읽어도 뒤에서 읽어도 같으면 YES, 아니면 NO를 출력하세요.",
+  "input": "첫째 줄에 공백이 없는 문자열이 주어집니다.",
+  "output": "회문이면 YES, 아니면 NO를 출력합니다.",
+  "starter_code": "text = input()\n\n# 문자열의 앞과 뒤를 비교하세요.\n",
+  "examples": [
+    {
+      "input": "level",
+      "output": "YES"
+    }
+  ],
+  "tests": [
+    {
+      "input": "level",
+      "output": "YES"
+    },
+    {
+      "input": "python",
+      "output": "NO"
+    },
+    {
+      "input": "a",
+      "output": "YES"
+    }
+  ]
+}
