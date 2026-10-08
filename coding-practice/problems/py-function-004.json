@@ -1,0 +1,30 @@
+{
+  "number": "024",
+  "title": "세 수 중 가장 큰 값",
+  "category": "함수 > 매개변수 · 반환값",
+  "level": "기초",
+  "description": "세 정수 a, b, c를 매개변수로 받아 가장 큰 값을 반환하는 largest(a, b, c) 함수를 작성하세요.",
+  "input": "첫째 줄에 세 정수가 공백으로 구분되어 주어집니다.",
+  "output": "largest(a, b, c)가 반환한 값을 출력합니다.",
+  "starter_code": "def largest(a, b, c):\n    # 가장 큰 값을 반환하세요.\n    pass\n\na, b, c = map(int, input().split())\nprint(largest(a, b, c))\n",
+  "examples": [
+    {
+      "input": "3 9 5",
+      "output": "9"
+    }
+  ],
+  "tests": [
+    {
+      "input": "3 9 5",
+      "output": "9"
+    },
+    {
+      "input": "10 2 4",
+      "output": "10"
+    },
+    {
+      "input": "-1 -7 -3",
+      "output": "-1"
+    }
+  ]
+}
