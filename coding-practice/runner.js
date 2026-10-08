@@ -151,6 +151,16 @@ import json
 
 rules = json.loads(rule_json)
 violations = []
+labels = {
+    "For": "for 반복문",
+    "While": "while 반복문",
+    "If": "if문",
+    "Break": "break",
+    "Continue": "continue",
+    "Import": "import",
+    "ImportFrom": "from ... import",
+    "Global": "global"
+}
 
 try:
     tree = ast.parse(rule_code)
@@ -163,11 +173,11 @@ if tree is not None:
 
     for node_name in rules.get("required_nodes", []):
         if node_name not in node_names:
-            violations.append(f"필수 문법이 없습니다: {node_name}")
+            violations.append("필수 문법이 없습니다: " + labels.get(node_name, node_name))
 
     any_nodes = rules.get("required_any_nodes", [])
     if any_nodes and not any(name in node_names for name in any_nodes):
-        violations.append("다음 중 하나의 문법을 사용하세요: " + " / ".join(any_nodes))
+        violations.append("다음 중 하나의 문법을 사용하세요: " + " / ".join(labels.get(name, name) for name in any_nodes))
 
     call_names = []
     call_keywords = []
