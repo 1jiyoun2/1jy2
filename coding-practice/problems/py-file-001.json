@@ -1,0 +1,30 @@
+{
+  "number": "041",
+  "title": "안전한 정수 변환",
+  "category": "파일·예외 > 예외 처리",
+  "level": "기초",
+  "description": "문자열을 입력받아 정수로 변환할 수 있으면 그 정수를 출력하고, 변환할 수 없으면 INVALID를 출력하세요.",
+  "input": "첫째 줄에 문자열 하나가 주어집니다.",
+  "output": "정수 변환에 성공하면 정수를, ValueError가 발생하면 INVALID를 출력합니다.",
+  "starter_code": "text = input()\n\ntry:\n    # 정수로 변환해 출력하세요.\n    pass\nexcept ValueError:\n    print('INVALID')\n",
+  "examples": [
+    {
+      "input": "25",
+      "output": "25"
+    }
+  ],
+  "tests": [
+    {
+      "input": "25",
+      "output": "25"
+    },
+    {
+      "input": "-8",
+      "output": "-8"
+    },
+    {
+      "input": "hello",
+      "output": "INVALID"
+    }
+  ]
+}
