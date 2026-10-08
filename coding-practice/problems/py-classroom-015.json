@@ -1,0 +1,31 @@
+{
+  "number": "085",
+  "title": "IndexError 처리",
+  "category": "수업 실습 > 예외 처리",
+  "level": "기초",
+  "source": "예외처리 학생실습 Colab",
+  "description": "numbers = [10, 20, 30]에서 입력받은 인덱스의 값을 출력하고, 범위를 벗어나면 'IndexError'를 출력하세요.",
+  "input": "첫째 줄에 정수 인덱스가 주어집니다.",
+  "output": "해당 값 또는 IndexError를 출력합니다.",
+  "starter_code": "numbers = [10, 20, 30]\ni = int(input())\n\ntry:\n    # 값을 출력하세요.\n    pass\nexcept IndexError:\n    print('IndexError')\n",
+  "examples": [
+    {
+      "input": "3",
+      "output": "IndexError"
+    }
+  ],
+  "tests": [
+    {
+      "input": "0",
+      "output": "10"
+    },
+    {
+      "input": "2",
+      "output": "30"
+    },
+    {
+      "input": "3",
+      "output": "IndexError"
+    }
+  ]
+}
