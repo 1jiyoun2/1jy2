@@ -8,11 +8,30 @@
   "output": "첫째 줄에 (a > 0 and b > 0)의 결과를, 둘째 줄에 (a > 0 or b > 0)의 결과를 True 또는 False로 출력합니다.",
   "starter_code": "a, b = map(int, input().split())\n\n# and, or 연산자를 사용해 보세요.\n",
   "examples": [
-    { "input": "3 -1", "output": "False\nTrue" }
+    {
+      "input": "3 -1",
+      "output": "False\nTrue"
+    }
   ],
   "tests": [
-    { "input": "3 -1", "output": "False\nTrue" },
-    { "input": "2 5", "output": "True\nTrue" },
-    { "input": "-2 -3", "output": "False\nFalse" }
-  ]
+    {
+      "input": "3 -1",
+      "output": "False\nTrue"
+    },
+    {
+      "input": "2 5",
+      "output": "True\nTrue"
+    },
+    {
+      "input": "-2 -3",
+      "output": "False\nFalse"
+    }
+  ],
+  "rule_note": "and와 or 논리 연산자를 사용하세요.",
+  "rules": {
+    "required_nodes": [
+      "And",
+      "Or"
+    ]
+  }
 }
