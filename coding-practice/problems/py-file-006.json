@@ -1,0 +1,26 @@
+{
+  "number": "046",
+  "title": "파일에 이어 쓰기",
+  "category": "파일·예외 > 파일 입출력",
+  "level": "기초",
+  "description": "두 문자열을 입력받아 첫 번째 문자열은 w 모드로, 두 번째 문자열은 a 모드로 같은 파일에 저장한 뒤 전체 내용을 출력하세요. 두 문자열 사이에는 줄바꿈을 넣습니다.",
+  "input": "첫째 줄과 둘째 줄에 문자열이 하나씩 주어집니다.",
+  "output": "파일의 전체 내용을 두 줄로 출력합니다.",
+  "starter_code": "first = input()\nsecond = input()\n\n# 첫 줄은 w, 둘째 줄은 a 모드로 저장하세요.\n",
+  "examples": [
+    {
+      "input": "one\ntwo",
+      "output": "one\ntwo"
+    }
+  ],
+  "tests": [
+    {
+      "input": "one\ntwo",
+      "output": "one\ntwo"
+    },
+    {
+      "input": "A\nB",
+      "output": "A\nB"
+    }
+  ]
+}
