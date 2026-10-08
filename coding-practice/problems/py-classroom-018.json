@@ -1,0 +1,31 @@
+{
+  "number": "088",
+  "title": "여러 예외 한 번에 처리",
+  "category": "수업 실습 > 예외 처리",
+  "level": "기초",
+  "source": "예외처리 학생실습 Colab",
+  "description": "ValueError와 ZeroDivisionError를 하나의 except에서 처리해 두 경우 모두 '입력값을 확인하세요.'를 출력하세요.",
+  "input": "첫째 줄에 문자열 하나가 주어집니다.",
+  "output": "정상 입력이면 계산 결과, 두 예외 중 하나가 발생하면 공통 안내 문구를 출력합니다.",
+  "starter_code": "try:\n    num = int(input())\n    result = 100 / num\n    print('결과:', result)\nexcept (ValueError, ZeroDivisionError):\n    # 공통 안내 문구를 출력하세요.\n    pass\n",
+  "examples": [
+    {
+      "input": "abc",
+      "output": "입력값을 확인하세요."
+    }
+  ],
+  "tests": [
+    {
+      "input": "5",
+      "output": "결과: 20.0"
+    },
+    {
+      "input": "abc",
+      "output": "입력값을 확인하세요."
+    },
+    {
+      "input": "0",
+      "output": "입력값을 확인하세요."
+    }
+  ]
+}
