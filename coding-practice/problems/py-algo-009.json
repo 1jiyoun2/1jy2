@@ -33,8 +33,9 @@
   ],
   "rule_note": "반복문으로 피보나치 값을 갱신하세요.",
   "rules": {
-    "required_nodes": [
-      "For"
+    "required_any_nodes": [
+      "For",
+      "While"
     ]
   }
 }
