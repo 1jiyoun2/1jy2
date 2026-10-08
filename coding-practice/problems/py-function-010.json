@@ -1,0 +1,30 @@
+{
+  "number": "030",
+  "title": "범위 안으로 값 제한하기",
+  "category": "함수 > 함수 · 조건",
+  "level": "기초",
+  "description": "value, low, high를 매개변수로 받아 value가 low보다 작으면 low, high보다 크면 high, 그 사이이면 value를 반환하는 clamp(value, low, high) 함수를 작성하세요.",
+  "input": "첫째 줄에 세 정수 value, low, high가 공백으로 구분되어 주어집니다.",
+  "output": "clamp(value, low, high)의 반환값을 출력합니다.",
+  "starter_code": "def clamp(value, low, high):\n    # 조건에 따라 값을 반환하세요.\n    pass\n\nvalue, low, high = map(int, input().split())\nprint(clamp(value, low, high))\n",
+  "examples": [
+    {
+      "input": "15 0 10",
+      "output": "10"
+    }
+  ],
+  "tests": [
+    {
+      "input": "15 0 10",
+      "output": "10"
+    },
+    {
+      "input": "-3 0 10",
+      "output": "0"
+    },
+    {
+      "input": "7 0 10",
+      "output": "7"
+    }
+  ]
+}
