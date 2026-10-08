@@ -1,5 +1,5 @@
 {
-  "number": "009",
+  "number": "021",
   "title": "두 수를 더하는 함수",
   "category": "함수 > 매개변수 · 반환값",
   "level": "기초",
@@ -8,11 +8,23 @@
   "output": "add(a, b)가 반환한 값을 출력합니다.",
   "starter_code": "def add(a, b):\n    # 합을 반환하도록 작성하세요.\n    pass\n\na, b = map(int, input().split())\nprint(add(a, b))\n",
   "examples": [
-    { "input": "3 7", "output": "10" }
+    {
+      "input": "3 7",
+      "output": "10"
+    }
   ],
   "tests": [
-    { "input": "3 7", "output": "10" },
-    { "input": "-2 5", "output": "3" },
-    { "input": "100 200", "output": "300" }
+    {
+      "input": "3 7",
+      "output": "10"
+    },
+    {
+      "input": "-2 5",
+      "output": "3"
+    },
+    {
+      "input": "100 200",
+      "output": "300"
+    }
   ]
 }
