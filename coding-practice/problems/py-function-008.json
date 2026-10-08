@@ -1,0 +1,30 @@
+{
+  "number": "028",
+  "title": "1부터 N까지 합 함수",
+  "category": "함수 > 함수 · 반복",
+  "level": "기초",
+  "description": "양의 정수 n을 매개변수로 받아 1부터 n까지의 합을 반환하는 sum_to_n(n) 함수를 작성하세요.",
+  "input": "첫째 줄에 양의 정수 n이 주어집니다.",
+  "output": "sum_to_n(n)의 반환값을 출력합니다.",
+  "starter_code": "def sum_to_n(n):\n    total = 0\n    # 반복문을 사용해 합을 구하세요.\n    return total\n\nn = int(input())\nprint(sum_to_n(n))\n",
+  "examples": [
+    {
+      "input": "5",
+      "output": "15"
+    }
+  ],
+  "tests": [
+    {
+      "input": "5",
+      "output": "15"
+    },
+    {
+      "input": "1",
+      "output": "1"
+    },
+    {
+      "input": "10",
+      "output": "55"
+    }
+  ]
+}
