@@ -1,0 +1,23 @@
+{
+  "number": "089",
+  "title": "없는 파일 읽기 처리",
+  "category": "수업 실습 > 파일 · 예외",
+  "level": "기초",
+  "source": "예외처리 학생실습 Colab",
+  "description": "없는파일.txt를 읽기 모드로 열어 보세요. 파일이 없으면 '파일이 없습니다.'를 출력하세요.",
+  "input": "입력은 없습니다.",
+  "output": "파일이 없습니다.를 출력합니다.",
+  "starter_code": "try:\n    # 없는파일.txt를 읽기 모드로 여세요.\n    pass\nexcept FileNotFoundError:\n    print('파일이 없습니다.')\n",
+  "examples": [
+    {
+      "input": "",
+      "output": "파일이 없습니다."
+    }
+  ],
+  "tests": [
+    {
+      "input": "",
+      "output": "파일이 없습니다."
+    }
+  ]
+}
