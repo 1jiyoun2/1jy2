@@ -1,34 +1,38 @@
 <!DOCTYPE html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>05. 테스트</title><link rel="stylesheet" href="../../style.css"></head>
+<html lang="ko">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>프로그램 테스트</title><link rel="stylesheet" href="../../style.css"></head>
 <body><main>
 <p class="back"><a href="./">← 프로그램의 설계와 구현</a></p>
-<h1>05. 테스트</h1>
-<p class="subtitle">예상 결과와 실제 실행 결과를 비교하고, 발견한 문제를 수정한 뒤 다시 확인한다.</p>
+<h1>프로그램 테스트</h1>
+<p class="subtitle">Unit Test · Integration Test · System Test</p>
 
-<h2>세 가지 관점</h2>
-<table class="list"><thead><tr><th class="name">테스트</th><th class="description">수업에서 확인하는 범위</th></tr></thead><tbody>
-<tr><td>단위 테스트</td><td class="description">함수나 기능 하나가 주어진 입력에서 예상대로 동작하는지 확인</td></tr>
-<tr><td>통합 테스트</td><td class="description">서로 연결된 여러 기능 사이에서 값 전달과 실행 흐름이 올바른지 확인</td></tr>
-<tr><td>시스템 테스트</td><td class="description">프로그램 전체를 처음부터 끝까지 실행하며 요구 사항을 만족하는지 확인</td></tr>
-</tbody></table>
+<p>테스트는 구현한 프로그램이 요구 사항을 만족하며 정확하게 동작하는지 확인하는 과정이다. 예상 결과와 실제 실행 결과를 비교하고, 차이가 있으면 원인을 찾아 프로그램을 수정·보완한다.</p>
+
+<h2>테스트의 기본 흐름</h2>
+<table class="list">
+<thead><tr><th class="name">순서</th><th class="description">내용</th></tr></thead>
+<tbody>
+<tr><td>1. 테스트 데이터 준비</td><td class="description">프로그램의 기능을 확인할 수 있는 입력 데이터를 정한다.</td></tr>
+<tr><td>2. 예상 결과 결정</td><td class="description">설계와 요구 사항을 바탕으로 어떤 결과가 나와야 하는지 미리 정한다.</td></tr>
+<tr><td>3. 실제 실행</td><td class="description">프로그램에 테스트 데이터를 입력하고 실제 결과를 확인한다.</td></tr>
+<tr><td>4. 비교와 판단</td><td class="description">예상 결과와 실제 결과를 비교하여 오류 여부를 판단한다.</td></tr>
+<tr><td>5. 수정과 재검사</td><td class="description">오류가 있다면 원인을 찾아 수정한 뒤 다시 테스트한다.</td></tr>
+</tbody>
+</table>
+
+<h2>테스트의 종류</h2>
+<table class="list">
+<thead><tr><th class="name">테스트</th><th class="description">확인하는 범위</th></tr></thead>
+<tbody>
+<tr><td>단위 테스트</td><td class="description">프로그램을 구성하는 개별 기능이나 단위가 올바르게 동작하는지 확인</td></tr>
+<tr><td>통합 테스트</td><td class="description">여러 기능을 연결했을 때 데이터 전달과 상호 작용이 올바른지 확인</td></tr>
+<tr><td>시스템 테스트</td><td class="description">전체 프로그램을 실제 실행 환경에서 동작시켜 요구 사항을 만족하는지 확인</td></tr>
+</tbody>
+</table>
 
 <h2>테스트 기록</h2>
-<p>“오류 없음”이라고만 적지 않고, 어떤 입력을 사용했고 어떤 결과를 예상했으며 실제 결과가 어땠는지를 남긴다. 문제가 발견되면 원인과 수정 내용을 기록하고 같은 조건으로 다시 실행한다.</p>
+<p>테스트에서는 단순히 “정상 작동”이라고 판단하는 것이 아니라 입력 데이터, 예상 결과, 실제 결과를 근거로 동작 여부를 확인해야 한다. 발견한 오류와 수정한 내용도 함께 기록하면 프로그램의 문제를 추적하기 쉽다.</p>
 
-<table class="list"><thead><tr><th class="name">기록 항목</th><th class="description">예</th></tr></thead><tbody>
-<tr><td>테스트 대상</td><td class="description">확인할 함수·기능·전체 흐름</td></tr>
-<tr><td>입력값</td><td class="description">정상값, 경계값 등 실제로 사용한 데이터</td></tr>
-<tr><td>예상 결과</td><td class="description">설계상 나와야 하는 결과</td></tr>
-<tr><td>실제 결과</td><td class="description">프로그램을 실행해 확인한 결과</td></tr>
-<tr><td>오류·원인</td><td class="description">예상과 다르면 어느 단계에서 차이가 생겼는지</td></tr>
-<tr><td>수정·재검사</td><td class="description">수정한 뒤 같은 테스트를 다시 실행한 결과</td></tr>
-</tbody></table>
-
-<h2>확인 활동</h2>
-<ol>
-<li>핵심 함수 하나에 대해 정상 입력과 경계 입력을 각각 정해 테스트해 본다.</li>
-<li>함수 두 개 이상이 연결되는 흐름에서 전달되는 값을 추적해 본다.</li>
-<li>프로그램을 처음부터 끝까지 실행해 요구분석명세의 핵심 기능을 하나씩 확인한다.</li>
-</ol>
+<p class="note">요구 사항 명세는 테스트의 기준이 된다. 처음에 정의한 기능과 조건이 실제 프로그램에서 충족되는지 확인하는 것이 테스트의 핵심이다.</p>
 </main></body></html>
