@@ -1,0 +1,30 @@
+{
+  "number": "043",
+  "title": "리스트 인덱스 예외",
+  "category": "파일·예외 > 예외 처리",
+  "level": "기초",
+  "description": "정수 리스트와 인덱스 i를 입력받아 해당 값을 출력하세요. 존재하지 않는 인덱스이면 INDEX ERROR를 출력하세요.",
+  "input": "첫째 줄에 정수 리스트, 둘째 줄에 인덱스 i가 주어집니다.",
+  "output": "해당 값 또는 INDEX ERROR를 출력합니다.",
+  "starter_code": "numbers = list(map(int, input().split()))\ni = int(input())\n\ntry:\n    # i번째 값을 출력하세요.\n    pass\nexcept IndexError:\n    print('INDEX ERROR')\n",
+  "examples": [
+    {
+      "input": "10 20 30\n1",
+      "output": "20"
+    }
+  ],
+  "tests": [
+    {
+      "input": "10 20 30\n1",
+      "output": "20"
+    },
+    {
+      "input": "1 2\n5",
+      "output": "INDEX ERROR"
+    },
+    {
+      "input": "7 8 9\n0",
+      "output": "7"
+    }
+  ]
+}
