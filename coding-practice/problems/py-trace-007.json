@@ -1,0 +1,40 @@
+{
+  "number": "097",
+  "type": "trace",
+  "title": "Book 객체와 파일 처리 흐름",
+  "category": "클래스 > 객체 · 파일 연결",
+  "level": "보통",
+  "description": "클래스·예외 처리 Colab의 전체 확인 코드를 바탕으로 객체 생성부터 파일 저장·불러오기까지의 흐름을 추적하세요.",
+  "back_link": "python/classes/",
+  "code": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def show(self):\n        print(self.title, self.price)\n\ntitle = \"파이썬\"\nprice = 12000\n\nbook = Book(title, price)\nbook.show()\n\nwith open(\"book.txt\", \"w\", encoding=\"utf-8\") as f:\n    f.write(title + \",\" + str(price))\n\nwith open(\"book.txt\", \"r\", encoding=\"utf-8\") as f:\n    data = f.read()\n\nprint(\"저장된 내용:\", data)",
+  "questions": [
+    {
+      "prompt": "book.title에 저장되는 값은?",
+      "answers": [
+        "파이썬"
+      ],
+      "display_answer": "파이썬"
+    },
+    {
+      "prompt": "book.price에 저장되는 값은?",
+      "answers": [
+        "12000"
+      ],
+      "display_answer": "12000"
+    },
+    {
+      "prompt": "book.txt에 저장되는 문자열은?",
+      "answers": [
+        "파이썬,12000"
+      ],
+      "display_answer": "파이썬,12000"
+    },
+    {
+      "prompt": "f.read()의 결과가 저장되는 변수 이름은?",
+      "answers": [
+        "data"
+      ],
+      "display_answer": "data"
+    }
+  ]
+}
