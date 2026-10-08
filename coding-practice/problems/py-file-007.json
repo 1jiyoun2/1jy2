@@ -1,0 +1,26 @@
+{
+  "number": "047",
+  "title": "첫 줄 읽기",
+  "category": "파일·예외 > readline()",
+  "level": "기초",
+  "description": "세 줄의 문자열을 파일에 저장한 뒤 readline()을 사용해 첫 번째 줄만 읽어 출력하세요.",
+  "input": "세 줄의 문자열이 주어집니다.",
+  "output": "첫 번째 줄만 출력합니다.",
+  "starter_code": "lines = [input(), input(), input()]\n\n# 파일에 세 줄을 저장한 뒤 readline()으로 첫 줄을 읽으세요.\n",
+  "examples": [
+    {
+      "input": "apple\nbanana\ncherry",
+      "output": "apple"
+    }
+  ],
+  "tests": [
+    {
+      "input": "apple\nbanana\ncherry",
+      "output": "apple"
+    },
+    {
+      "input": "first\nsecond\nthird",
+      "output": "first"
+    }
+  ]
+}
