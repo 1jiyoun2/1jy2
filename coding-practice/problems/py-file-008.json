@@ -22,5 +22,14 @@
       "input": "abc",
       "output": "abc\nabc"
     }
-  ]
+  ],
+  "rule_note": "read()와 seek(0)을 사용해 파일 위치를 처음으로 되돌리세요.",
+  "rules": {
+    "required_calls": [
+      "open",
+      "write",
+      "read",
+      "seek"
+    ]
+  }
 }
