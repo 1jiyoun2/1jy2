@@ -1,0 +1,43 @@
+{
+  "number": "112",
+  "title": "기록을 파일에 저장하고 다시 읽기",
+  "category": "종합 > 파일·예외 종합",
+  "level": "적용",
+  "description": "이름과 점수를 입력받아 record.txt에 '이름,점수' 형식으로 저장한 뒤 다시 읽어서 그대로 출력하세요.",
+  "input": "첫째 줄에 이름, 둘째 줄에 정수 점수가 주어집니다.",
+  "output": "파일에서 다시 읽은 '이름,점수' 문자열을 출력합니다.",
+  "starter_code": "name = input()\nscore = int(input())\n\n# record.txt에 저장한 뒤 다시 읽어 출력하세요.\n",
+  "examples": [
+    {
+      "input": "민수\n85",
+      "output": "민수,85"
+    }
+  ],
+  "tests": [
+    {
+      "input": "민수\n85",
+      "output": "민수,85"
+    },
+    {
+      "input": "지우\n100",
+      "output": "지우,100"
+    },
+    {
+      "input": "A\n0",
+      "output": "A,0"
+    }
+  ],
+  "hints": [
+    "쓰기 모드로 연 파일에 name + ',' + str(score)를 저장하세요.",
+    "그 다음 읽기 모드로 다시 열어 read()한 값을 출력하세요."
+  ],
+  "rule_note": "write()로 저장한 내용을 read()로 다시 읽어 확인하세요.",
+  "rules": {
+    "required_calls": [
+      "open",
+      "write",
+      "read"
+    ]
+  },
+  "back_link": "python/integrated/"
+}
