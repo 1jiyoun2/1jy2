@@ -523,5 +523,45 @@
     "number": "105",
     "id": "py-function-014",
     "group": "functions"
+  },
+  {
+    "number": "106",
+    "id": "py-integrated-001",
+    "group": "integrated"
+  },
+  {
+    "number": "107",
+    "id": "py-integrated-002",
+    "group": "integrated"
+  },
+  {
+    "number": "108",
+    "id": "py-integrated-003",
+    "group": "integrated"
+  },
+  {
+    "number": "109",
+    "id": "py-integrated-004",
+    "group": "integrated"
+  },
+  {
+    "number": "110",
+    "id": "py-integrated-005",
+    "group": "integrated"
+  },
+  {
+    "number": "111",
+    "id": "py-integrated-006",
+    "group": "integrated"
+  },
+  {
+    "number": "112",
+    "id": "py-integrated-007",
+    "group": "integrated"
+  },
+  {
+    "number": "113",
+    "id": "py-integrated-008",
+    "group": "integrated"
   }
 ]
