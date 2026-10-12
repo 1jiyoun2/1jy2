@@ -19,6 +19,23 @@ main {
 h1 { margin: 0; font-size: 30px; }
 .subtitle { margin: 8px 0 34px; color: #6b7280; font-size: 14px; }
 h2 { margin: 30px 0 10px; font-size: 17px; }
+details.archive-section { margin-top: 30px; }
+details.archive-section > summary {
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 700;
+    list-style: none;
+    user-select: none;
+}
+details.archive-section > summary::-webkit-details-marker { display: none; }
+details.archive-section > summary::before {
+    content: "▸";
+    display: inline-block;
+    width: 18px;
+    color: #6b7280;
+}
+details.archive-section[open] > summary::before { content: "▾"; }
+details.archive-section .list { margin-top: 10px; }
 p, li { font-size: 14px; line-height: 1.7; }
 .back { margin: 0 0 24px; font-size: 14px; }
 .list {
@@ -76,28 +93,30 @@ a:hover { text-decoration: underline; }
 
     <h2><a href="coding-practice/">💯Coding Practice</a></h2>
 
-    <h2>Archive</h2>
-    <table class="list">
-        <thead><tr><th class="name">이름</th><th class="description">내용</th></tr></thead>
-        <tbody>
-            <tr>
-                <td><a href="courses/ai-basics-2020/summary.html">인공지능 기초 (제2020-236호)</a></td>
-                <td class="description">이전 교육과정 수업 자료 · 인공지능 개념 · 모델 실습</td>
-            </tr>
-            <tr>
-                <td><a href="archive/c-programming/function.html">C Programming</a></td>
-                <td class="description">함수 · 배열 · 포인터</td>
-            </tr>
-            <tr>
-                <td><a href="archive/database/">Database</a></td>
-                <td class="description">데이터베이스 · SQL</td>
-            </tr>
-            <tr>
-                <td><a href="archive/web-programming/">Web Programming</a></td>
-                <td class="description">HTML · CSS</td>
-            </tr>
-        </tbody>
-    </table>
+    <details class="archive-section">
+        <summary>Archive</summary>
+        <table class="list">
+            <thead><tr><th class="name">이름</th><th class="description">내용</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td><a href="courses/ai-basics-2020/summary.html">인공지능 기초 (제2020-236호)</a></td>
+                    <td class="description">이전 교육과정 수업 자료 · 인공지능 개념 · 모델 실습</td>
+                </tr>
+                <tr>
+                    <td><a href="archive/c-programming/function.html">C Programming</a></td>
+                    <td class="description">함수 · 배열 · 포인터</td>
+                </tr>
+                <tr>
+                    <td><a href="archive/database/">Database</a></td>
+                    <td class="description">데이터베이스 · SQL</td>
+                </tr>
+                <tr>
+                    <td><a href="archive/web-programming/">Web Programming</a></td>
+                    <td class="description">HTML · CSS</td>
+                </tr>
+            </tbody>
+        </table>
+    </details>
 </main>
     <a href="https://1jy2.com/" aria-label="메인으로 이동" style="position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;min-height:34px;padding:6px 11px;border:1px solid #cfd4dc;background:#fff;color:#334155;text-decoration:none;font:600 12px/1.2 'Malgun Gothic',Arial,sans-serif;box-shadow:0 2px 8px rgba(15,23,42,.10);">⌂ Home</a>
 </body>
