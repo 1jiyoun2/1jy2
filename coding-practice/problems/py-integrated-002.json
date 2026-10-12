@@ -1,0 +1,48 @@
+{
+  "number": "107",
+  "title": "점수 목록 분석하기",
+  "category": "종합 > 기초 종합",
+  "level": "적용",
+  "description": "공백으로 구분된 점수들을 입력받아 평균과 60점 이상인 점수의 개수를 출력하세요.",
+  "input": "한 줄에 정수 점수 여러 개가 공백으로 구분되어 주어집니다.",
+  "output": "첫째 줄에 평균을 소수점 첫째 자리까지, 둘째 줄에 60점 이상인 점수의 개수를 출력합니다.",
+  "starter_code": "scores = list(map(int, input().split()))\n\n# 반복문으로 합계와 60점 이상인 점수의 개수를 구하세요.\n",
+  "examples": [
+    {
+      "input": "80 55 70 90 40",
+      "output": "67.0\n3"
+    }
+  ],
+  "tests": [
+    {
+      "input": "80 55 70 90 40",
+      "output": "67.0\n3"
+    },
+    {
+      "input": "60 60 60",
+      "output": "60.0\n3"
+    },
+    {
+      "input": "100 90",
+      "output": "95.0\n2"
+    }
+  ],
+  "hints": [
+    "합계와 합격 개수를 따로 저장할 변수를 준비하세요.",
+    "평균은 합계를 len(scores)로 나누어 구할 수 있습니다."
+  ],
+  "rule_note": "반복문과 조건문을 이용해 직접 집계하세요.",
+  "rules": {
+    "required_nodes": [
+      "If"
+    ],
+    "required_any_nodes": [
+      "For",
+      "While"
+    ],
+    "forbidden_calls": [
+      "sum"
+    ]
+  },
+  "back_link": "python/integrated/"
+}
