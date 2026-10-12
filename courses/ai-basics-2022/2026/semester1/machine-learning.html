@@ -18,6 +18,67 @@
 </tbody>
 </table>
 
+
+<h2>실습 1 · 아이리스 분류 모델</h2>
+<p>전처리된 아이리스 데이터를 이용해 품종 문자열을 숫자로 변환하고, 네 개의 특성을 입력값으로 사용하여 K-최근접 이웃 분류 모델을 학습하였다.</p>
+<pre class="flow">x = df[['SepalLengthCm', 'SepalWidthCm',
+        'PetalLengthCm', 'PetalWidthCm']]
+y = df['Species']
+
+x_train, x_test, y_train, y_test = train_test_split(
+    x, y, test_size=0.2, random_state=10
+)
+
+model = KNeighborsClassifier()
+model.fit(x_train, y_train)
+Predicted = model.predict(x_test)</pre>
+<p>예측 결과와 실제값 일부를 직접 비교하고, <code>confusion_matrix()</code>와 <code>accuracy_score()</code>를 이용하여 분류 성능을 확인하였다.</p>
+
+<h2>실습 2 · 청년 인구 예측과 선형 회귀</h2>
+<p>문화시설 관련 데이터를 이용하여 두 개의 독립변수를 조합해 청년 인구를 예측하였다. 도서관·공연장, 도서관·박물관, 도서관·미술관 등 여러 조합을 바꾸어 보면서 결정계수가 어떻게 달라지는지 비교하였다.</p>
+<pre class="flow">x = df[['도서관', '공연장']]
+y = df[['청년']]
+
+x_train, x_test, y_train, y_test = train_test_split(
+    x, y, test_size=0.2, random_state=0
+)
+
+model = LinearRegression()
+model.fit(x_train, y_train)
+Predicted = model.predict(x_test)</pre>
+<table class="list">
+<thead><tr><th class="name">확인 요소</th><th class="description">수업에서 본 의미</th></tr></thead>
+<tbody>
+<tr><td><code>coef_</code>, <code>intercept_</code></td><td class="description">학습된 선형 관계의 기울기와 절편 확인</td></tr>
+<tr><td>평균제곱오차</td><td class="description">실제값과 예측값 사이의 오차 크기를 수치로 확인</td></tr>
+<tr><td>결정계수</td><td class="description">선택한 독립변수 조합이 종속변수의 변화를 얼마나 설명하는지 비교</td></tr>
+<tr><td>산점도</td><td class="description">독립변수와 종속변수의 관계, 실제값과 예측값의 차이를 시각적으로 확인</td></tr>
+</tbody>
+</table>
+
+<h2>실습 3 · 버섯 데이터 이진 분류 딥러닝</h2>
+<p>버섯 데이터를 이용해 범주형 속성을 숫자로 변환하고, 학습용·평가용 데이터를 나눈 뒤 완전연결 신경망으로 이진 분류를 수행하였다.</p>
+<pre class="flow">for column in df.columns:
+    df[column] = le.fit_transform(df[column])
+
+x = df.iloc[:, 1:]
+y = df.iloc[:, 0]
+
+model = keras.Sequential()
+model.add(keras.layers.Dense(64, activation='relu'))
+model.add(keras.layers.Dense(8, activation='relu'))
+model.add(keras.layers.Dense(1, activation='sigmoid'))
+
+model.compile(
+    optimizer='adam',
+    loss='binary_crossentropy',
+    metrics=['accuracy']
+)</pre>
+<p>은닉층에는 ReLU, 이진 분류 출력층에는 sigmoid를 사용하고, <code>binary_crossentropy</code> 손실 함수로 학습하였다. 학습 후에는 평가 데이터의 정확도를 확인하고 epoch에 따른 loss 변화를 그래프로 관찰하였다.</p>
+
+<h3>더 알아보기</h3>
+<p>추가 활동에서는 <code>MinMaxScaler</code>를 이용한 정규화 개념을 살펴보며, 입력 데이터의 스케일을 조정하는 전처리가 모델 학습과 어떤 관련이 있는지 확인하였다.</p>
+
 <h2>모델링을 위한 변수 선택</h2>
 <p>학생들은 데이터의 여러 속성 중 어떤 값을 종속변수로 둘 것인지 정하고, 어떤 독립변수가 그 값을 예측하는 데 관련이 있을지 설명하였다. 필요하면 학습에서 제외할 속성을 정하고 그 이유도 데이터와 문제 상황에 연결하였다.</p>
 
