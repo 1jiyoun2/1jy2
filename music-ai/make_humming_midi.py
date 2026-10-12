@@ -2,11 +2,18 @@ import argparse
 from pathlib import Path
 
 from src.audio_loader import load_audio
+from src.tempo_detector import detect_tempo
 
 from src.humming_pitch import (
     detect_pitch,
     group_pitch_to_notes,
-    smooth_note_lengths,
+)
+
+from src.rhythm_analyzer import (
+    analyze_rhythm,
+    get_subdivision_result,
+    quantize_notes_to_beats,
+    detect_phrases,
 )
 
 from src.humming_midi import (
@@ -24,7 +31,10 @@ from src.harmony import (
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="허밍 음원을 멜로디 MIDI와 화음 Pad MIDI로 변환합니다."
+        description=(
+            "허밍을 Beat 기반으로 분석해 "
+            "멜로디 MIDI와 화음 MIDI를 생성합니다."
+        )
     )
 
     parser.add_argument(
@@ -42,56 +52,122 @@ def parse_args():
     parser.add_argument(
         "--pad-output",
         default="output/pad.mid",
-        help="화음 Pad MIDI 출력 경로",
+        help="Pad MIDI 출력 경로",
     )
 
     parser.add_argument(
         "--combined-output",
         default="output/humming_with_pad.mid",
-        help="멜로디와 화음을 합친 MIDI 출력 경로",
+        help="통합 MIDI 출력 경로",
     )
 
     parser.add_argument(
         "--bpm",
         type=float,
-        default=120.0,
-        help="MIDI BPM",
+        default=None,
+        help=(
+            "BPM을 직접 지정합니다. "
+            "생략하면 오디오에서 자동 분석합니다."
+        ),
     )
 
     parser.add_argument(
-        "--chord-seconds",
+        "--subdivision",
+        type=int,
+        choices=[1, 2, 4],
+        default=4,
+        help=(
+            "Quantize 해상도. "
+            "1=4분음표, 2=8분음표, "
+            "4=16분음표"
+        ),
+    )
+
+    parser.add_argument(
+        "--quantize-strength",
         type=float,
-        default=2.0,
-        help="화음이 유지되는 기본 시간(초)",
+        default=1.0,
+        help=(
+            "Quantize 강도. "
+            "0.0=원본, 1.0=완전 보정"
+        ),
+    )
+
+    parser.add_argument(
+        "--beats-per-chord",
+        type=float,
+        default=4.0,
+        help=(
+            "코드 하나가 유지되는 기본 박 수. "
+            "기본값 4.0"
+        ),
     )
 
     return parser.parse_args()
 
 
-def print_melody(notes):
-    print("\n=== Melody ===")
+def print_rhythm(
+    notes,
+):
+    print(
+        "\n=== Quantized Melody ==="
+    )
 
     for note in notes:
         print(
-            f"{note['start']:6.2f}s - "
-            f"{note['end']:6.2f}s  "
             f"{note['note']:4s}  "
-            f"MIDI {note['midi']:3d}"
+            f"beat "
+            f"{note['beat_start']:5.2f} "
+            f"- "
+            f"{note['beat_end']:5.2f}  "
+            f"duration "
+            f"{note['beat_duration']:4.2f}  "
+            f"time "
+            f"{note['start']:6.3f}s "
+            f"- "
+            f"{note['end']:6.3f}s"
         )
 
 
-def print_harmony(progression):
-    print("\n=== Harmony ===")
+def print_phrases(
+    phrases,
+):
+    print(
+        "\n=== Phrase Analysis ==="
+    )
+
+    for phrase in phrases:
+        print(
+            f"Phrase "
+            f"{phrase['phrase']}: "
+            f"beat "
+            f"{phrase['start_beat']:.2f} "
+            f"- "
+            f"{phrase['end_beat']:.2f}"
+        )
+
+
+def print_harmony(
+    progression,
+):
+    print(
+        "\n=== Harmony ==="
+    )
 
     for chord in progression:
         chord_names = [
-            NOTE_NAMES[pitch_class]
-            for pitch_class in chord["notes"]
+            NOTE_NAMES[
+                pitch_class
+            ]
+            for pitch_class
+            in chord["notes"]
         ]
 
         print(
-            f"{chord['start']:6.2f}s - "
-            f"{chord['end']:6.2f}s  "
+            f"beat "
+            f"{chord['start_beat']:5.2f} "
+            f"- "
+            f"{chord['end_beat']:5.2f}  "
             f"{'-'.join(chord_names)}"
         )
 
@@ -99,7 +175,9 @@ def print_harmony(progression):
 def main():
     args = parse_args()
 
-    input_path = Path(args.input)
+    input_path = Path(
+        args.input
+    )
 
     if not input_path.exists():
         print(
@@ -108,16 +186,61 @@ def main():
         )
         return
 
-    print(f"\n허밍 파일: {input_path}")
+    if not (
+        0.0
+        <= args.quantize_strength
+        <= 1.0
+    ):
+        print(
+            "--quantize-strength는 "
+            "0.0에서 1.0 사이여야 합니다."
+        )
+        return
 
-    # 1. 허밍 오디오 로드
-    print("\n피치 분석 중...")
+    print(
+        f"\n허밍 파일: "
+        f"{input_path}"
+    )
+
+    # 1. 오디오 로드
+    print(
+        "\n오디오 분석 중..."
+    )
 
     y, sr = load_audio(
         input_path
     )
 
-    # 2. 프레임 단위 피치 추출
+    # 2. BPM
+    detected_bpm, _ = detect_tempo(
+        y,
+        sr
+    )
+
+    if args.bpm is None:
+        bpm = float(
+            detected_bpm
+        )
+    else:
+        bpm = float(
+            args.bpm
+        )
+
+    print(
+        f"분석 BPM: "
+        f"{detected_bpm:.2f}"
+    )
+
+    print(
+        f"사용 BPM: "
+        f"{bpm:.2f}"
+    )
+
+    # 3. 피치 분석
+    print(
+        "\n피치 분석 중..."
+    )
+
     pitch_frames = detect_pitch(
         y,
         sr
@@ -129,17 +252,12 @@ def main():
         )
         return
 
-    # 3. 실제 노트 단위로 묶기
-    notes = group_pitch_to_notes(
+    # 4. 원본 노트 생성
+    raw_notes = group_pitch_to_notes(
         pitch_frames
     )
 
-    # 4. 짧은 공백을 부드럽게 연결
-    notes = smooth_note_lengths(
-        notes
-    )
-
-    if not notes:
+    if not raw_notes:
         print(
             "유효한 멜로디 노트를 "
             "검출하지 못했습니다."
@@ -148,14 +266,81 @@ def main():
 
     print(
         f"검출된 노트: "
-        f"{len(notes)}개"
+        f"{len(raw_notes)}개"
     )
 
-    print_melody(
+    # 5. Grid 분석
+    rhythm_result = analyze_rhythm(
+        notes=raw_notes,
+        bpm=bpm,
+    )
+
+    if rhythm_result is None:
+        print(
+            "리듬 분석에 실패했습니다."
+        )
+        return
+
+    subdivision_result = (
+        get_subdivision_result(
+            rhythm_result,
+            args.subdivision,
+        )
+    )
+
+    if subdivision_result is None:
+        print(
+            "요청한 Grid를 "
+            "찾지 못했습니다."
+        )
+        return
+
+    offset = (
+        subdivision_result[
+            "offset"
+        ]
+    )
+
+    print(
+        f"\nQuantize Grid: "
+        f"1/{4 * args.subdivision} note"
+    )
+
+    print(
+        f"Grid offset: "
+        f"{offset:.3f}s"
+    )
+
+    print(
+        f"Grid 평균 오차: "
+        f"{subdivision_result['average_error']:.3f}s"
+    )
+
+    # 6. Beat 기반 Quantize
+    notes = quantize_notes_to_beats(
+        notes=raw_notes,
+        bpm=bpm,
+        offset=offset,
+        subdivision=args.subdivision,
+        strength=args.quantize_strength,
+    )
+
+    print_rhythm(
         notes
     )
 
-    # 5. 멜로디 Key 추정
+    # 7. Phrase 분석
+    phrases = detect_phrases(
+        notes=notes,
+        bpm=bpm,
+        min_silence_beats=0.5,
+    )
+
+    print_phrases(
+        phrases
+    )
+
+    # 8. Key 분석
     key = detect_melody_key(
         notes
     )
@@ -171,18 +356,20 @@ def main():
         f"{key['name']}"
     )
 
-    # 6. 화음 진행 생성
+    # 9. Beat 기반 코드 생성
     progression = create_chord_progression(
         notes=notes,
         key=key,
-        chord_seconds=args.chord_seconds,
+        bpm=bpm,
+        offset=offset,
+        beats_per_chord=args.beats_per_chord,
     )
 
     print_harmony(
         progression
     )
 
-    # 7. 출력 경로 준비
+    # 10. 출력 경로
     melody_output = Path(
         args.output
     )
@@ -210,29 +397,26 @@ def main():
         exist_ok=True,
     )
 
-    # 8. 멜로디 MIDI 생성
+    # 11. MIDI 생성
     create_melody_midi(
         notes=notes,
         output_path=melody_output,
-        bpm=args.bpm,
+        bpm=bpm,
     )
 
-    # 9. Pad MIDI 생성
     create_pad_midi(
         progression=progression,
         output_path=pad_output,
-        bpm=args.bpm,
+        bpm=bpm,
     )
 
-    # 10. 멜로디 + Pad 통합 MIDI 생성
     create_combined_midi(
         notes=notes,
         progression=progression,
         output_path=combined_output,
-        bpm=args.bpm,
+        bpm=bpm,
     )
 
-    # 11. 결과 출력
     print(
         f"\n멜로디 MIDI 생성 완료: "
         f"{melody_output}"

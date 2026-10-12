@@ -1,143 +1,53 @@
 import numpy as np
 
 
-def estimate_bpm_candidates(
-    notes,
-    min_bpm=60,
-    max_bpm=180
-):
-    """
-    멜로디 노트의 시작 시점 간격을 이용해서
-    BPM 후보들을 계산한다.
-    """
-
-    if len(notes) < 2:
-        return []
-
-    starts = np.array(
-        [note["start"] for note in notes],
-        dtype=float
-    )
-
-    intervals = np.diff(starts)
-
-    # 너무 짧거나 너무 긴 간격 제거
-    intervals = intervals[
-        (intervals >= 0.10)
-        & (intervals <= 2.0)
-    ]
-
-    if len(intervals) == 0:
-        return []
-
-    candidates = []
-
-    for interval in intervals:
-        bpm = 60.0 / interval
-
-        # 같은 리듬이 배속/반속으로 해석될 가능성도 고려
-        variants = [
-            bpm,
-            bpm / 2,
-            bpm * 2,
-        ]
-
-        for candidate in variants:
-            if min_bpm <= candidate <= max_bpm:
-                candidates.append(
-                    float(candidate)
-                )
-
-    candidates.sort()
-
-    return candidates
+def get_beat_seconds(bpm):
+    return 60.0 / bpm
 
 
-def cluster_bpm_candidates(
-    candidates,
-    tolerance=3.0
-):
-    """
-    비슷한 BPM 후보들을 그룹으로 묶는다.
-    """
+def get_grid_seconds(bpm, subdivision):
+    return get_beat_seconds(bpm) / subdivision
 
-    if not candidates:
-        return []
 
-    groups = []
-
-    for bpm in candidates:
-        placed = False
-
-        for group in groups:
-            center = np.mean(group)
-
-            if abs(bpm - center) <= tolerance:
-                group.append(bpm)
-                placed = True
-                break
-
-        if not placed:
-            groups.append([bpm])
-
-    ranked = []
-
-    for group in groups:
-        ranked.append({
-            "bpm": float(np.mean(group)),
-            "count": len(group),
-        })
-
-    ranked.sort(
-        key=lambda item: item["count"],
-        reverse=True
-    )
-
-    return ranked
+def get_grid_step_beats(subdivision):
+    return 1.0 / subdivision
 
 
 def find_best_grid_offset(
     notes,
     bpm,
-    subdivision=2
+    subdivision=4,
+    search_steps=200,
 ):
-    """
-    BPM이 주어졌을 때,
-    멜로디 시작점들이 가장 잘 맞는
-    grid 시작 위치(offset)를 찾는다.
-
-    subdivision=2:
-        8분음표 단위 grid
-    """
-
     if not notes:
         return 0.0
 
-    beat_seconds = 60.0 / bpm
-    grid_seconds = beat_seconds / subdivision
+    grid_seconds = get_grid_seconds(
+        bpm,
+        subdivision,
+    )
 
     starts = np.array(
         [note["start"] for note in notes],
-        dtype=float
+        dtype=float,
     )
 
     offsets = np.linspace(
-        0,
+        0.0,
         grid_seconds,
-        100,
-        endpoint=False
+        search_steps,
+        endpoint=False,
     )
 
     best_offset = 0.0
-    best_score = float("inf")
+    best_error = float("inf")
 
     for offset in offsets:
-        total_error = 0.0
+        errors = []
 
         for start in starts:
             grid_index = round(
-                (start - offset)
-                / grid_seconds
+                (start - offset) / grid_seconds
             )
 
             nearest_grid = (
@@ -145,102 +55,310 @@ def find_best_grid_offset(
                 + grid_index * grid_seconds
             )
 
-            total_error += abs(
-                start - nearest_grid
+            errors.append(
+                abs(start - nearest_grid)
             )
 
-        if total_error < best_score:
-            best_score = total_error
-            best_offset = offset
+        average_error = float(
+            np.mean(errors)
+        )
 
-    return float(best_offset)
+        if average_error < best_error:
+            best_error = average_error
+            best_offset = float(offset)
+
+    return best_offset
 
 
-def create_grid(
+def analyze_subdivision(
+    notes,
+    bpm,
+    subdivision,
+):
+    offset = find_best_grid_offset(
+        notes=notes,
+        bpm=bpm,
+        subdivision=subdivision,
+    )
+
+    grid_seconds = get_grid_seconds(
+        bpm,
+        subdivision,
+    )
+
+    errors = []
+
+    for note in notes:
+        grid_index = round(
+            (note["start"] - offset)
+            / grid_seconds
+        )
+
+        nearest = (
+            offset
+            + grid_index * grid_seconds
+        )
+
+        errors.append(
+            abs(note["start"] - nearest)
+        )
+
+    return {
+        "subdivision": subdivision,
+        "offset": offset,
+        "grid_seconds": grid_seconds,
+        "average_error": float(np.mean(errors)),
+        "max_error": float(np.max(errors)),
+    }
+
+
+def analyze_rhythm(
+    notes,
+    bpm,
+):
+    if not notes:
+        return None
+
+    results = []
+
+    for subdivision in (1, 2, 4):
+        results.append(
+            analyze_subdivision(
+                notes=notes,
+                bpm=bpm,
+                subdivision=subdivision,
+            )
+        )
+
+    best = min(
+        results,
+        key=lambda item: item["average_error"],
+    )
+
+    return {
+        "bpm": float(bpm),
+        "beat_seconds": get_beat_seconds(bpm),
+        "best_subdivision": best["subdivision"],
+        "best_offset": best["offset"],
+        "average_error": best["average_error"],
+        "max_error": best["max_error"],
+        "subdivision_results": results,
+    }
+
+
+def get_subdivision_result(
+    rhythm_result,
+    subdivision,
+):
+    for result in rhythm_result["subdivision_results"]:
+        if result["subdivision"] == subdivision:
+            return result
+
+    return None
+
+
+def seconds_to_beats(
+    seconds,
+    bpm,
+    offset,
+):
+    beat_seconds = get_beat_seconds(bpm)
+
+    return (
+        seconds - offset
+    ) / beat_seconds
+
+
+def beats_to_seconds(
+    beats,
+    bpm,
+    offset,
+):
+    beat_seconds = get_beat_seconds(bpm)
+
+    return (
+        offset
+        + beats * beat_seconds
+    )
+
+
+def quantize_beat(
+    beat,
+    subdivision,
+    strength=1.0,
+):
+    step = get_grid_step_beats(
+        subdivision
+    )
+
+    target = (
+        round(beat / step)
+        * step
+    )
+
+    return (
+        beat
+        + (target - beat) * strength
+    )
+
+
+def quantize_notes_to_beats(
     notes,
     bpm,
     offset,
-    subdivision=2
+    subdivision=4,
+    strength=1.0,
 ):
     """
-    멜로디 전체 구간에 대한
-    subdivision grid를 생성한다.
+    노트의 시작점과 끝점을 모두 Beat Grid에 맞춘다.
+
+    subdivision=4:
+        1박을 4칸으로 나누므로
+        16분음표 해상도.
+
+    strength=1.0:
+        완전 Quantize.
+
+    strength=0.75:
+        Grid까지 거리의 75%만 이동.
     """
 
     if not notes:
         return []
 
-    beat_seconds = 60.0 / bpm
-    grid_seconds = beat_seconds / subdivision
-
-    end_time = max(
-        note["end"]
-        for note in notes
+    step = get_grid_step_beats(
+        subdivision
     )
 
-    # offset보다 이전에도 grid가 존재할 수 있으므로
-    # 0초 이전까지 역산해서 시작점을 맞춘다.
-    time = offset
+    quantized_notes = []
 
-    while time - grid_seconds >= 0:
-        time -= grid_seconds
+    for note in notes:
+        original_start_beat = seconds_to_beats(
+            note["start"],
+            bpm,
+            offset,
+        )
 
-    grid = []
+        original_end_beat = seconds_to_beats(
+            note["end"],
+            bpm,
+            offset,
+        )
 
-    while time <= end_time + grid_seconds:
-        if time >= 0:
-            grid.append(
-                float(time)
-            )
+        quantized_start_beat = quantize_beat(
+            original_start_beat,
+            subdivision,
+            strength,
+        )
 
-        time += grid_seconds
+        quantized_end_beat = quantize_beat(
+            original_end_beat,
+            subdivision,
+            strength,
+        )
 
-    return grid
+        minimum_end = (
+            quantized_start_beat
+            + step
+        )
+
+        if quantized_end_beat < minimum_end:
+            quantized_end_beat = minimum_end
+
+        start_seconds = beats_to_seconds(
+            quantized_start_beat,
+            bpm,
+            offset,
+        )
+
+        end_seconds = beats_to_seconds(
+            quantized_end_beat,
+            bpm,
+            offset,
+        )
+
+        quantized_notes.append({
+            **note,
+            "original_start": note["start"],
+            "original_end": note["end"],
+            "beat_start": quantized_start_beat,
+            "beat_end": quantized_end_beat,
+            "beat_duration": (
+                quantized_end_beat
+                - quantized_start_beat
+            ),
+            "start": start_seconds,
+            "end": end_seconds,
+        })
+
+    return quantized_notes
 
 
-def analyze_rhythm(
+def detect_phrases(
     notes,
-    min_bpm=60,
-    max_bpm=180,
-    subdivision=2
+    bpm,
+    min_silence_beats=0.5,
 ):
     """
-    허밍 멜로디 노트로부터
-    BPM 후보와 리듬 grid를 분석한다.
+    실제 노트 사이의 쉼을 Beat 단위로 계산한다.
+
+    기본값 0.5:
+        반 박 이상 실제 쉼이 있으면
+        새로운 프레이즈 후보로 판단.
     """
 
-    candidates = estimate_bpm_candidates(
-        notes,
-        min_bpm=min_bpm,
-        max_bpm=max_bpm,
+    if not notes:
+        return []
+
+    beat_seconds = get_beat_seconds(
+        bpm
     )
 
-    ranked = cluster_bpm_candidates(
-        candidates
-    )
+    phrases = []
+    current_notes = [notes[0]]
 
-    if not ranked:
-        return None
+    for index in range(
+        len(notes) - 1
+    ):
+        current_note = notes[index]
+        next_note = notes[index + 1]
 
-    best_bpm = ranked[0]["bpm"]
+        silence_seconds = (
+            next_note["original_start"]
+            - current_note["original_end"]
+        )
 
-    offset = find_best_grid_offset(
-        notes,
-        best_bpm,
-        subdivision=subdivision,
-    )
+        silence_beats = (
+            silence_seconds
+            / beat_seconds
+        )
 
-    grid = create_grid(
-        notes,
-        best_bpm,
-        offset,
-        subdivision=subdivision,
-    )
+        if silence_beats >= min_silence_beats:
+            phrases.append({
+                "notes": current_notes,
+                "silence_after_beats": silence_beats,
+            })
 
-    return {
-        "bpm": best_bpm,
-        "offset": offset,
-        "subdivision": subdivision,
-        "grid": grid,
-        "candidates": ranked[:5],
-    }
+            current_notes = [
+                next_note
+            ]
+        else:
+            current_notes.append(
+                next_note
+            )
+
+    phrases.append({
+        "notes": current_notes,
+        "silence_after_beats": None,
+    })
+
+    for index, phrase in enumerate(phrases):
+        phrase["phrase"] = index + 1
+        phrase["start_beat"] = (
+            phrase["notes"][0]["beat_start"]
+        )
+        phrase["end_beat"] = (
+            phrase["notes"][-1]["beat_end"]
+        )
+
+    return phrases
