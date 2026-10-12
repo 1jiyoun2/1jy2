@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audio → MIDI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:"Malgun Gothic",Arial,sans-serif;background:#fff;color:#202124}
+main{max-width:720px;margin:0 auto;padding:56px 24px 80px}
+h1{margin:0 0 8px;font-size:28px}
+p{font-size:14px;line-height:1.7;color:#5f6368}
+.panel{margin-top:28px;padding:24px;border:1px solid #d8dbe2;background:#fff}
+.file-label{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 18px;border:1px solid #b8bec8;background:#f7f7f8;color:#202124;font-size:14px;font-weight:600;cursor:pointer}
+.file-label:hover{background:#eef2f7}
+input[type=file]{display:none}
+#status{margin-top:18px;padding:12px 14px;border-left:3px solid #c8ccd4;background:#fafafa;white-space:pre-wrap;color:#374151;font-size:13px;line-height:1.6}
+.progress{width:100%;height:6px;background:#eceef2;margin-top:16px;overflow:hidden}
+.bar{height:100%;width:0;background:#6b7280;transition:width .25s}
+.small{margin-top:12px;font-size:12px;color:#8a919e}
+</style>
+</head>
+<body>
+<main>
+<h1>Audio → MIDI</h1>
+<p>피아노 오디오 파일을 선택하면 MIDI로 변환한 뒤 자동으로 다운로드합니다. 여러 파일을 선택하면 변환 결과를 ZIP으로 묶어 다운로드합니다.</p>
+<div class="panel">
+  <label class="file-label" for="files">파일 선택</label>
+  <input id="files" type="file" accept="audio/*,.wav,.mp3,.flac,.m4a,.aac,.ogg" multiple>
+  <div class="progress"><div id="bar" class="bar"></div></div>
+  <div id="status">파일을 선택하세요.</div>
+  <div class="small">변환 중에는 이 페이지를 닫지 마세요.</div>
+</div>
+</main>
+
+<script type="module">
+import { Client, handle_file } from "https://esm.sh/@gradio/client@1.19.0";
+import JSZip from "https://esm.sh/jszip@3.10.1";
+
+const input = document.getElementById("files");
+const status = document.getElementById("status");
+const bar = document.getElementById("bar");
+
+const SPACE = "Lollikit/TranskunGUI";
+
+function setStatus(text){ status.textContent = text; }
+function setProgress(p){ bar.style.width = Math.max(0, Math.min(100, p)) + "%"; }
+
+function baseName(name){
+  const i = name.lastIndexOf(".");
+  return i > 0 ? name.slice(0,i) : name;
+}
+
+function collectUrls(value, out=[]){
+  if (value == null) return out;
+  if (typeof value === "string") {
+    if (/^https?:\/\//i.test(value) || value.includes("/file=")) out.push(value);
+    return out;
+  }
+  if (Array.isArray(value)) {
+    for (const v of value) collectUrls(v,out);
+    return out;
+  }
+  if (typeof value === "object") {
+    for (const k of ["url","path","download_url","name"]) {
+      const v=value[k];
+      if (typeof v==="string" && (/^https?:\/\//i.test(v) || v.includes("/file="))) out.push(v);
+    }
+    for (const v of Object.values(value)) collectUrls(v,out);
+  }
+  return out;
+}
+
+function endpointEntries(api){
+  const all=[];
+  if (api?.named_endpoints) {
+    for (const [name,meta] of Object.entries(api.named_endpoints)) all.push({id:name,meta});
+  }
+  if (api?.unnamed_endpoints) {
+    for (const [name,meta] of Object.entries(api.unnamed_endpoints)) {
+      const id = /^\d+$/.test(name) ? Number(name) : name;
+      all.push({id,meta});
+    }
+  }
+  return all;
+}
+
+function endpointScore(entry){
+  const meta=entry.meta || {};
+  const text=JSON.stringify(meta).toLowerCase();
+  let s=0;
+  if (text.includes("file") || text.includes("audio")) s+=6;
+  if (text.includes("midi") || text.includes(".mid")) s+=8;
+  if (text.includes("transcrib") || text.includes("convert")) s+=5;
+  if (text.includes("cuda")) s+=2;
+  if (text.includes("quant")) s+=2;
+  return s;
+}
+
+function paramLabel(p){
+  return String(p?.label || p?.parameter_name || p?.name || "").toLowerCase();
+}
+
+function paramType(p){
+  return String(p?.type?.type || p?.type || p?.component || "").toLowerCase();
+}
+
+function buildArgs(meta,file){
+  const params = meta?.parameters || meta?.inputs || [];
+  return params.map((p)=>{
+    const label=paramLabel(p);
+    const typ=paramType(p);
+    if (label.includes("file") || label.includes("audio") || typ.includes("file") || typ.includes("audio")) {
+      if (label.includes("files") || typ.includes("array")) return [handle_file(file)];
+      return handle_file(file);
+    }
+    if (label.includes("cuda")) return false;
+    if (label.includes("quant")) return false;
+    if (typ.includes("boolean") || typ.includes("checkbox")) return false;
+    if (p?.example_input !== undefined) return p.example_input;
+    if (p?.default !== undefined) return p.default;
+    if (p?.value !== undefined) return p.value;
+    return null;
+  });
+}
+
+async function fetchMidi(result, originalName){
+  const urls=[...new Set(collectUrls(result?.data ?? result))];
+  if (!urls.length) throw new Error("변환 결과 파일 주소를 찾지 못했습니다.");
+  const midiUrl = urls.find(u=>/\.mid(?:\?|$)/i.test(u)) || urls[0];
+  const res=await fetch(midiUrl);
+  if(!res.ok) throw new Error("MIDI 파일 다운로드에 실패했습니다.");
+  const blob=await res.blob();
+  return {name:baseName(originalName)+".mid", blob};
+}
+
+async function convertOne(app,api,file){
+  const entries=endpointEntries(api).sort((a,b)=>endpointScore(b)-endpointScore(a));
+  let lastError=null;
+  for(const entry of entries){
+    if(endpointScore(entry)<=0) continue;
+    try{
+      const args=buildArgs(entry.meta,file);
+      if(!args.some(v=>v && (typeof v==="object" || Array.isArray(v)))) continue;
+      const result=await app.predict(entry.id,args);
+      return await fetchMidi(result,file.name);
+    }catch(err){
+      lastError=err;
+    }
+  }
+  throw lastError || new Error("Transkun 변환 API를 찾지 못했습니다.");
+}
+
+function downloadBlob(blob,name){
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download=name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),30000);
+}
+
+input.addEventListener("change",async()=>{
+  const files=[...input.files];
+  if(!files.length) return;
+
+  input.disabled=true;
+  setProgress(3);
+  setStatus("Transkun 연결 중...");
+
+  try{
+    const app=await Client.connect(SPACE);
+    const api=await app.view_api();
+
+    const converted=[];
+    for(let i=0;i<files.length;i++){
+      const f=files[i];
+      setStatus(`변환 중: ${f.name}\n(${i+1}/${files.length})`);
+      setProgress(8 + (i/files.length)*82);
+      const midi=await convertOne(app,api,f);
+      converted.push(midi);
+      setProgress(8 + ((i+1)/files.length)*82);
+    }
+
+    if(converted.length===1){
+      setStatus("변환 완료 · MIDI 다운로드 중...");
+      downloadBlob(converted[0].blob,converted[0].name);
+    }else{
+      setStatus("변환 완료 · ZIP 생성 중...");
+      const zip=new JSZip();
+      for(const x of converted) zip.file(x.name,x.blob);
+      const zipBlob=await zip.generateAsync({type:"blob",compression:"DEFLATE"});
+      downloadBlob(zipBlob,"transcribe.zip");
+    }
+    setProgress(100);
+    setStatus("완료되었습니다.\n다른 파일을 변환하려면 다시 파일을 선택하세요.");
+  }catch(err){
+    console.error(err);
+    setProgress(0);
+    setStatus("변환에 실패했습니다.\n"+(err?.message || String(err)));
+  }finally{
+    input.disabled=false;
+    input.value="";
+  }
+});
+</script>
+</body>
+</html>
