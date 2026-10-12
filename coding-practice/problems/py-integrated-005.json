@@ -1,0 +1,48 @@
+{
+  "number": "110",
+  "title": "명령어 분석하고 분기하기",
+  "category": "종합 > RPG 종합",
+  "level": "적용",
+  "description": "한 줄 명령을 공백 기준으로 나눈 뒤, '이동 장소', '장착 아이템', '상태' 명령을 구분해 정해진 형식으로 출력하세요.",
+  "input": "한 줄에 명령 문자열이 주어집니다.",
+  "output": "이동은 MOVE 장소, 장착은 EQUIP 아이템, 상태는 STATUS를 출력합니다. 그 외 명령은 UNKNOWN을 출력합니다.",
+  "starter_code": "command = input().strip()\nparts = command.split()\n\n# parts의 내용을 확인해 명령을 분기하세요.\n",
+  "examples": [
+    {
+      "input": "장착 나무검",
+      "output": "EQUIP 나무검"
+    }
+  ],
+  "tests": [
+    {
+      "input": "장착 나무검",
+      "output": "EQUIP 나무검"
+    },
+    {
+      "input": "이동 숲",
+      "output": "MOVE 숲"
+    },
+    {
+      "input": "상태",
+      "output": "STATUS"
+    },
+    {
+      "input": "춤추기",
+      "output": "UNKNOWN"
+    }
+  ],
+  "hints": [
+    "parts[0]에는 첫 번째 단어가 들어갑니다.",
+    "두 단어가 필요한 명령에서는 len(parts)도 함께 확인하면 안전합니다."
+  ],
+  "rule_note": "split()과 if/elif 분기를 함께 사용하세요.",
+  "rules": {
+    "required_nodes": [
+      "If"
+    ],
+    "required_calls": [
+      "split"
+    ]
+  },
+  "back_link": "python/integrated/"
+}
