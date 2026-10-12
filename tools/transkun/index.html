@@ -3,314 +3,59 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 <title>Transkun | Piano Audio → MIDI</title>
 <style>
+:root{color-scheme:light}
 *{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic",Arial,sans-serif;background:#fff;color:#202124}
-main{max-width:720px;margin:auto;padding:56px 24px 80px}
-h1{margin:0 0 10px;font-size:28px}
-p{font-size:14px;line-height:1.75;color:#5f6368}
-.panel{margin-top:28px;padding:24px;border:1px solid #d8dbe2;background:#fff}
-label{display:block;font-size:14px;font-weight:600;margin-bottom:12px}
-#files{display:block;width:100%;max-width:100%;padding:14px 12px;border:1px solid #b8bec8;background:#f7f7f8;font:inherit;font-size:14px;color:#202124;cursor:pointer}
-#files::file-selector-button{margin-right:12px;border:1px solid #a5acb8;background:#fff;border-radius:4px;padding:9px 12px;color:#202124;font-weight:600;cursor:pointer}
-#files:focus-visible,#convert:focus-visible,.download a:focus-visible{outline:2px solid #2563eb;outline-offset:2px}
-#selection{font-size:13px;color:#5f6368;margin-top:10px;overflow-wrap:anywhere}
-#convert{margin-top:20px;width:100%;min-height:44px;background:#202124;color:#fff;border:0;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer}
-#convert:disabled{background:#b6b9c0;cursor:not-allowed}
-.progress{height:7px;width:100%;background:#eceef2;margin-top:19px;overflow:hidden}
-.bar{height:100%;width:0;background:#6b7280;transition:width .25s}
-#status{margin-top:16px;padding:12px 14px;border-left:3px solid #c8ccd4;background:#fafafa;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.65;color:#374151}
-#status.error{border-left-color:#c93535;color:#992b2b}
-#status.success{border-left-color:#168a5d}
-#downloads{margin-top:18px}
-.download{margin:8px 0;padding:10px 12px;border:1px solid #e3e6eb;overflow-wrap:anywhere}
-.download a{color:#175ab0;font-size:14px}
-.secondary{width:100%;min-height:42px;margin-top:16px;padding:10px;border:1px solid #9ca3af;border-radius:4px;background:#fff;color:#202124;font-weight:600;cursor:pointer}
-#fallback{margin-top:16px;border-top:1px solid #e5e7eb;padding-top:16px}
-#fallback[hidden]{display:none}
-#fallback iframe{width:100%;height:760px;border:1px solid #d8dbe2;border-radius:4px;background:#fff}
-#fallback a{color:#175ab0}
-.small{font-size:12px;color:#8a919e;margin-top:15px}
-.small a{color:inherit}
+body{margin:0;background:#fff;color:#202124;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",Arial,sans-serif}
+main{max-width:980px;margin:0 auto;padding:44px 20px 75px}
+h1{font-size:28px;letter-spacing:-.4px;margin:0 0 12px}
+p{line-height:1.7;font-size:14px;color:#505866}
+.panel{border:1px solid #d8dbe2;background:#fff;margin-top:26px;padding:18px}
+h2{margin:0 0 9px;font-size:17px}
+.actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:18px 0}
+.action{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;min-height:44px;background:#202124;border:1px solid #202124;color:#fff;text-decoration:none;font-size:14px;font-weight:600;border-radius:5px}
+.action:hover{background:#444}
+.note{padding:13px 15px;border-left:3px solid #8a92a3;background:#f7f8fa;font-size:13px;line-height:1.7;color:#444b56}
+#app-frame{display:block;border:1px solid #d8dbe2;width:100%;height:790px;margin-top:20px;background:#f9fafb}
+.small{font-size:12px;color:#747b88;margin-top:15px}
+.small a{color:#4c596f}
+.version{font-size:11px;color:#8b93a1;margin-top:30px}
+@media(max-width:600px){
+ main{padding:26px 10px 55px}
+ h1{font-size:24px}
+ .panel{padding:12px;margin-top:20px}
+ #app-frame{height:860px}
+ .action{width:100%}
+}
 </style>
 </head>
 <body>
 <main>
 <h1>Audio → MIDI</h1>
-<p>Transkun으로 피아노 연주 오디오를 MIDI로 변환합니다. WAV를 포함한 오디오 파일을 선택한 뒤 변환을 시작하세요. 여러 파일은 순서대로 처리하며, ZIP 다운로드도 제공합니다.</p>
-<div class="panel">
-  <label for="files">변환할 오디오 파일 선택</label>
-  <input id="files" name="files" type="file" accept=".wav,.wave,.mp3,.flac,.m4a,.aac,.ogg,audio/wav,audio/x-wav,audio/mpeg,audio/flac" multiple>
-  <div id="selection" aria-live="polite">선택된 파일이 없습니다.</div>
-  <button id="convert" type="button" disabled>변환 시작</button>
-  <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
-  <div id="status" role="status" aria-live="polite">파일을 선택하세요.</div>
-  <div id="downloads" aria-live="polite"></div>
-  <button id="open-embedded" type="button" class="secondary">원본 변환 화면 사용하기</button>
-  <section id="fallback" hidden aria-label="원본 Transkun 변환 화면">
-    <p><strong>대체 변환 화면</strong> — 웹페이지와 변환 서버 간 직접 API 연결이 제한될 때 원본 Gradio 화면에서 WAV를 선택하고 MIDI를 다운로드할 수 있습니다.</p>
-    <p><a href="https://huggingface.co/spaces/Lollikit/TranskunGUI" target="_blank" rel="noopener noreferrer">내장 화면이 나타나지 않으면 원본 사이트를 새 창으로 열기 ↗</a></p>
-    <iframe id="space-frame" title="Transkun GUI 변환 서비스" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allow="clipboard-read; clipboard-write"></iframe>
-  </section>
-  <p class="small">이 페이지는 외부 Hugging Face 서버에서 변환을 실행합니다. 서버 상태와 대기열에 따라 시간이 걸릴 수 있습니다. 결과는 피아노 오디오용 모델 기준입니다.</p>
-  <p class="small">모델: <a href="https://github.com/yujia-yan/transkun" target="_blank" rel="noopener noreferrer">Transkun</a> · 변환 서버: <a href="https://huggingface.co/spaces/Lollikit/TranskunGUI" target="_blank" rel="noopener noreferrer">TranskunGUI</a></p>
+<p>Transkun을 이용해 피아노 연주 오디오를 MIDI로 변환합니다. 아래 변환기 안에서 WAV 파일을 선택하고 변환을 시작하세요. 변환 결과 MIDI 파일은 변환기에서 직접 내려받을 수 있습니다.</p>
+<section class="panel">
+<h2>피아노 오디오 변환기</h2>
+<div class="note">
+이 도구는 외부 Hugging Face 서버에서 실제 변환을 수행합니다. GitHub Pages는 화면만 제공하므로 독립적인 변환 서버가 아니에요.<br>
+아래 화면이 비어 있거나 파일을 선택할 수 없다면 <strong>원본 변환기 열기</strong>를 눌러 새 탭에서 실행해 주세요.
 </div>
+<div class="actions">
+<a class="action" href="https://huggingface.co/spaces/Lollikit/TranskunGUI" target="_blank" rel="noopener noreferrer">원본 변환기 열기 ↗</a>
+</div>
+<iframe
+  id="app-frame"
+  title="TranskunGUI 피아노 오디오 MIDI 변환기"
+  src="https://lollikit-transkungui.hf.space/"
+  loading="eager"
+  allow="clipboard-read; clipboard-write"
+  referrerpolicy="strict-origin-when-cross-origin"
+></iframe>
+<p class="small">원본 서비스의 오디오 파일 선택·변환·다운로드 기능을 그대로 제공합니다. WAV 외 포맷 지원 여부는 원본 서버 설정에 따릅니다. 서버가 중지되거나 접근이 차단되면 이 페이지에서도 변환할 수 없습니다.</p>
+<p class="small">모델 출처: <a href="https://github.com/yujia-yan/transkun" target="_blank" rel="noopener noreferrer">Yujia-Yan/Transkun</a> · 변환 서버: <a href="https://huggingface.co/spaces/Lollikit/TranskunGUI" target="_blank" rel="noopener noreferrer">Lollikit/TranskunGUI</a></p>
+</section>
+<p class="version">페이지 버전: 2026-10-12-embed-1</p>
 </main>
-<script>
-(function(){
-"use strict";
-const SPACE="Lollikit/TranskunGUI";
-const SPACE_ORIGIN="https://lollikit-transkungui.hf.space";
-const input=document.getElementById("files");
-const btn=document.getElementById("convert");
-const selection=document.getElementById("selection");
-const status=document.getElementById("status");
-const bar=document.getElementById("bar");
-const downloads=document.getElementById("downloads");
-const embeddedButton=document.getElementById("open-embedded");
-const fallback=document.getElementById("fallback");
-const spaceFrame=document.getElementById("space-frame");
-function showFallback(){
-  fallback.hidden=false;
-  embeddedButton.textContent="원본 변환 화면 닫기";
-  if(!spaceFrame.getAttribute("src")) spaceFrame.src=SPACE_ORIGIN+"/";
-}
-embeddedButton.addEventListener("click",function(){
-  if(fallback.hidden) showFallback();
-  else{
-    fallback.hidden=true;
-    embeddedButton.textContent="원본 변환 화면 사용하기";
-  }
-});
-const extensions=/\.(wav|wave|mp3|flac|m4a|aac|ogg)$/i;
-let busy=false;
-let clientModule=null;
-const createdURLs=[];
-
-function setStatus(message,kind){
-  status.textContent=message;
-  status.className=kind||"";
-}
-function setProgress(value){
-  bar.style.width=Math.max(0,Math.min(100,value))+"%";
-}
-function baseName(name){
-  return name.replace(/\.[^.]+$/,"");
-}
-function readableError(err){
-  const msg=err && err.message ? err.message : String(err);
-  if (/failed to fetch|load failed|networkerror|network request failed|cors/i.test(msg)){
-    return "네트워크 요청이 실패했습니다. Hugging Face 서버 연결, 브라우저의 교차 출처 요청(CORS), 네트워크 차단 여부를 확인하세요.\n원본 오류: "+msg;
-  }
-  return msg;
-}
-function resetDownloads(){
-  downloads.replaceChildren();
-  for(const url of createdURLs) URL.revokeObjectURL(url);
-  createdURLs.length=0;
-}
-function addDownload(name,url,isLocal){
-  const div=document.createElement("div");
-  div.className="download";
-  const a=document.createElement("a");
-  a.href=url;
-  a.textContent=name+" 다운로드";
-  if(isLocal){a.download=name;}else{
-    a.target="_blank";
-    a.rel="noopener noreferrer";
-  }
-  div.appendChild(a);
-  downloads.appendChild(div);
-  return a;
-}
-function parseFile(data){
-  const files=[];
-  function walk(item){
-    if(Array.isArray(item)){
-      item.forEach(walk);
-    }else if(item && typeof item==="object"){
-      const raw=typeof item.url==="string" ? item.url : 
-        (typeof item.path==="string" ? item.path : "");
-      if(raw){
-        let url=raw;
-        if(!/^https?:\/\//i.test(url)){
-          if(url.startsWith("/file=")||url.startsWith("/gradio_api/file=")){
-            url=new URL(url,SPACE_ORIGIN).href;
-          }else if(url.startsWith("/")){
-            url=SPACE_ORIGIN+"/gradio_api/file="+encodeURIComponent(url);
-          }else{
-            url=new URL(url,SPACE_ORIGIN).href;
-          }
-        }
-        const u=new URL(url);
-        if(u.protocol!=="https:") throw new Error("유효하지 않은 결과 파일 주소입니다.");
-        files.push({url:u.href,name:item.orig_name||item.name||"converted.mid"});
-      }
-    }else if(typeof item==="string" && /^https?:\/\//i.test(item)){
-      files.push({url:item,name:"converted.mid"});
-    }
-  }
-  walk(data);
-  return files.filter(f=>/\.mid(?:\?|$)/i.test(f.url)||/\.mid$/i.test(f.name));
-}
-async function loadGradio(){
-  if(clientModule) return clientModule;
-  let firstError;
-  try{
-    clientModule=await import("https://cdn.jsdelivr.net/npm/@gradio/client@1.19.0/dist/index.min.js");
-  }catch(err){
-    firstError=err;
-    try{
-      clientModule=await import("https://esm.sh/@gradio/client@1.19.0");
-    }catch(err2){
-      throw new Error("Gradio 연결용 스크립트를 불러오지 못했습니다. CDN이 차단되었을 수 있습니다.\n"+readableError(err2)+"\n"+readableError(firstError));
-    }
-  }
-  if(typeof clientModule.Client!=="function" || typeof clientModule.handle_file!=="function"){
-    throw new Error("Gradio 클라이언트가 올바르게 로드되지 않았습니다.");
-  }
-  return clientModule;
-}
-async function tryFetchMidi(url){
-  const response=await fetch(url);
-  if(!response.ok) throw new Error("파일 다운로드 HTTP "+response.status);
-  const blob=await response.blob();
-  if(blob.size<14) throw new Error("결과 MIDI 파일 크기가 비정상적입니다.");
-  const bytes=new Uint8Array(await blob.slice(0,4).arrayBuffer());
-  if(bytes[0]!==77||bytes[1]!==84||bytes[2]!==104||bytes[3]!==100){
-    throw new Error("MIDI 형식이 아닌 파일이 반환되었습니다.");
-  }
-  return blob;
-}
-async function getZipModule(){
-  try{return await import("https://cdn.jsdelivr.net/npm/jszip@3.10.1/+esm");}
-  catch(e){return await import("https://esm.sh/jszip@3.10.1");}
-}
-input.addEventListener("change",function(){
-  if(busy) return;
-  resetDownloads();
-  setProgress(0);
-  const files=Array.from(input.files||[]);
-  selection.textContent=files.length===0 ? "선택된 파일이 없습니다." :
-    files.length===1 ? "선택한 파일: "+files[0].name :
-    "총 "+files.length+"개 파일 선택: "+files.map(f=>f.name).join(", ");
-  const invalid=files.find(f=>!extensions.test(f.name)||f.size===0);
-  btn.disabled=files.length===0||!!invalid;
-  if(invalid){
-    setStatus("지원하지 않는 확장자 또는 빈 파일입니다: "+invalid.name,"error");
-  }else{
-    setStatus(files.length ? "파일 선택 완료. '변환 시작'을 누르세요." : "파일을 선택하세요.");
-  }
-});
-btn.addEventListener("click",async function(){
-  if(busy) return;
-  const files=Array.from(input.files||[]);
-  if(!files.length) return;
-  busy=true;
-  btn.disabled=true;
-  input.disabled=true;
-  resetDownloads();
-  let currentStep="연결";
-  let complete=0;
-  const zipped=[];
-  let lastError=null;
-  try{
-    setProgress(3);
-    setStatus("서버 연결 준비 중...");
-    const {Client,handle_file}=await loadGradio();
-    // The direct .hf.space URL avoids the Hugging Face Hub lookup that is
-    // triggered by Client.connect("owner/space") and can fail with CORS.
-    let app;
-    try{
-      app=await Client.connect(SPACE_ORIGIN);
-    }catch(directError){
-      console.warn("Direct Gradio connection failed; trying Hub lookup",directError);
-      currentStep="서버 연결";
-      try{
-        app=await Client.connect(SPACE);
-      }catch(hubError){
-        throw new Error("직접 서버 연결과 Hugging Face 조회가 모두 실패했습니다.\n직접 연결: "+
-          readableError(directError)+"\nHub 조회: "+readableError(hubError));
-      }
-    }
-    for(let i=0;i<files.length;i++){
-      const file=files[i];
-      currentStep="업로드 및 변환";
-      setStatus("오디오 업로드·변환 중: "+file.name+"\n("+ (i+1) +"/"+files.length+")\n서버 대기열이 있을 수 있습니다.");
-      setProgress(5+Math.round((i/files.length)*85));
-      // Gradio 서버 app.py: on_convert(audio_paths, use_cuda, use_quantize).
-      // gr.File(file_count="multiple") 이므로 파일은 배열 하나로 전달한다.
-      // 원음의 MIDI 타이밍을 변경하지 않도록 use_quantize=false.
-      const result=await app.predict("/on_convert",[[handle_file(file)],false,false]);
-      const data=result&&result.data;
-      if(!Array.isArray(data)) throw new Error("서버가 예상과 다른 변환 결과를 반환했습니다.");
-      const output=parseFile(data[1]);
-      if(!output.length){
-        throw new Error("서버가 MIDI 결과 파일을 생성하지 못했습니다.\n"+
-          (typeof data[0]==="string" ? data[0] : "서버의 상태를 확인하세요."));
-      }
-      currentStep="MIDI 다운로드";
-      const midi=output[0];
-      const name=baseName(file.name)+".mid";
-      try{
-        const blob=await tryFetchMidi(midi.url);
-        const local=URL.createObjectURL(blob);
-        createdURLs.push(local);
-        addDownload(name,local,true);
-        zipped.push({name,blob});
-      }catch(downloadErr){
-        // 교차 출처 다운로드가 막혀도 사용자가 결과에 접근할 수 있도록 유지.
-        addDownload(name,midi.url,false);
-        lastError=downloadErr;
-      }
-      complete++;
-      setProgress(5+Math.round(((i+1)/files.length)*85));
-      setStatus("변환 완료: "+complete+"/"+files.length+"개");
-    }
-    if(files.length>1&&zipped.length===files.length){
-      currentStep="ZIP 생성";
-      setStatus("모든 파일 변환 완료. ZIP 생성 중...");
-      try{
-        const zipMod=await getZipModule();
-        const zip=new zipMod.default();
-        const used=new Set();
-        for(const file of zipped){
-          let filename=file.name;
-          let num=2;
-          while(used.has(filename)){
-            filename=baseName(file.name)+"_"+num+".mid";
-            num++;
-          }
-          used.add(filename);
-          zip.file(filename,file.blob);
-        }
-        const blob=await zip.generateAsync({type:"blob",compression:"DEFLATE"});
-        const local=URL.createObjectURL(blob);
-        createdURLs.push(local);
-        const anchor=addDownload("transkun_midis.zip",local,true);
-        downloads.prepend(anchor.parentElement);
-      }catch(zipErr){
-        lastError=zipErr;
-      }
-    }
-    setProgress(100);
-    setStatus("완료: "+complete+"개 MIDI 생성.\n아래 다운로드 링크를 눌러 저장하세요."+
-      (lastError ? "\n일부 파일은 외부 서버 링크로 제공되거나 ZIP을 만들지 못했습니다: "+readableError(lastError) : ""),"success");
-  }catch(err){
-    console.error("Transkun error at "+currentStep,err);
-    setStatus(currentStep+" 단계에서 실패했습니다.\n"+readableError(err)+
-      (complete ? "\n이미 완료된 "+complete+"개 파일은 아래에서 다운로드할 수 있습니다." : "")+
-      "\n아래 '원본 변환 화면'에서 직접 WAV를 선택해 변환할 수 있습니다.","error");
-    showFallback();
-    setProgress(complete ? 5+Math.round((complete/files.length)*85) : 0);
-  }finally{
-    busy=false;
-    input.disabled=false;
-    btn.disabled=!input.files.length;
-  }
-});
-})();
-</script>
 </body>
 </html>
