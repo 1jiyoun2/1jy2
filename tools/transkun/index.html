@@ -26,6 +26,11 @@ label{display:block;font-size:14px;font-weight:600;margin-bottom:12px}
 #downloads{margin-top:18px}
 .download{margin:8px 0;padding:10px 12px;border:1px solid #e3e6eb;overflow-wrap:anywhere}
 .download a{color:#175ab0;font-size:14px}
+.secondary{width:100%;min-height:42px;margin-top:16px;padding:10px;border:1px solid #9ca3af;border-radius:4px;background:#fff;color:#202124;font-weight:600;cursor:pointer}
+#fallback{margin-top:16px;border-top:1px solid #e5e7eb;padding-top:16px}
+#fallback[hidden]{display:none}
+#fallback iframe{width:100%;height:760px;border:1px solid #d8dbe2;border-radius:4px;background:#fff}
+#fallback a{color:#175ab0}
 .small{font-size:12px;color:#8a919e;margin-top:15px}
 .small a{color:inherit}
 </style>
@@ -42,6 +47,12 @@ label{display:block;font-size:14px;font-weight:600;margin-bottom:12px}
   <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
   <div id="status" role="status" aria-live="polite">파일을 선택하세요.</div>
   <div id="downloads" aria-live="polite"></div>
+  <button id="open-embedded" type="button" class="secondary">원본 변환 화면 사용하기</button>
+  <section id="fallback" hidden aria-label="원본 Transkun 변환 화면">
+    <p><strong>대체 변환 화면</strong> — 웹페이지와 변환 서버 간 직접 API 연결이 제한될 때 원본 Gradio 화면에서 WAV를 선택하고 MIDI를 다운로드할 수 있습니다.</p>
+    <p><a href="https://huggingface.co/spaces/Lollikit/TranskunGUI" target="_blank" rel="noopener noreferrer">내장 화면이 나타나지 않으면 원본 사이트를 새 창으로 열기 ↗</a></p>
+    <iframe id="space-frame" title="Transkun GUI 변환 서비스" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allow="clipboard-read; clipboard-write"></iframe>
+  </section>
   <p class="small">이 페이지는 외부 Hugging Face 서버에서 변환을 실행합니다. 서버 상태와 대기열에 따라 시간이 걸릴 수 있습니다. 결과는 피아노 오디오용 모델 기준입니다.</p>
   <p class="small">모델: <a href="https://github.com/yujia-yan/transkun" target="_blank" rel="noopener noreferrer">Transkun</a> · 변환 서버: <a href="https://huggingface.co/spaces/Lollikit/TranskunGUI" target="_blank" rel="noopener noreferrer">TranskunGUI</a></p>
 </div>
@@ -57,6 +68,21 @@ const selection=document.getElementById("selection");
 const status=document.getElementById("status");
 const bar=document.getElementById("bar");
 const downloads=document.getElementById("downloads");
+const embeddedButton=document.getElementById("open-embedded");
+const fallback=document.getElementById("fallback");
+const spaceFrame=document.getElementById("space-frame");
+function showFallback(){
+  fallback.hidden=false;
+  embeddedButton.textContent="원본 변환 화면 닫기";
+  if(!spaceFrame.getAttribute("src")) spaceFrame.src=SPACE_ORIGIN+"/";
+}
+embeddedButton.addEventListener("click",function(){
+  if(fallback.hidden) showFallback();
+  else{
+    fallback.hidden=true;
+    embeddedButton.textContent="원본 변환 화면 사용하기";
+  }
+});
 const extensions=/\.(wav|wave|mp3|flac|m4a|aac|ogg)$/i;
 let busy=false;
 let clientModule=null;
@@ -193,7 +219,21 @@ btn.addEventListener("click",async function(){
     setProgress(3);
     setStatus("서버 연결 준비 중...");
     const {Client,handle_file}=await loadGradio();
-    const app=await Client.connect(SPACE);
+    // The direct .hf.space URL avoids the Hugging Face Hub lookup that is
+    // triggered by Client.connect("owner/space") and can fail with CORS.
+    let app;
+    try{
+      app=await Client.connect(SPACE_ORIGIN);
+    }catch(directError){
+      console.warn("Direct Gradio connection failed; trying Hub lookup",directError);
+      currentStep="서버 연결";
+      try{
+        app=await Client.connect(SPACE);
+      }catch(hubError){
+        throw new Error("직접 서버 연결과 Hugging Face 조회가 모두 실패했습니다.\n직접 연결: "+
+          readableError(directError)+"\nHub 조회: "+readableError(hubError));
+      }
+    }
     for(let i=0;i<files.length;i++){
       const file=files[i];
       currentStep="업로드 및 변환";
@@ -261,7 +301,8 @@ btn.addEventListener("click",async function(){
     console.error("Transkun error at "+currentStep,err);
     setStatus(currentStep+" 단계에서 실패했습니다.\n"+readableError(err)+
       (complete ? "\n이미 완료된 "+complete+"개 파일은 아래에서 다운로드할 수 있습니다." : "")+
-      "\n서버 확인: https://huggingface.co/spaces/Lollikit/TranskunGUI","error");
+      "\n아래 '원본 변환 화면'에서 직접 WAV를 선택해 변환할 수 있습니다.","error");
+    showFallback();
     setProgress(complete ? 5+Math.round((complete/files.length)*85) : 0);
   }finally{
     busy=false;
