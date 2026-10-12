@@ -327,7 +327,8 @@ async function loadManifest(currentId) {
             "data-structures": "python/data-structures/",
             "files-exceptions": "python/files-exceptions/",
             "classes": "python/classes/",
-            "algorithms": "python/algorithms/"
+            "algorithms": "python/algorithms/",
+            "integrated": "python/integrated/"
         };
 
         if (!problem.back_link && groupUrls[current.group]) {
