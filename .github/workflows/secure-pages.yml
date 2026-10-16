@@ -1,0 +1,58 @@
+name: Secure static Pages build
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: secure-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Validate and package public site
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout public source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned JavaScript minifier
+        run: npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund terser@5.44.1
+      - name: Build public site and scan for secrets
+        run: node scripts/build-site.mjs
+      - name: Check generated JavaScript syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            node --check "$file"
+          done < <(find _site -type f -name '*.js' -print0)
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload public artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    name: Publish sanitized site
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
