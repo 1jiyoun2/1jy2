@@ -105,6 +105,26 @@ async function copyPublicPath(relativePath) {
     statistics.copied++;
 }
 
+async function scanWholeRepository(directory = repoRoot) {
+    const ignore = new Set([".git", "node_modules", "_site", ".venv", "__pycache__", ".cache"]);
+    for (const name of await fs.readdir(directory)) {
+        if (ignore.has(name)) continue;
+        const fullPath = path.join(directory, name);
+        const stat = await fs.lstat(fullPath);
+        if (stat.isSymbolicLink()) continue;
+        if (stat.isDirectory()) {
+            await scanWholeRepository(fullPath);
+            continue;
+        }
+        if (!stat.isFile()) continue;
+        const relative = path.relative(repoRoot, fullPath).replaceAll(path.sep, "/");
+        if (name.startsWith(".env")) throw new Error("Environment file committed into public repository: " + relative);
+        if (/\.(?:html?|js|json|css|py|ipynb|md|txt|yml|yaml)$/i.test(name) && stat.size < 2_000_000) {
+            scanForSecrets(await fs.readFile(fullPath, "utf8"), relative);
+        }
+    }
+}
+await scanWholeRepository();
 if (outputDir === repoRoot || !outputDir.startsWith(repoRoot + path.sep)) throw new Error("Unsafe output directory");
 await fs.rm(outputDir, { recursive: true, force: true });
 await fs.mkdir(outputDir, { recursive: true });
