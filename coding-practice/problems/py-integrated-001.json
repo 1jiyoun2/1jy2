@@ -1,12 +1,12 @@
 {
   "number": "106",
-  "title": "상점에서 여러 번 구매하기",
+  "title": "예산 내에서 차례대로 구매하기",
   "category": "종합 > 기초 종합",
   "level": "적용",
-  "description": "현재 골드와 물건 가격 목록을 입력받아, 앞에서부터 살 수 있는 물건은 구매하고 살 수 없는 물건은 건너뜁니다. 구매한 물건 수와 남은 골드를 출력하세요.",
-  "input": "첫째 줄에 현재 골드, 둘째 줄에 물건 수 n, 이후 n줄에 각 물건의 가격이 주어집니다.",
-  "output": "첫째 줄에 구매한 물건 수, 둘째 줄에 남은 골드를 출력합니다.",
-  "starter_code": "gold = int(input())\nn = int(input())\n\nbought = 0\n\n# n개의 가격을 차례대로 확인하세요.\n# 살 수 있으면 골드를 줄이고 bought를 1 증가시키세요.\n\nprint(bought)\nprint(gold)\n",
+  "description": "정해진 예산과 물건 가격 목록을 입력받아 앞에서부터 구매 가능한 물건은 사고, 예산을 초과하는 물건은 건너뜁니다. 구매한 물건 수와 남은 예산을 출력하세요.",
+  "input": "첫째 줄에 예산, 둘째 줄에 물건 수 n, 이후 n줄에 각 물건의 가격이 주어집니다.",
+  "output": "첫째 줄에 구매한 물건 수, 둘째 줄에 남은 예산을 출력합니다.",
+  "starter_code": "budget = int(input())\nn = int(input())\n\nbought = 0\n\n# n개의 가격을 차례대로 확인하세요.\n# 구매할 수 있으면 예산을 줄이고 bought를 1 증가시키세요.\n\nprint(bought)\nprint(budget)\n",
   "examples": [
     {
       "input": "100\n4\n30\n50\n40\n20",
@@ -29,7 +29,7 @@
   ],
   "hints": [
     "반복문 안에서 가격을 하나씩 입력받으세요.",
-    "현재 gold가 price보다 크거나 같을 때만 구매 처리하면 됩니다."
+    "현재 budget이 price보다 크거나 같을 때만 구매하면 됩니다."
   ],
   "rule_note": "반복문과 조건문을 함께 사용하세요.",
   "rules": {

@@ -7,7 +7,7 @@
   "description": "주어진 다섯 값의 자료형을 type()으로 확인해 한 줄에 하나씩 출력하세요.",
   "input": "입력은 없습니다.",
   "output": "각 값의 자료형 이름을 순서대로 출력합니다: str, int, float, bool, list",
-  "starter_code": "values = [\"123\", 123, 123.0, False, [\"HP\", \"MP\", \"EXP\"]]\n\n# 각 값의 자료형 이름을 한 줄에 하나씩 출력하세요.\n",
+  "starter_code": "values = [\"123\", 123, 123.0, False, [\"국어\", \"수학\", \"정보\"]]\n\n# 각 값의 자료형 이름을 한 줄에 하나씩 출력하세요.\n",
   "examples": [
     {
       "input": "",

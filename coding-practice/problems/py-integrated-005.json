@@ -1,33 +1,33 @@
 {
   "number": "110",
-  "title": "명령어 분석하고 분기하기",
-  "category": "종합 > RPG 종합",
+  "title": "문서 명령어 분석하고 분기하기",
+  "category": "종합 > 문자열 · 조건 종합",
   "level": "적용",
-  "description": "한 줄 명령을 공백 기준으로 나눈 뒤, '이동 장소', '장착 아이템', '상태' 명령을 구분해 정해진 형식으로 출력하세요.",
-  "input": "한 줄에 명령 문자열이 주어집니다.",
-  "output": "이동은 MOVE 장소, 장착은 EQUIP 아이템, 상태는 STATUS를 출력합니다. 그 외 명령은 UNKNOWN을 출력합니다.",
+  "description": "문서 관리 프로그램의 한 줄 명령을 공백 기준으로 나눈 뒤 '열기 파일명', '저장 파일명', '목록' 명령을 구분해 정해진 형식으로 출력하세요.",
+  "input": "한 줄에 문서 관리 명령 문자열이 주어집니다.",
+  "output": "열기는 OPEN 파일명, 저장은 SAVE 파일명, 목록은 LIST를 출력합니다. 그 외 명령은 UNKNOWN을 출력합니다.",
   "starter_code": "command = input().strip()\nparts = command.split()\n\n# parts의 내용을 확인해 명령을 분기하세요.\n",
   "examples": [
     {
-      "input": "장착 나무검",
-      "output": "EQUIP 나무검"
+      "input": "저장 report.txt",
+      "output": "SAVE report.txt"
     }
   ],
   "tests": [
     {
-      "input": "장착 나무검",
-      "output": "EQUIP 나무검"
+      "input": "저장 report.txt",
+      "output": "SAVE report.txt"
     },
     {
-      "input": "이동 숲",
-      "output": "MOVE 숲"
+      "input": "열기 notes.txt",
+      "output": "OPEN notes.txt"
     },
     {
-      "input": "상태",
-      "output": "STATUS"
+      "input": "목록",
+      "output": "LIST"
     },
     {
-      "input": "춤추기",
+      "input": "삭제 report.txt",
       "output": "UNKNOWN"
     }
   ],

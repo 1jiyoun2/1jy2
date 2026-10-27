@@ -1,12 +1,12 @@
 {
   "number": "059",
-  "title": "Character 피해 처리",
+  "title": "Storage 남은 공간 처리",
   "category": "클래스 > 조건 · 상태",
   "level": "기초",
-  "description": "Character 클래스의 take_damage(amount) 메서드가 hp를 amount만큼 줄이되 0보다 작아지지 않도록 작성하세요.",
-  "input": "첫째 줄에 초기 hp, 둘째 줄에 피해량이 주어집니다.",
-  "output": "피해 적용 후 hp를 출력합니다.",
-  "starter_code": "class Character:\n    def __init__(self, hp):\n        self.hp = hp\n\n    def take_damage(self, amount):\n        # hp를 줄이되 0보다 작아지지 않게 하세요.\n        pass\n\nhp = int(input())\ndamage = int(input())\nc = Character(hp)\nc.take_damage(damage)\nprint(c.hp)\n",
+  "description": "Storage 클래스의 use_space(amount) 메서드를 작성해 남은 저장 공간을 amount만큼 줄이되, 0보다 작아지지 않도록 하세요.",
+  "input": "첫째 줄에 사용 가능한 저장 공간, 둘째 줄에 사용량이 주어집니다.",
+  "output": "처리 후 남은 저장 공간을 출력합니다.",
+  "starter_code": "class Storage:\n    def __init__(self, available):\n        self.available = available\n\n    def use_space(self, amount):\n        # 남은 공간을 줄이되 0보다 작아지지 않게 하세요.\n        pass\n\navailable = int(input())\namount = int(input())\nstorage = Storage(available)\nstorage.use_space(amount)\nprint(storage.available)\n",
   "examples": [
     {
       "input": "100\n30",

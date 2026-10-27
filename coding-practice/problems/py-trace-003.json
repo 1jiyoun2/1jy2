@@ -1,15 +1,15 @@
 {
   "number": "093",
   "type": "trace",
-  "title": "전투 반복 흐름 추적",
+  "title": "반복 작업의 종료 조건 추적",
   "category": "제어 구조 > while · break",
   "level": "기초",
-  "description": "Colab의 전투 루프를 읽고 반복 횟수와 HP 변화를 추적하세요.",
+  "description": "처리할 작업량과 남은 시간을 바꾸는 while 루프를 읽고, break가 실행되는 시점과 반복 횟수를 추적하세요.",
   "back_link": "python/control/",
-  "code": "player_hp = 50\nmonster_hp = 35\n\nwhile player_hp > 0 and monster_hp > 0:\n    command = \"공격\"\n\n    if command == \"공격\":\n        monster_hp -= 15\n        print(\"몬스터 HP:\", monster_hp)\n\n    if monster_hp <= 0:\n        print(\"몬스터 처치\")\n        break\n\n    player_hp -= 8\n    print(\"플레이어 HP:\", player_hp)\n\nprint(\"최종 플레이어 HP:\", player_hp)\nprint(\"최종 몬스터 HP:\", monster_hp)",
+  "code": "time_left = 50\nremaining_tasks = 35\n\nwhile time_left > 0 and remaining_tasks > 0:\n    command = \"처리\"\n\n    if command == \"처리\":\n        remaining_tasks -= 15\n        print(\"남은 작업량:\", remaining_tasks)\n\n    if remaining_tasks <= 0:\n        print(\"작업 완료\")\n        break\n\n    time_left -= 8\n    print(\"남은 시간:\", time_left)\n\nprint(\"최종 남은 시간:\", time_left)\nprint(\"최종 남은 작업량:\", remaining_tasks)",
   "questions": [
     {
-      "prompt": "공격은 총 몇 번 실행되는가?",
+      "prompt": "작업 처리는 총 몇 번 실행되는가?",
       "answers": [
         "3",
         "3번"
@@ -17,28 +17,28 @@
       "display_answer": "3번"
     },
     {
-      "prompt": "반복이 끝난 뒤 player_hp는?",
+      "prompt": "반복 종료 후 time_left의 값은?",
       "answers": [
         "34"
       ],
       "display_answer": "34"
     },
     {
-      "prompt": "반복이 끝난 뒤 monster_hp는?",
+      "prompt": "반복 종료 후 remaining_tasks의 값은?",
       "answers": [
         "-10"
       ],
       "display_answer": "-10"
     },
     {
-      "prompt": "break가 실행되는 공격 횟수는?",
+      "prompt": "break는 몇 번째 반복에서 실행되는가?",
       "answers": [
         "3",
         "3번",
         "세번째",
         "세 번째"
       ],
-      "display_answer": "3번째 공격"
+      "display_answer": "3번째 반복"
     }
   ]
 }

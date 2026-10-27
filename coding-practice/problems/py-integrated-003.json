@@ -1,12 +1,12 @@
 {
   "number": "108",
-  "title": "MP 사용 함수 만들기",
+  "title": "지출 가능 여부를 판단하는 함수",
   "category": "종합 > 함수 종합",
   "level": "적용",
-  "description": "현재 MP와 스킬의 소모 MP를 받아 스킬 사용 가능 여부를 판단하는 use_skill() 함수를 작성하세요. 사용할 수 있으면 남은 MP와 True를, 부족하면 원래 MP와 False를 반환합니다.",
-  "input": "첫째 줄에 현재 MP, 둘째 줄에 소모 MP가 주어집니다.",
-  "output": "첫째 줄에 함수 호출 뒤의 MP, 둘째 줄에 성공 여부를 출력합니다.",
-  "starter_code": "def use_skill(current_mp, cost):\n    # MP가 부족한 경우와 충분한 경우를 나누어 반환하세요.\n    pass\n\ncurrent_mp = int(input())\ncost = int(input())\n\ncurrent_mp, success = use_skill(current_mp, cost)\nprint(current_mp)\nprint(success)\n",
+  "description": "현재 예산과 지출 금액을 받아 지출이 가능한지 판단하는 pay_expense() 함수를 작성하세요. 지출 가능하면 남은 예산과 True를, 부족하면 원래 예산과 False를 반환합니다.",
+  "input": "첫째 줄에 현재 예산, 둘째 줄에 지출 금액이 주어집니다.",
+  "output": "첫째 줄에 지출 후 예산, 둘째 줄에 성공 여부를 출력합니다.",
+  "starter_code": "def pay_expense(budget, cost):\n    # 예산이 부족한 경우와 충분한 경우를 나누어 반환하세요.\n    pass\n\nbudget = int(input())\ncost = int(input())\n\nbudget, success = pay_expense(budget, cost)\nprint(budget)\nprint(success)\n",
   "examples": [
     {
       "input": "30\n12",
@@ -28,7 +28,7 @@
     }
   ],
   "hints": [
-    "함수 안에서 current_mp와 cost를 비교하세요.",
+    "함수 안에서 budget과 cost를 비교하세요.",
     "두 값을 한 번에 return하면 호출하는 쪽에서 두 변수로 받을 수 있습니다."
   ],
   "rule_note": "사용자 정의 함수, 조건문, 반환값을 함께 사용하세요.",
