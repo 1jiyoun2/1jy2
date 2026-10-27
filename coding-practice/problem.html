@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>문제 | Coding Practice</title>
+    <link rel="stylesheet" href="style.css?v=20261008-9">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/theme/material-darker.css">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/python/python.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/edit/closebrackets.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/edit/matchbrackets.js"></script>
+</head>
+<body class="practice-workspace">
+<header class="workspace-topbar">
+    <a id="back-link" href="python/">← 문제 목록</a>
+    <span class="workspace-brand">Coding Practice</span>
+    <nav class="problem-nav" aria-label="문제 이동">
+        <a id="prev-problem" href="#" hidden>← 이전</a>
+        <a id="next-problem" href="#" hidden>다음 →</a>
+    </nav>
+    <span id="top-meta"></span>
+</header>
+
+<main class="workspace">
+    <section class="problem-pane">
+        <h1 id="problem-title">문제를 불러오는 중...</h1>
+        <p class="subtitle" id="problem-subtitle"></p>
+        <div class="problem-meta" id="problem-meta"></div>
+
+        <h2>문제</h2>
+        <p id="description"></p>
+        <div id="rule-note" class="rule-note" hidden></div>
+
+        <div id="io-sections">
+            <h2>입력</h2>
+            <p id="input-desc"></p>
+
+            <h2>출력</h2>
+            <p id="output-desc"></p>
+
+            <h2>예제</h2>
+            <div id="examples"></div>
+        </div>
+
+        <div id="trace-guide" class="trace-guide" hidden>
+            코드를 실행하기 전에 먼저 값을 추적해 답을 작성해 보세요. 필요하면 코드 실행 결과와 비교할 수 있습니다.
+        </div>
+
+        <div id="hint-box" class="hint-box" hidden></div>
+    </section>
+
+    <section class="editor-pane">
+        <div class="file-tab">main.py</div>
+        <div class="editor-wrap">
+            <textarea id="code" spellcheck="false"></textarea>
+        </div>
+
+        <div id="input-panel">
+            <div class="panel-title">입력</div>
+            <textarea id="stdin" class="stdin-box" spellcheck="false" aria-label="입력값"></textarea>
+        </div>
+
+        <div id="trace-answer-panel" hidden>
+            <div class="panel-title">답안</div>
+            <div id="trace-answers" class="trace-answers"></div>
+        </div>
+
+        <div class="toolbar">
+            <button id="run-btn" class="primary" disabled>▶ 실행</button>
+            <button id="judge-btn" disabled>채점</button>
+            <button id="hint-btn" disabled>힌트</button>
+            <button id="reset-btn">초기화</button>
+        </div>
+
+        <div class="panel-title">실행 결과</div>
+        <div id="output" class="console">Python 실행 환경을 준비하는 중입니다...</div>
+
+        <div class="panel-title" id="result-title">채점 결과</div>
+        <div id="judge-result" class="console judge-console">아직 채점하지 않았습니다.</div>
+    </section>
+</main>
+
+<script src="runner.js?v=20261012-1"></script>
+    <a href="https://1jy2.com/" aria-label="메인으로 이동" style="position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;min-height:34px;padding:6px 11px;border:1px solid #cfd4dc;background:#fff;color:#334155;text-decoration:none;font:600 12px/1.2 'Malgun Gothic',Arial,sans-serif;box-shadow:0 2px 8px rgba(15,23,42,.10);">⌂ Home</a>
+</body>
+</html>

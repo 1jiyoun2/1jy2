@@ -1,0 +1,26 @@
+{
+  "number": "051",
+  "title": "이름을 저장하는 Person",
+  "category": "클래스 > 속성",
+  "level": "기초",
+  "description": "Person 클래스를 만들고 생성자에서 name을 속성으로 저장하세요. 객체를 만든 뒤 name을 출력하세요.",
+  "input": "첫째 줄에 이름 문자열이 주어집니다.",
+  "output": "객체의 name 속성을 출력합니다.",
+  "starter_code": "class Person:\n    def __init__(self, name):\n        # name 속성을 저장하세요.\n        pass\n\nname = input()\np = Person(name)\nprint(p.name)\n",
+  "examples": [
+    {
+      "input": "Mina",
+      "output": "Mina"
+    }
+  ],
+  "tests": [
+    {
+      "input": "Mina",
+      "output": "Mina"
+    },
+    {
+      "input": "Jin",
+      "output": "Jin"
+    }
+  ]
+}

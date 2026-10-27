@@ -1,0 +1,43 @@
+{
+  "number": "109",
+  "title": "피해 계산 함수와 전투 반복",
+  "category": "종합 > 함수 종합",
+  "level": "보통",
+  "description": "공격력과 방어력으로 피해량을 계산하는 damage() 함수를 만들고, 몬스터 HP가 0 이하가 될 때까지 같은 공격을 반복하세요. 피해량의 최솟값은 1입니다.",
+  "input": "첫째 줄에 몬스터 HP, 둘째 줄에 공격력, 셋째 줄에 방어력이 주어집니다.",
+  "output": "첫째 줄에 공격 횟수, 둘째 줄에 최종 몬스터 HP를 출력합니다.",
+  "starter_code": "def damage(attack, defense):\n    # 최소 피해량은 1입니다.\n    pass\n\nmonster_hp = int(input())\nattack = int(input())\ndefense = int(input())\n\nturns = 0\n# monster_hp가 0 이하가 될 때까지 반복하세요.\n\nprint(turns)\nprint(monster_hp)\n",
+  "examples": [
+    {
+      "input": "35\n20\n7",
+      "output": "3\n-4"
+    }
+  ],
+  "tests": [
+    {
+      "input": "35\n20\n7",
+      "output": "3\n-4"
+    },
+    {
+      "input": "10\n5\n10",
+      "output": "10\n0"
+    },
+    {
+      "input": "20\n12\n2",
+      "output": "2\n0"
+    }
+  ],
+  "hints": [
+    "damage()에서는 attack - defense와 1 중 큰 값을 반환하면 됩니다.",
+    "반복할 때마다 monster_hp에서 피해량을 빼고 turns를 1 증가시키세요."
+  ],
+  "rule_note": "함수와 반복문을 연결해 상태 변화를 처리하세요.",
+  "rules": {
+    "required_nodes": [
+      "FunctionDef",
+      "While",
+      "Return"
+    ]
+  },
+  "back_link": "python/integrated/"
+}

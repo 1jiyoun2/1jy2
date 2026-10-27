@@ -1,0 +1,30 @@
+{
+  "number": "053",
+  "title": "Counter 증가",
+  "category": "클래스 > 상태 변경",
+  "level": "기초",
+  "description": "Counter 클래스의 value를 0으로 시작하고 increase()를 호출할 때마다 1씩 증가하도록 작성하세요.",
+  "input": "첫째 줄에 increase()를 호출할 횟수 n이 주어집니다.",
+  "output": "n번 호출한 뒤 value를 출력합니다.",
+  "starter_code": "class Counter:\n    def __init__(self):\n        self.value = 0\n\n    def increase(self):\n        # value를 1 증가시키세요.\n        pass\n\nn = int(input())\nc = Counter()\nfor _ in range(n):\n    c.increase()\nprint(c.value)\n",
+  "examples": [
+    {
+      "input": "3",
+      "output": "3"
+    }
+  ],
+  "tests": [
+    {
+      "input": "3",
+      "output": "3"
+    },
+    {
+      "input": "0",
+      "output": "0"
+    },
+    {
+      "input": "10",
+      "output": "10"
+    }
+  ]
+}

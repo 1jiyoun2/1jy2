@@ -1,0 +1,26 @@
+{
+  "number": "056",
+  "title": "Square 넓이와 둘레",
+  "category": "클래스 > 메서드",
+  "level": "기초",
+  "description": "Square 클래스에 한 변의 길이 side를 저장하고 area()와 perimeter() 메서드를 작성하세요.",
+  "input": "첫째 줄에 양의 정수 side가 주어집니다.",
+  "output": "첫째 줄에 넓이, 둘째 줄에 둘레를 출력합니다.",
+  "starter_code": "class Square:\n    def __init__(self, side):\n        self.side = side\n\n    def area(self):\n        pass\n\n    def perimeter(self):\n        pass\n\nside = int(input())\ns = Square(side)\nprint(s.area())\nprint(s.perimeter())\n",
+  "examples": [
+    {
+      "input": "5",
+      "output": "25\n20"
+    }
+  ],
+  "tests": [
+    {
+      "input": "5",
+      "output": "25\n20"
+    },
+    {
+      "input": "1",
+      "output": "1\n4"
+    }
+  ]
+}

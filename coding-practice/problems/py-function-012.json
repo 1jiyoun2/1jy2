@@ -1,0 +1,43 @@
+{
+  "number": "103",
+  "title": "from import로 함수 가져오기",
+  "category": "함수 > 라이브러리 함수",
+  "level": "적용",
+  "description": "from math import ceil을 사용해 실수 x보다 크거나 같은 가장 작은 정수를 출력하세요.",
+  "input": "첫째 줄에 실수 x가 주어집니다.",
+  "output": "ceil(x)의 결과를 출력합니다.",
+  "starter_code": "# from math import ceil 형태로 가져오세요.\nx = float(input())\n\n# ceil(x)를 출력하세요.\n",
+  "examples": [
+    {
+      "input": "3.2",
+      "output": "4"
+    }
+  ],
+  "tests": [
+    {
+      "input": "3.2",
+      "output": "4"
+    },
+    {
+      "input": "5.0",
+      "output": "5"
+    },
+    {
+      "input": "-1.2",
+      "output": "-1"
+    }
+  ],
+  "hints": [
+    "import 문에서 ceil 함수만 직접 가져올 수 있습니다.",
+    "가져온 뒤에는 math.ceil이 아니라 ceil()로 호출합니다."
+  ],
+  "rule_note": "from ... import ... 형태를 사용하세요.",
+  "rules": {
+    "required_nodes": [
+      "ImportFrom"
+    ],
+    "required_calls": [
+      "ceil"
+    ]
+  }
+}

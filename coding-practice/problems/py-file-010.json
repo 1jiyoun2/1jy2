@@ -1,0 +1,30 @@
+{
+  "number": "050",
+  "title": "여러 예외 처리",
+  "category": "파일·예외 > 예외 처리",
+  "level": "기초",
+  "description": "정수 리스트와 문자열 index를 입력받아 index를 정수로 바꾼 뒤 해당 위치의 값을 출력하세요. 숫자가 아니면 VALUE ERROR, 범위를 벗어나면 INDEX ERROR를 출력하세요.",
+  "input": "첫째 줄에 정수 리스트, 둘째 줄에 인덱스로 사용할 문자열이 주어집니다.",
+  "output": "값 또는 예외에 맞는 문구를 출력합니다.",
+  "starter_code": "numbers = list(map(int, input().split()))\ntext = input()\n\ntry:\n    # text를 정수로 변환하고 해당 인덱스의 값을 출력하세요.\n    pass\nexcept ValueError:\n    print('VALUE ERROR')\nexcept IndexError:\n    print('INDEX ERROR')\n",
+  "examples": [
+    {
+      "input": "10 20 30\n1",
+      "output": "20"
+    }
+  ],
+  "tests": [
+    {
+      "input": "10 20 30\n1",
+      "output": "20"
+    },
+    {
+      "input": "10 20\nhello",
+      "output": "VALUE ERROR"
+    },
+    {
+      "input": "10 20\n5",
+      "output": "INDEX ERROR"
+    }
+  ]
+}

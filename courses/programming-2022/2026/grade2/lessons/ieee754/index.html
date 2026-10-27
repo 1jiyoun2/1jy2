@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IEEE 754</title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<main>
+    <p class="back"><a href="../../">← 2026 2학년 프로그래밍</a></p>
+    <h1>IEEE 754</h1>
+    <p class="subtitle">Floating-point Representation</p>
+
+    <p>실수는 정수와 달리 소수점 아래의 값까지 표현해야 하므로 컴퓨터 내부에서 별도의 저장 방식이 필요하다. 삼양미디어 『프로그래밍』에서는 실수를 2진수로 바꾼 뒤 IEEE 754 표준에 따라 부호, 지수부, 가수부로 나누어 저장하는 방법을 소개한다.</p>
+
+    <p><a href="https://colab.research.google.com/github/1jiyoun2/1jy2/blob/main/courses/programming-2022/2026/grade2/resources/notebooks/ieee754_lesson.ipynb" target="_blank" rel="noopener">Colab에서 열기 →</a> · <a href="../../resources/notebooks/ieee754_lesson.ipynb">Notebook 파일 보기 →</a></p>
+
+    <h2>단정도 32비트 구조</h2>
+    <table class="list">
+        <thead><tr><th class="name">부분</th><th class="description">역할</th></tr></thead>
+        <tbody>
+            <tr><td>부호 비트 · 1비트</td><td class="description">양수와 음수를 구분</td></tr>
+            <tr><td>지수부 · 8비트</td><td class="description">정규화된 2진수의 지수를 bias 127을 이용해 저장</td></tr>
+            <tr><td>가수부 · 23비트</td><td class="description">정규화된 유효 숫자의 소수 부분을 저장</td></tr>
+        </tbody>
+    </table>
+
+    <h2>10진수 실수를 저장하는 흐름</h2>
+    <table class="list">
+        <thead><tr><th class="name">과정</th><th class="description">내용</th></tr></thead>
+        <tbody>
+            <tr><td>1. 2진수 변환</td><td class="description">10진수의 정수 부분과 소수 부분을 2진수로 표현</td></tr>
+            <tr><td>2. 정규화</td><td class="description">2진수를 <code>1.xxxxx × 2ⁿ</code> 형태로 정리</td></tr>
+            <tr><td>3. 부호 결정</td><td class="description">양수는 0, 음수는 1을 부호 비트에 저장</td></tr>
+            <tr><td>4. 지수부 결정</td><td class="description">실제 지수에 bias 127을 더해 8비트로 표현</td></tr>
+            <tr><td>5. 가수부 결정</td><td class="description">정규화된 수에서 맨 앞의 1을 제외한 비트를 가수부에 저장</td></tr>
+            <tr><td>6. 결합</td><td class="description">부호 비트 + 지수부 + 가수부를 이어 32비트 실수 표현 완성</td></tr>
+        </tbody>
+    </table>
+
+    <h2>교과서 예시와 연결</h2>
+    <p><code>0.15625</code>는 2진수로 <code>0.00101₂</code>이고, 이를 정규화하면 <code>1.01₂ × 2⁻³</code>이 된다. 이때 부호는 양수이므로 0, 실제 지수는 -3이므로 저장 지수는 124가 되며, 가수부에는 정규화된 수에서 맨 앞의 1을 제외한 비트를 저장한다.</p>
+
+    <h2>Python으로 과정 확인하기</h2>
+    <p>수업에서는 교과서의 개념을 확장하여 10진수 실수가 32비트 표현으로 바뀌는 과정을 단계별 코드로 확인한다. 완성된 결과만 보는 것이 아니라 정수 부분 변환, 소수 부분 변환, 정규화, 지수부와 가수부 생성이 어떻게 이어지는지 살펴본다.</p>
+
+    <div class="code-embed" data-src="code/ieee754_teaching.py" data-label="IEEE 754 · 단계별 구현"></div>
+
+    <h2>예시 · 10.625</h2>
+    <table class="list">
+        <thead><tr><th class="name">과정</th><th class="description">결과</th></tr></thead>
+        <tbody>
+            <tr><td>2진수 표현</td><td class="description"><code>1010.101₂</code></td></tr>
+            <tr><td>정규화</td><td class="description"><code>1.010101₂ × 2³</code></td></tr>
+            <tr><td>부호 비트</td><td class="description"><code>0</code></td></tr>
+            <tr><td>저장 지수</td><td class="description"><code>130</code></td></tr>
+            <tr><td>지수부</td><td class="description"><code>10000010</code></td></tr>
+            <tr><td>가수부</td><td class="description"><code>01010100000000000000000</code></td></tr>
+            <tr><td>최종 32비트</td><td class="description"><code>01000001001010100000000000000000</code></td></tr>
+        </tbody>
+    </table>
+
+    
+    <h2>관련 Coding Practice</h2>
+    <p>IEEE 754 구현 과정에서 사용하는 입력, 반복, 함수 흐름은 Coding Practice의 기초 문법·제어 구조·함수 문제로 다시 연습할 수 있다.</p>
+    <p><a href="../../../../../../coding-practice/python/basic/">기초 문법 →</a> · <a href="../../../../../../coding-practice/python/control/">제어 구조 →</a> · <a href="../../../../../../coding-practice/python/functions/">함수 →</a></p>
+
+    <p class="note">이 페이지의 Python 구현은 교과서의 IEEE 754 개념을 단계별로 확인하기 위한 수업용 확장 자료이다. IEEE 754 전체 규격이나 모든 특수한 실수 표현을 다루는 범용 변환기를 설명하는 것은 아니다.</p>
+
+    <script src="../../code-embed.js"></script>
+</main>
+    <a href="https://1jy2.com/" aria-label="메인으로 이동" style="position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;min-height:34px;padding:6px 11px;border:1px solid #cfd4dc;background:#fff;color:#334155;text-decoration:none;font:600 12px/1.2 'Malgun Gothic',Arial,sans-serif;box-shadow:0 2px 8px rgba(15,23,42,.10);">⌂ Home</a>
+</body>
+</html>

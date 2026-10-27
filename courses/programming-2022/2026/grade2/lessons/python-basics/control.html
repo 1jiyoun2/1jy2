@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python 기초 문법 - 제어 구조</title><link rel="stylesheet" href="../../style.css"></head>
+<body><main>
+<p class="back"><a href="./">← Python 기초 문법</a></p>
+<h1>3. 제어 구조</h1>
+<p class="subtitle">Sequence · Selection · Iteration</p>
+
+<h2>순차 구조와 코드 블록</h2>
+<p>코드를 위에서 아래로 순서대로 실행하는 것이 기본 흐름이다. Python에서는 같은 크기의 들여쓰기로 하나의 코드 블록을 구분하므로, 선택·반복 구조를 읽을 때 들여쓰기 범위를 함께 확인한다.</p>
+
+<h2>선택 구조</h2>
+<p><code>if</code>, <code>elif</code>, <code>else</code>를 이용해 조건에 따라 실행할 코드를 선택한다.</p>
+<div class="code-embed" data-src="code/04_selection.py" data-label="if / else 선택 구조"></div>
+<div class="code-embed" data-src="code/14_multi_selection.py" data-label="if / elif / else 다중 선택"></div>
+<div class="code-embed" data-src="code/28_nested_selection.py" data-label="중첩 선택 구조"></div>
+
+<h2>반복 구조</h2>
+<p><code>for</code>는 정해진 범위나 데이터의 항목을 순서대로 반복할 때, <code>while</code>은 조건이 참인 동안 반복할 때 사용한다.</p>
+<div class="code-embed" data-src="code/15_for_loop.py" data-label="for 반복"></div>
+<div class="code-embed" data-src="code/05_repetition.py" data-label="while 반복"></div>
+
+<h2>continue와 break</h2>
+<p><code>continue</code>는 현재 반복의 남은 부분을 건너뛰고 다음 반복으로 이동하며, <code>break</code>는 반복 자체를 끝낸다.</p>
+<div class="code-embed" data-src="code/27_continue.py" data-label="continue"></div>
+<div class="code-embed" data-src="code/16_break_nested.py" data-label="break"></div>
+
+<h2>중첩 반복 구조</h2>
+<p>반복 구조 안에 다른 반복 구조를 넣어 행·열처럼 여러 값을 조합하여 처리할 수 있다.</p>
+<div class="code-embed" data-src="code/29_nested_loop.py" data-label="중첩 반복"></div>
+
+<h2>확인하기</h2>
+<ol>
+<li>같은 반복 작업을 <code>for</code>와 <code>while</code>로 각각 표현해 본다.</li>
+<li>조건문의 들여쓰기가 달라지면 실행 범위가 어떻게 달라지는지 확인한다.</li>
+<li><code>continue</code>와 <code>break</code>가 반복 흐름을 어떻게 다르게 바꾸는지 비교한다.</li>
+<li>중첩 반복에서 바깥쪽 반복 1회당 안쪽 반복이 몇 번 실행되는지 추적한다.</li>
+</ol>
+<script src="../../code-embed.js"></script>
+</main>
+    <a href="https://1jy2.com/" aria-label="메인으로 이동" style="position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;min-height:34px;padding:6px 11px;border:1px solid #cfd4dc;background:#fff;color:#334155;text-decoration:none;font:600 12px/1.2 'Malgun Gothic',Arial,sans-serif;box-shadow:0 2px 8px rgba(15,23,42,.10);">⌂ Home</a>
+</body></html>

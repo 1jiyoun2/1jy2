@@ -1,0 +1,26 @@
+{
+  "number": "055",
+  "title": "BankAccount 입금",
+  "category": "클래스 > 상태 변경",
+  "level": "기초",
+  "description": "BankAccount 클래스의 balance에 입금액을 더하는 deposit(amount) 메서드를 작성하세요.",
+  "input": "첫째 줄에 초기 잔액, 둘째 줄에 입금액이 주어집니다.",
+  "output": "입금 후 balance를 출력합니다.",
+  "starter_code": "class BankAccount:\n    def __init__(self, balance):\n        self.balance = balance\n\n    def deposit(self, amount):\n        # balance에 amount를 더하세요.\n        pass\n\nbalance = int(input())\namount = int(input())\na = BankAccount(balance)\na.deposit(amount)\nprint(a.balance)\n",
+  "examples": [
+    {
+      "input": "1000\n500",
+      "output": "1500"
+    }
+  ],
+  "tests": [
+    {
+      "input": "1000\n500",
+      "output": "1500"
+    },
+    {
+      "input": "0\n200",
+      "output": "200"
+    }
+  ]
+}

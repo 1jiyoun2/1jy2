@@ -1,0 +1,18 @@
+{
+  "number": "002",
+  "title": "몫과 나머지",
+  "category": "기초 문법 > 연산자",
+  "level": "기초",
+  "description": "두 양의 정수 a와 b를 입력받아 a를 b로 나눈 몫과 나머지를 출력하세요.",
+  "input": "첫째 줄에 두 양의 정수 a와 b가 공백으로 구분되어 주어집니다. b는 0이 아닙니다.",
+  "output": "첫째 줄에 몫, 둘째 줄에 나머지를 출력합니다.",
+  "starter_code": "a, b = map(int, input().split())\n\n# //와 % 연산자를 사용해 보세요.\n",
+  "examples": [
+    { "input": "17 5", "output": "3\n2" }
+  ],
+  "tests": [
+    { "input": "17 5", "output": "3\n2" },
+    { "input": "20 4", "output": "5\n0" },
+    { "input": "9 2", "output": "4\n1" }
+  ]
+}

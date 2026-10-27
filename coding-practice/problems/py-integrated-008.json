@@ -1,0 +1,50 @@
+{
+  "number": "113",
+  "title": "안전하게 점수 입력받아 저장하기",
+  "category": "종합 > 파일·예외 종합",
+  "level": "보통",
+  "description": "점수를 입력받아 정수로 변환합니다. 숫자가 아니면 '숫자를 입력하세요.'를 출력하고, 정상 입력이면 score.txt에 저장한 뒤 '저장 완료'와 저장된 값을 차례로 출력하세요.",
+  "input": "한 줄에 점수 입력값이 주어집니다.",
+  "output": "잘못된 입력이면 안내 문장 하나를 출력합니다. 정상 입력이면 '저장 완료'와 파일에서 읽은 점수를 두 줄로 출력합니다.",
+  "starter_code": "try:\n    score = int(input())\n    # score.txt에 저장하고 다시 읽으세요.\n    pass\nexcept ValueError:\n    print('숫자를 입력하세요.')\n",
+  "examples": [
+    {
+      "input": "90",
+      "output": "저장 완료\n90"
+    },
+    {
+      "input": "abc",
+      "output": "숫자를 입력하세요."
+    }
+  ],
+  "tests": [
+    {
+      "input": "90",
+      "output": "저장 완료\n90"
+    },
+    {
+      "input": "0",
+      "output": "저장 완료\n0"
+    },
+    {
+      "input": "abc",
+      "output": "숫자를 입력하세요."
+    }
+  ],
+  "hints": [
+    "정상 입력일 때만 파일 쓰기와 읽기를 실행해야 합니다.",
+    "파일에는 str(score)를 저장한 뒤 read()로 읽어 출력하세요."
+  ],
+  "rule_note": "try/except와 파일 입출력을 하나의 흐름으로 연결하세요.",
+  "rules": {
+    "required_nodes": [
+      "Try"
+    ],
+    "required_calls": [
+      "open",
+      "write",
+      "read"
+    ]
+  },
+  "back_link": "python/integrated/"
+}

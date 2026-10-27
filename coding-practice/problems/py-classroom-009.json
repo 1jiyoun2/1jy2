@@ -1,0 +1,31 @@
+{
+  "number": "079",
+  "title": "MP 사용 함수",
+  "category": "수업 실습 > 함수 · 반환값",
+  "level": "기초",
+  "source": "2학년 프로그래밍 2단원 Colab 실습",
+  "description": "spend_mp(current_mp, cost)를 작성하세요. MP가 부족하면 현재 MP와 False를, 충분하면 차감된 MP와 True를 반환합니다.",
+  "input": "첫째 줄에 current_mp와 cost가 공백으로 구분되어 주어집니다.",
+  "output": "반환된 MP와 성공 여부를 공백으로 구분해 출력합니다.",
+  "starter_code": "def spend_mp(current_mp, cost):\n    # 조건에 맞는 두 값을 반환하세요.\n    pass\n\ncurrent_mp, cost = map(int, input().split())\nmp, success = spend_mp(current_mp, cost)\nprint(mp, success)\n",
+  "examples": [
+    {
+      "input": "30 10",
+      "output": "20 True"
+    }
+  ],
+  "tests": [
+    {
+      "input": "30 10",
+      "output": "20 True"
+    },
+    {
+      "input": "5 10",
+      "output": "5 False"
+    },
+    {
+      "input": "10 10",
+      "output": "0 True"
+    }
+  ]
+}

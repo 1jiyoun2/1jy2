@@ -1,0 +1,47 @@
+{
+  "number": "094",
+  "type": "trace",
+  "title": "함수의 데이터 이동 추적",
+  "category": "함수 > 매개변수 · 반환값",
+  "level": "기초",
+  "description": "함수를 호출할 때 인자가 어떤 매개변수로 전달되고 반환값이 어디에 저장되는지 추적하세요.",
+  "back_link": "python/functions/",
+  "code": "def calculate_damage(attack, defense, power=0):\n    result = attack + power - defense\n    return max(1, result)\n\nattack_value = 20\ndefense_value = 7\npower_value = 5\n\ndamage = calculate_damage(attack_value, defense_value, power_value)\nmonster_hp = 50\nmonster_hp = monster_hp - damage\n\nprint(damage)\nprint(monster_hp)",
+  "questions": [
+    {
+      "prompt": "함수 안의 attack 매개변수에 전달되는 값은?",
+      "answers": [
+        "20"
+      ],
+      "display_answer": "20"
+    },
+    {
+      "prompt": "defense 매개변수에 전달되는 값은?",
+      "answers": [
+        "7"
+      ],
+      "display_answer": "7"
+    },
+    {
+      "prompt": "power 매개변수에 전달되는 값은?",
+      "answers": [
+        "5"
+      ],
+      "display_answer": "5"
+    },
+    {
+      "prompt": "함수의 반환값이 저장되는 변수 이름은?",
+      "answers": [
+        "damage"
+      ],
+      "display_answer": "damage"
+    },
+    {
+      "prompt": "최종 monster_hp의 값은?",
+      "answers": [
+        "32"
+      ],
+      "display_answer": "32"
+    }
+  ]
+}

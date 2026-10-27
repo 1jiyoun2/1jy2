@@ -1,0 +1,34 @@
+{
+  "number": "091",
+  "type": "trace",
+  "title": "명령 입력 데이터 흐름 추적",
+  "category": "기초 문법 > 입력 · split()",
+  "level": "기초",
+  "description": "Colab의 RPG 코드북 연결 활동을 바탕으로, 문자열 입력이 split()을 거쳐 action과 target으로 나뉘는 과정을 추적하세요.",
+  "back_link": "python/basic/",
+  "code": "text = \"장착 나무검\"\nparts = text.strip().split()\n\naction = parts[0]\ntarget = parts[1]\n\nprint(\"text =\", text)\nprint(\"parts =\", parts)\nprint(\"action =\", action)\nprint(\"target =\", target)",
+  "questions": [
+    {
+      "prompt": "parts에 저장되는 두 문자열을 쉼표로 구분해 적으세요.",
+      "answers": [
+        "장착,나무검",
+        "장착, 나무검"
+      ],
+      "display_answer": "장착, 나무검"
+    },
+    {
+      "prompt": "action에 저장되는 값은?",
+      "answers": [
+        "장착"
+      ],
+      "display_answer": "장착"
+    },
+    {
+      "prompt": "target에 저장되는 값은?",
+      "answers": [
+        "나무검"
+      ],
+      "display_answer": "나무검"
+    }
+  ]
+}

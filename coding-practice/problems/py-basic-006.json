@@ -1,0 +1,30 @@
+{
+  "number": "006",
+  "title": "문자열을 정수로",
+  "category": "기초 문법 > 자료형 변환",
+  "level": "기초",
+  "description": "문자열로 입력된 두 정수를 정수형으로 변환한 뒤 합을 출력하세요.",
+  "input": "첫째 줄에 두 정수가 공백으로 구분되어 주어집니다.",
+  "output": "두 값을 정수로 변환해 더한 결과를 출력합니다.",
+  "starter_code": "a, b = input().split()\n\n# int()를 사용해 두 값을 정수로 변환하세요.\n",
+  "examples": [
+    {
+      "input": "12 8",
+      "output": "20"
+    }
+  ],
+  "tests": [
+    {
+      "input": "12 8",
+      "output": "20"
+    },
+    {
+      "input": "-3 7",
+      "output": "4"
+    },
+    {
+      "input": "100 250",
+      "output": "350"
+    }
+  ]
+}

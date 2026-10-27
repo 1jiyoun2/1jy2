@@ -1,0 +1,22 @@
+{
+  "number": "044",
+  "title": "없는 파일 열기",
+  "category": "파일·예외 > 파일 · 예외",
+  "level": "기초",
+  "description": "존재하지 않는 파일 missing.txt를 읽기 모드로 열어 보세요. FileNotFoundError가 발생하면 FILE NOT FOUND를 출력하세요.",
+  "input": "입력은 없습니다.",
+  "output": "FILE NOT FOUND를 출력합니다.",
+  "starter_code": "try:\n    # missing.txt를 읽기 모드로 열어 보세요.\n    pass\nexcept FileNotFoundError:\n    print('FILE NOT FOUND')\n",
+  "examples": [
+    {
+      "input": "",
+      "output": "FILE NOT FOUND"
+    }
+  ],
+  "tests": [
+    {
+      "input": "",
+      "output": "FILE NOT FOUND"
+    }
+  ]
+}

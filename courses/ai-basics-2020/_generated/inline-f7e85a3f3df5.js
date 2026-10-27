@@ -1,0 +1,1 @@
+function SirenFunction(n){var e=document.getElementById(n);"none"==e.style.display?e.style.display="block":e.style.display="none"}

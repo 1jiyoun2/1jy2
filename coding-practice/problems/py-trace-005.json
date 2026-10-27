@@ -1,0 +1,47 @@
+{
+  "number": "095",
+  "type": "trace",
+  "title": "JSON 저장과 불러오기 흐름",
+  "category": "파일·예외 > JSON 확장",
+  "level": "기초",
+  "description": "교과서의 파일 처리 원리를 JSON 저장으로 확장한 Colab 활동을 바탕으로 데이터의 이동을 추적하세요.",
+  "back_link": "python/files-exceptions/",
+  "code": "import json\n\ndata = {\n    \"name\": \"용사\",\n    \"hp\": 70,\n    \"gold\": 40,\n    \"inventory\": [\"나무 검\", \"포션\"]\n}\n\nwith open(\"mini_save.json\", \"w\", encoding=\"utf-8\") as f:\n    json.dump(data, f, ensure_ascii=False)\n\nwith open(\"mini_save.json\", \"r\", encoding=\"utf-8\") as f:\n    loaded = json.load(f)\n\nprint(type(data).__name__)\nprint(type(loaded).__name__)\nprint(loaded[\"hp\"])\nprint(loaded[\"inventory\"][1])",
+  "questions": [
+    {
+      "prompt": "json.dump()에 전달되는 data의 자료형 이름은?",
+      "answers": [
+        "dict"
+      ],
+      "display_answer": "dict"
+    },
+    {
+      "prompt": "json.load()의 결과가 저장되는 변수 이름은?",
+      "answers": [
+        "loaded"
+      ],
+      "display_answer": "loaded"
+    },
+    {
+      "prompt": "loaded의 자료형 이름은?",
+      "answers": [
+        "dict"
+      ],
+      "display_answer": "dict"
+    },
+    {
+      "prompt": "loaded['hp']의 값은?",
+      "answers": [
+        "70"
+      ],
+      "display_answer": "70"
+    },
+    {
+      "prompt": "loaded['inventory'][1]의 값은?",
+      "answers": [
+        "포션"
+      ],
+      "display_answer": "포션"
+    }
+  ]
+}

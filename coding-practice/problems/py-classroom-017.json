@@ -1,0 +1,31 @@
+{
+  "number": "087",
+  "title": "두 종류의 예외 각각 처리",
+  "category": "수업 실습 > 예외 처리",
+  "level": "기초",
+  "source": "예외처리 학생실습 Colab",
+  "description": "입력값을 정수로 바꾸어 100을 나눈 결과를 출력하세요. 숫자가 아니면 '숫자를 입력해야 합니다.', 0이면 '0으로 나눌 수 없습니다.'를 출력하세요.",
+  "input": "첫째 줄에 문자열 하나가 주어집니다.",
+  "output": "나눗셈 결과 또는 예외별 안내 문구를 출력합니다.",
+  "starter_code": "try:\n    num = int(input())\n    result = 100 / num\n    print('결과:', result)\nexcept ValueError:\n    # ValueError 처리\n    pass\nexcept ZeroDivisionError:\n    # ZeroDivisionError 처리\n    pass\n",
+  "examples": [
+    {
+      "input": "0",
+      "output": "0으로 나눌 수 없습니다."
+    }
+  ],
+  "tests": [
+    {
+      "input": "4",
+      "output": "결과: 25.0"
+    },
+    {
+      "input": "abc",
+      "output": "숫자를 입력해야 합니다."
+    },
+    {
+      "input": "0",
+      "output": "0으로 나눌 수 없습니다."
+    }
+  ]
+}

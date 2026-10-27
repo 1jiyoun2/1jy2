@@ -1,0 +1,30 @@
+name: Deploy prebuilt 1jy2 Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    steps:
+      - uses: actions/checkout@v4
+      - name: Stage published site only
+        run: |
+          mkdir -p _publish
+          rsync -a --exclude='.git/' --exclude='.github/' --exclude='_publish/' ./ _publish/
+          test -f _publish/CNAME
+          test -f _publish/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _publish
+      - uses: actions/deploy-pages@v4

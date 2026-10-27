@@ -1,0 +1,43 @@
+{
+  "number": "102",
+  "title": "math 모듈로 제곱근 구하기",
+  "category": "함수 > 라이브러리 함수",
+  "level": "적용",
+  "description": "math 모듈을 import하고 math.sqrt()를 사용해 입력받은 양의 정수의 제곱근을 출력하세요.",
+  "input": "첫째 줄에 양의 정수 n이 주어집니다.",
+  "output": "n의 제곱근을 출력합니다.",
+  "starter_code": "# math 모듈을 import하세요.\nn = int(input())\n\n# math.sqrt()를 사용해 출력하세요.\n",
+  "examples": [
+    {
+      "input": "81",
+      "output": "9.0"
+    }
+  ],
+  "tests": [
+    {
+      "input": "81",
+      "output": "9.0"
+    },
+    {
+      "input": "16",
+      "output": "4.0"
+    },
+    {
+      "input": "2",
+      "output": "1.4142135623730951"
+    }
+  ],
+  "hints": [
+    "먼저 import math를 작성하세요.",
+    "sqrt()는 math 모듈에 들어 있는 함수입니다."
+  ],
+  "rule_note": "math 모듈과 sqrt() 라이브러리 함수를 사용하세요.",
+  "rules": {
+    "required_nodes": [
+      "Import"
+    ],
+    "required_calls": [
+      "sqrt"
+    ]
+  }
+}

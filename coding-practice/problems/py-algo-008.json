@@ -1,0 +1,34 @@
+{
+  "number": "068",
+  "title": "소수 판별",
+  "category": "알고리즘 > 반복 · 조건",
+  "level": "기초",
+  "description": "2 이상의 정수 n을 입력받아 소수이면 PRIME, 아니면 NOT PRIME을 출력하세요.",
+  "input": "첫째 줄에 2 이상의 정수 n이 주어집니다.",
+  "output": "PRIME 또는 NOT PRIME을 출력합니다.",
+  "starter_code": "n = int(input())\nis_prime = True\n\n# 2부터 필요한 범위까지 나누어 확인하세요.\n\nprint('PRIME' if is_prime else 'NOT PRIME')\n",
+  "examples": [
+    {
+      "input": "7",
+      "output": "PRIME"
+    }
+  ],
+  "tests": [
+    {
+      "input": "7",
+      "output": "PRIME"
+    },
+    {
+      "input": "12",
+      "output": "NOT PRIME"
+    },
+    {
+      "input": "2",
+      "output": "PRIME"
+    },
+    {
+      "input": "49",
+      "output": "NOT PRIME"
+    }
+  ]
+}

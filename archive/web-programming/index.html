@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="kr">
+	<head>
+		<meta charset="utf-8">
+		<title>웹프로그래밍</title>
+	</head>
+	<body>
+		
+	<header> 웹프로그래밍 </header>
+	<br> <br>
+		
+	<section>
+	<div>
+		<h3> <b> 1. HTML의 기초</b>  <br>	</h3>
+		<!&lt; &gt;>
+	
+		<pre>
+			<b>[Semantic태그]</b>
+			<table>
+			<tr>
+				<td> 
+				·&lt;header&gt; &lt;/header&gt;
+				·&lt;nav&gt; &lt;/nav&gt;
+				·&lt;section&gt; &lt;/section&gt;
+				·&lt;article&gt; &lt;/article&gt;
+				·&lt;aside&gt; &lt;/aside&gt;
+				·&lt;footer&gt; &lt;/footer&gt;
+				</td>
+				<td> 
+				:로고와 이름
+				:사이트 메뉴(페이지 이동)
+				:구획
+				:내용
+				:광고(사이드)
+				:하단 정보
+				</td>
+			</tr>
+			</table>
+			<b>[그외]</b>
+			
+			
+			·div : 단순 구분
+				
+			<b>[글자]</b>
+			<table>
+			<tr>
+				<td> 
+				·h1~h6
+				·p
+				·br
+				·sub, sup
+				</td>
+				<td> 
+				: 제목(숫자가 작을수록 글자가 큼)
+				: 문단 나눔
+				: 한 줄 강제개행
+				: 아래첨자, 위첨자
+				   (log<sub>2</sub>24 a<sup>2</sup>+b<sup>2</sup>)
+				</td>
+			</tr>
+			</table>
+			
+			<b>[링크]</b>
+			<table>
+			<tr>
+				<td> 
+				·&lt;a&gt;
+				·href 속성
+				·target 속성
+				</td>
+				<td> 
+				: anchor의 약자로 하이퍼링크 기능
+				: Hypertext Reference의 약자로 연결할 주소
+				: 창 열기 방식 (새창 _blank, 기존창 _self)
+				</td>
+			</tr>
+			</table>
+
+			<b>[멀티미디어]</b>
+			<table>
+			<tr>
+				<td> 
+				·&lt;img&gt;
+				·src 속성
+				·alt 속성 
+				·width 속성
+				·height 속성
+				
+				·&lt;audio controls&gt; &lt;/audio&gt;
+				·&lt;source&gt;
+				·src 속성
+				·type 속성
+				
+				·&lt;vedio controls&gt; &lt;/vedio&gt;
+				·&lt;source&gt;
+				·src 속성
+				·type 속성		
+				·width 속성
+				·height 속성
+				
+				·&lt;iframe&gt; &lt;/iframe&gt;
+				·src 속성
+				·width 속성
+				·height 속성				
+				</td>
+				<td> 
+				: 이미지
+				: &lt;img src = "이미지 주소"&gt;
+				: Alternative text의 약자로 이미지 대체 문구
+				: 이미지 가로 크기 지정
+				: 이미지 세로 크기 지정
+				
+				: 오디오 컨트롤러 생성
+				
+				: &lt;source src = "오디오 주소"&gt;
+				: 오디오 파일 형식
+				: 비디오 컨트롤러 생성
+				
+				: &lt;source src = "비디오 주소"&gt;
+				: 비디오 파일 형식
+				: 비디오 가로 크기 지정
+				: 비디오 세로 크기 지정
+				
+				: 웹비디오(페이지) 불러오기
+				: &lt;iframe src = "불러올 비디오(페이지) 주소"&gt;
+				: 불러올 비디오(페이지) 가로 크기 지정
+				: 불러올 비디오(페이지) 세로 크기 지정
+
+				</td>
+			</tr>
+			</table>			
+		
+			<b>[입력양식]</b>
+			<table>
+			<tr>
+				<td> 
+				· &lt;form&gt; &lt;/form&gt;
+				· action 속성
+				· method 속성
+				
+				· &lt;input&gt; &lt;/input&gt;
+				· name 속성
+				· type 속성 
+				
+				
+				· placeholder 속성
+				· value 속성
+				
+				· &lt;label&gt; &lt;/labet&gt;
+				· target 속성
+				
+				
+				· &lt;select&gt; &lt;option&gt; &lt;/option&gt; &lt;/select&gt;
+				· name, value 속성
+				
+				· &lt;textarea&gt; &lt;/textarea&gt;
+				
+				· &lt;button&gt; &lt;/button&gt;
+				</td>
+				<td> 
+				:입력양식
+				:송신URL
+				:전송방식(get-엽서/post-편지)
+				
+				:다양한 입력양식 (div태그로 구분 잘 하기!)
+				:해당 입력양식의 이름을 지정
+				:text, email, password, button, search
+				 checkbox, file, radio
+				 color, data, number, range, reset, time
+				:텍스트 입력 시 가이드 제공
+				:텍스트 상자에 입력 값 미리 제공
+				
+				:입력양식의 설명을 제공
+				:해당 입력양식의 id속성 과 매칭
+				 예) &lt;label for="<font color = "red">target</font>"&gt;아이디: &lt;/label&gt;
+				     &lt;input type="text" id=<font color = "red">"target"</font>&gt;
+				:DropDown 선택목록
+				:select의 name, option의 value속성은 필수조건
+				
+				:여러 줄로 입력 가능한 텍스트 상자로 col, row 속성 지정 
+				
+				:버튼을 input태그 없이 사용
+				 예) &lt;button type="submit">제출&lt;/button&gt;
+				</td>
+			</tr>
+			</table>		
+		</pre>			
+	</div>
+	
+	<div>
+		<h3> <b> 2. 테이블과 리스트</b>  <br>	</h3>
+		<!&lt; &gt;>
+	
+		<pre>
+			<b>[테이블]</b>
+			<table>
+			<tr>
+				<td> 
+				· &lt;table&gt; &lt;/table&gt;
+				· &lt;tr&gt; &lt;/tr&gt;
+				· &lt;th&gt; &lt;/th&gt;
+				· &lt;td&gt; &lt;/td&gt;
+				· colspan, lowspan 속성
+				</td>
+				<td> 
+				:테이블 생성
+				:행 만들기
+				:열 제목(생략 가능)
+				:행 채우기
+				:해당 칸의 크기 지정
+				</td>
+			</tr>
+			</table>
+			
+			<b>[리스트]</b>
+			<table>
+			<tr>
+				<td> 
+				· &lt;ul&gt; &lt;/ul&gt;
+				· &lt;ol&gt; &lt;/ol&gt;
+				
+				· &lt;li&gt; &lt;/li&gt;
+				</td>
+				<td> 
+				:리스트 생성(글머리기호)
+				:리스트 생성(숫자 카운트)
+				 ul이 ol안에 ol이 ul안에 서로 중첩 사용 가능
+				:리스트 요소 추가
+				</td>
+			</tr>
+			</table>			
+					
+			<b>[ol태그의 속성]</b>
+			<table>
+			<tr>
+				<td> 
+				· start
+				· type
+				· reversed
+				</td>
+				<td> 
+				:리스트의 시작 숫자 지정
+				:리스트의 목록 유형 지정(로마자, 알파벳, 숫자)
+				:리스트 목록 역순으로 지정
+				</td>
+			</tr>
+			</table>
+
+			<b>[li태그의 속성]</b>
+			<table>
+			<tr>
+				<td> 
+				· vlaue
+				</td>
+				<td> 
+				:해당 리스트 요소의 숫자 지정
+				</td>
+			</tr>
+			</table>
+
+		</pre>			
+	</div>
+
+	<div>
+		<h3> <b> 3. CSS (Cascading Style Sheets)</b></h3>	
+		<!&lt; &gt;>
+		<pre>
+			<b>[기본구조]</b>
+			<table>
+			<tr>
+				<td> 
+				· Selector (선택자)
+				
+				
+				· Property (속성)
+				· Value (값)
+				</td>
+				<td> 
+				:&lt;article&gt; {
+				  지정할 스타일 내용
+				}
+				:지정할 내용들 (font-size, color position 등)
+				:속성에 할당 될 내용들 (16px, blue, '굴림체' 등)
+				</td>
+			</tr>
+			</table>	
+			&emsp;&emsp;&emsp;*속성과 값을 한 쌍으로 이 한 쌍을 "(Declaration)선언"이라고 칭함.
+			&emsp;&emsp;&emsp;*각 선언은 "(세미콜론);"으로 구분.
+			&emsp;&emsp;&emsp;예) article { font-size: 10px; color: white;  }
+
+			<b>[가변 크기 단위]</b>
+			<table>
+			<tr>
+				<td> 
+				· em
+				· %
+				· rem
+				· vw
+				· vh
+				· vmin
+				· vmax
+				· ex
+				</td>
+				<td> 
+				:배수 단위 (상위)
+				:백분율 단위
+				:root me (최상위)
+				:화면빈 백분율 단위
+				:화면비 백분율 단위
+				:화면비 최솟값
+				:화면비 최댓값
+				:현재 폰트의 x-height값
+				
+				</td>
+			</tr>
+			</table>
+			&emsp;&emsp;&emsp;*반응형 구현을 위해 rem 사용 권장
+			<b>[색상 표현]</b>
+			<table>
+			<tr>
+				<td> 
+				· 키워드
+				· hex코드
+				· hex코드에 Alpha값 사용
+				· RGB
+				· RGB에 Alpha값 사용
+				</td>
+				<td> 
+				:blue, red 등
+				:#E10034
+				:#E1003444
+				:rgb(124,123,111)
+				:rgba(222,111,23, 0.4)
+				</td>
+			</tr>
+			</table>
+
+			<b>[단순 선택자]</b>
+			<table>
+			<tr>
+				<td> 
+				· 타입 선택자
+				· 아이디 선택자
+				
+				· 클랙스 선택자
+				
+				· 전체 선택자
+				· 속성 선택자
+				
+				
+				</td>
+				<td> 
+				:지정한 태그를 사용하는 모든 곳에 적용
+				:특정 아이디에만 적용(아이디 중복 비추) 
+				 예) #id { color: red; }
+				:특정 클래스에만 적용(한 클래스에 여러 요소 포함)
+				 예) .ClassName { color: red; }
+				:모든 요소에 적용 ( * )
+				:특정 속성에만 적용
+				 예1) a[target="_blank"] { color: red; }
+				 예2) .ClassName[target="_blank"] { color: red; }
+				</td>
+			</tr>
+			</table>
+
+			<b>[복합 선택자]</b>
+			<table>
+			<tr>
+				<td> 
+				· 부모 - 자식 관계
+				· 부모 - 후손 관계
+				</td>
+				<td> 
+				:'>'등호를 사용하여 관계 표시
+				:' '공백을 사용하여 관계 표시
+				</td>
+			</tr>
+			</table>
+			
+			<b>[box개념]</b>
+			<table>
+			<tr>
+				<td> 
+				· 박스단위로 글자 or 그림등의 콘텐츠가 작성됨.
+				· margin, border, padding 개념 알기
+				· 가운데는 content
+				<img src = "assets/layout.PNG">
+				</td>
+			</tr>
+			</table>
+			<b>[다양한 텍스트 스타일]</b>
+			<table>
+			<tr>
+				<td> 
+				· font-size
+				· font-family
+				
+				· font-style (font-weight)
+				
+				· 한번에 작성 가능
+				· text-align
+				· line-height
+				· letter-spacing
+				· text-indent
+				</td>
+				<td> 
+				:글꼴 크기
+				:글꼴 종류
+				 글꼴은 기본 글꼴 or 웹폰트 or 업로드하여 사용가능.
+				:글꼴 형태 (굵기 normal/bold or 100~900)
+				 normal, italic, oblique(강제기울림)
+				:<font color=blue>font: font-style font-weight size font-family;</font>
+				:정렬하기 (left, right, center, justify)
+				:줄간격 ( n배 or 30px )
+				:자간 ( 10px )
+				:들여쓰기 ( 10px )
+				</td>
+			</tr>
+			</table>
+			
+			<b>[위치와 정렬]</b>
+			<table>
+			<tr>
+				<td> 
+				· block
+				
+				
+				
+				
+				· inline
+				
+				
+				
+				
+				· display_inline-block
+				
+				
+				· display: none
+				· position:static
+				· position:relative
+				
+				· position:absolute
+				
+				
+				
+				
+				
+				· position:fixed
+				· float
+				
+				
+				
+				</td>
+				<td> 
+				:옆에 다른 요소가 오지 못하도록 개행 
+				 NewLine, 기본값 width : 100%
+				 div, h1~h6, p, header, footer, section 등
+				 width, height, margin, padding 사용 가능
+				 예) <font color=blue>.display_block { margin: 0; } </font>
+				:가능한 개행없이 채움
+				 NoNewLine
+				 span, a, img 등
+				 width, height, margin, padding 사용 불가능
+				 예) <font color=blue>.display_inline { margin: 0; } </font>
+				:width, height, margin, padding 사용하기 위함
+				 block과 동일한 옵션 사용 가능
+				 예) <font color=blue>display: inline-block;</font>
+				:숨기기
+				:기본옵션
+				:상대적인 위치
+				 top, right, bottom, left 사용 가능
+				:절대적인 위치
+				 relative, absolute, fixed가 없다면, body 기준
+				 예) .absolute {
+				      position: absolute;
+				      top: 10px;
+				      left: 100px; }
+				:화면기준 고정값 설정
+				:본문과의 배치 (left, right)
+				 예) .cat-img {
+				       width: 200px;
+				       float: right;
+				      }
+				</td>
+			</tr>
+			</table>
+
+			<b>[위치 정렬]</b>
+			<table>
+			<tr>
+				<td> 
+				· 정해진 기준 방향으로 줄을 세운다.
+				· flexbox를 사용하기 위한 필수 ↓
+				   .parent { /* 배치, 정렬하고자 하는 요소를 감싸는 부모 요소 */
+				      display: flex;
+				    }
+				   .child { /* 배치, 정렬하고자 하는 대상 요소 */
+					    ... 
+				    }
+					
+					부모
+				· flex-direction
+				· flex-wrap
+				· flex-flow
+				· justify-cotent
+				· align-items
+				· align-content
+				
+				*사이즈는 flex container 가 우선 적용
+				
+				· flex-wrap: wrap
+				· flex-flow: column wrap;
+				
+				
+				
+				
+				· justify-content
+				· justify-content: flex-start
+				· justify-content: center
+				· justify-content: flex-end
+				· justify-content: space-between
+				· justify-content: space-around;
+				
+				· align-items
+				</td>
+				<td> 
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				    자식
+				:flex
+				:flex-grow
+				:flex-shrink
+				:flex-basis
+				:order
+				
+				
+				
+				:자동 개행
+				:direction과 flow 동시에 지정
+				 예) .container {
+				       display: flex;
+				       flex-flow: column wrap;
+				      }
+				:내부 정렬
+				:행 기준 - 왼쪽, 열 기준 - 위
+				:행 기준 - 가운데, 열 기준 - 가운데
+				:행 기준 - 오른쪽, 열 기준 - 아래
+				:양쪽 정렬
+				:양쪽 공백 있는 양쪽 정렬
+				
+				:flex에서 정한 방향의 수직 방향
+				 기본값 - stretch
+				</td>
+			</tr>
+			</table>
+			
+		</pre>			
+	</div>		
+
+
+			<b>[]</b>
+			<table>
+			<tr>
+				<td> 
+				· &lt; &gt;
+				</td>
+				<td> 
+				:
+				</td>
+			</tr>
+			</table>
+
+		
+	<div>
+		<h3> <b> ??? </b>  <br>	</h3>
+		<!&lt; &gt;>		
+		
+	
+			
+	</div>
+
+
+
+
+	</section>
+    <a href="https://1jy2.com/" aria-label="메인으로 이동" style="position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;min-height:34px;padding:6px 11px;border:1px solid #cfd4dc;background:#fff;color:#334155;text-decoration:none;font:600 12px/1.2 'Malgun Gothic',Arial,sans-serif;box-shadow:0 2px 8px rgba(15,23,42,.10);">⌂ Home</a>
+</body>
+</html>

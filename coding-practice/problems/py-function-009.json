@@ -1,0 +1,30 @@
+{
+  "number": "029",
+  "title": "문자 개수 세기 함수",
+  "category": "함수 > 함수 · 문자열",
+  "level": "기초",
+  "description": "문자열 text와 문자 ch를 매개변수로 받아 text 안에 ch가 몇 번 나타나는지 반환하는 count_char(text, ch) 함수를 작성하세요.",
+  "input": "첫째 줄에 문자열 text, 둘째 줄에 문자 ch가 주어집니다.",
+  "output": "count_char(text, ch)의 반환값을 출력합니다.",
+  "starter_code": "def count_char(text, ch):\n    count = 0\n    # 문자열을 순회하며 개수를 세세요.\n    return count\n\ntext = input()\nch = input()\nprint(count_char(text, ch))\n",
+  "examples": [
+    {
+      "input": "banana\na",
+      "output": "3"
+    }
+  ],
+  "tests": [
+    {
+      "input": "banana\na",
+      "output": "3"
+    },
+    {
+      "input": "hello\nl",
+      "output": "2"
+    },
+    {
+      "input": "python\nz",
+      "output": "0"
+    }
+  ]
+}

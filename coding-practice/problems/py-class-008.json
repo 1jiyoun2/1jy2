@@ -1,0 +1,26 @@
+{
+  "number": "058",
+  "title": "Timer 감소",
+  "category": "클래스 > 상태 변경",
+  "level": "기초",
+  "description": "Timer 클래스의 seconds를 1씩 줄이는 tick() 메서드를 작성하세요. 0보다 작아지지 않게 하세요.",
+  "input": "첫째 줄에 초기 seconds, 둘째 줄에 tick() 호출 횟수가 주어집니다.",
+  "output": "호출 후 seconds를 출력합니다.",
+  "starter_code": "class Timer:\n    def __init__(self, seconds):\n        self.seconds = seconds\n\n    def tick(self):\n        # 0보다 클 때만 1 감소시키세요.\n        pass\n\nseconds = int(input())\nn = int(input())\nt = Timer(seconds)\nfor _ in range(n):\n    t.tick()\nprint(t.seconds)\n",
+  "examples": [
+    {
+      "input": "5\n3",
+      "output": "2"
+    }
+  ],
+  "tests": [
+    {
+      "input": "5\n3",
+      "output": "2"
+    },
+    {
+      "input": "2\n5",
+      "output": "0"
+    }
+  ]
+}

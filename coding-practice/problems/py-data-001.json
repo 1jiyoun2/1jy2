@@ -1,0 +1,30 @@
+{
+  "number": "031",
+  "title": "리스트의 합",
+  "category": "자료 구조 > 리스트",
+  "level": "기초",
+  "description": "정수 여러 개를 리스트로 저장한 뒤 모든 값의 합을 출력하세요.",
+  "input": "첫째 줄에 공백으로 구분된 정수들이 주어집니다.",
+  "output": "리스트에 저장된 모든 정수의 합을 출력합니다.",
+  "starter_code": "numbers = list(map(int, input().split()))\n\n# 리스트의 합을 출력하세요.\n",
+  "examples": [
+    {
+      "input": "1 2 3 4",
+      "output": "10"
+    }
+  ],
+  "tests": [
+    {
+      "input": "1 2 3 4",
+      "output": "10"
+    },
+    {
+      "input": "5",
+      "output": "5"
+    },
+    {
+      "input": "-2 3 7",
+      "output": "8"
+    }
+  ]
+}

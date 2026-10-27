@@ -1,0 +1,40 @@
+{
+  "number": "099",
+  "title": "첫 약수 찾고 반복 종료",
+  "category": "제어 구조 > break",
+  "level": "적용",
+  "description": "2 이상의 정수 n을 입력받아 2부터 차례대로 나누어 보면서 처음 나누어떨어지는 수를 출력하고 즉시 반복을 종료하세요. break를 사용하세요.",
+  "input": "첫째 줄에 2 이상의 정수 n이 주어집니다.",
+  "output": "2 이상인 가장 작은 약수를 출력합니다.",
+  "starter_code": "n = int(input())\n\nfor i in range(2, n + 1):\n    # 처음 나누어떨어지는 i를 출력한 뒤 break 하세요.\n    pass\n",
+  "examples": [
+    {
+      "input": "15",
+      "output": "3"
+    }
+  ],
+  "tests": [
+    {
+      "input": "15",
+      "output": "3"
+    },
+    {
+      "input": "17",
+      "output": "17"
+    },
+    {
+      "input": "28",
+      "output": "2"
+    }
+  ],
+  "hints": [
+    "n % i == 0인지 확인하세요.",
+    "처음 약수를 찾은 직후 break로 반복문을 끝내세요."
+  ],
+  "rule_note": "가장 작은 약수를 찾은 즉시 break로 반복을 종료하세요.",
+  "rules": {
+    "required_nodes": [
+      "Break"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "number": "003",
+  "title": "비교 연산 결과",
+  "category": "기초 문법 > 비교 연산자",
+  "level": "기초",
+  "description": "두 정수 a와 b를 입력받아 a가 b보다 큰지, 그리고 a와 b가 같은지를 비교한 결과를 출력하세요.",
+  "input": "첫째 줄에 두 정수 a와 b가 공백으로 구분되어 주어집니다.",
+  "output": "첫째 줄에 a > b의 결과를, 둘째 줄에 a == b의 결과를 Python의 논리값(True 또는 False)으로 출력합니다.",
+  "starter_code": "a, b = map(int, input().split())\n\n# 비교 연산자를 사용해 보세요.\n",
+  "examples": [
+    { "input": "8 3", "output": "True\nFalse" }
+  ],
+  "tests": [
+    { "input": "8 3", "output": "True\nFalse" },
+    { "input": "5 5", "output": "False\nTrue" },
+    { "input": "-1 4", "output": "False\nFalse" }
+  ]
+}

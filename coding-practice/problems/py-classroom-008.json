@@ -1,0 +1,31 @@
+{
+  "number": "078",
+  "title": "bigger 함수",
+  "category": "수업 실습 > 함수",
+  "level": "기초",
+  "source": "2학년 프로그래밍 2단원 Colab 실습",
+  "description": "두 수를 받아 더 큰 값을 반환하는 bigger(a, b) 함수를 작성하세요.",
+  "input": "첫째 줄에 두 정수 a와 b가 공백으로 구분되어 주어집니다.",
+  "output": "bigger(a, b)의 반환값을 출력합니다.",
+  "starter_code": "def bigger(a, b):\n    # 더 큰 값을 반환하세요.\n    pass\n\na, b = map(int, input().split())\nprint(bigger(a, b))\n",
+  "examples": [
+    {
+      "input": "3 8",
+      "output": "8"
+    }
+  ],
+  "tests": [
+    {
+      "input": "3 8",
+      "output": "8"
+    },
+    {
+      "input": "10 2",
+      "output": "10"
+    },
+    {
+      "input": "-5 -1",
+      "output": "-1"
+    }
+  ]
+}
