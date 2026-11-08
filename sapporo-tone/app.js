@@ -9,7 +9,7 @@
     input: $('file-input'), drop: $('drop-zone'), empty: $('stage-empty'), media: $('stage-media'),
     canvas: $('result-canvas'), original: $('original-canvas'), rule: $('compare-rule'),
     processing: $('stage-processing'), processingText: $('stage-processing-text'),
-    fileInfo: $('file-info'), replace: $('replace-button'), reset: $('reset-button'),
+    fileInfo: $('file-info'), open: $('open-button'), inlineOpen: $('inline-open-button'), replace: $('replace-button'), reset: $('reset-button'),
     comparePanel: $('compare-panel'), compare: $('compare-slider'), videoControls: $('video-controls'),
     play: $('play-button'), seek: $('seek-slider'), time: $('video-time'),
     video: $('source-video'), export: $('export-button'), exportStatus: $('export-status'),
@@ -17,7 +17,7 @@
     auto: $('auto-exposure'), strength: $('strength'), light: $('light'), warmth: $('warmth'),
     softness: $('softness'), grain: $('grain')
   };
-  const defaults = { auto: true, strength: 80, light: 0, warmth: -8, softness: 65, grain: 8 };
+  const defaults = { auto: true, strength: 88, light: 0, warmth: 14, softness: 72, grain: 5 };
   const sampleCanvas = document.createElement('canvas');
   sampleCanvas.width = sampleCanvas.height = 128;
   const sampleContext = sampleCanvas.getContext('2d', { willReadFrequently: true });
@@ -77,25 +77,27 @@
     void main() {
       vec3 src = texture2D(image, vec2(uv.x, 1.0-uv.y)).rgb;
       vec3 c = src * exp2(uExposure);
-      // Soft highlight shoulder retains snow texture instead of hard clipping.
-      float shoulder = 0.10 + 0.14*uSoftness;
-      c = c / (1.0 + shoulder*c) * (1.0 + shoulder*0.72);
-      c = (c - 0.5)*(1.0-0.16*uSoftness) + 0.5;
-      c += 0.012*uSoftness*(1.0-smoothstep(0.03,0.56,luminance(c)));
+      float shoulder = 0.12 + 0.18*uSoftness;
+      c = c / (1.0 + shoulder*c) * (1.0 + shoulder*0.78);
+      c = (c - 0.5)*(1.0-0.14*uSoftness) + 0.5;
       float y = luminance(c);
-      c = mix(vec3(y), c, 0.82);
-      float shadow = 1.0-smoothstep(0.08,0.69,y);
-      float highlight = smoothstep(0.40,0.95,y);
-      // Slate-blue in shadows, milky ivory highlights; deliberately subtle.
-      c += vec3(-0.014,0.002,0.025)*shadow;
-      c += vec3(0.023,0.013,-0.005)*highlight;
-      c += uWarmth * vec3(0.048,0.022,-0.050);
+      c += 0.018*uSoftness*(1.0-smoothstep(0.04,0.58,y));
+      y = luminance(c);
+      c = mix(vec3(y), c, 0.76);
+      float shadow = 1.0-smoothstep(0.10,0.68,y);
+      float midtone = 1.0-abs(y-0.55)/0.55;
+      float highlight = smoothstep(0.42,0.97,y);
+      c += vec3(-0.008,0.006,0.026)*shadow;
+      c += vec3(0.026,0.016,-0.004)*midtone;
+      c += vec3(0.055,0.036,0.005)*highlight;
+      c += uWarmth * vec3(0.065,0.030,-0.045);
       c = mix(src, c, uStrength);
-      float grain = (random(floor(uv*uResolution*0.83))-0.5)*0.055*uGrain*uStrength;
+      float grain = (random(floor(uv*uResolution*0.83))-0.5)*0.04*uGrain*uStrength;
       c += vec3(grain);
       gl_FragColor = vec4(clamp(c,0.0,1.0),1.0);
     }
   `;
+
   function compile(gl, kind, source) {
     const shader = gl.createShader(kind);
     gl.shaderSource(shader, source);
@@ -170,11 +172,12 @@
         return 1;
       };
       const mid=percentile(.50), high=percentile(.92), brightShare=bright/count;
-      const isSnow = high>.79 && brightShare>.28 && mid>.47;
-      const desired = isSnow ? .66 : .55;
-      let ev = Math.log2((desired+.024)/(mid+.024));
-      if(ev>0 && high>.78) ev=Math.min(ev,Math.log2(.91/high)+.60);
-      return clamp(ev,-1.05,1.45);
+      const isSnow = high>.80 && brightShare>.25 && mid>.42;
+      const desired = isSnow ? .62 : .56;
+      let ev = Math.log2((desired+.026)/(mid+.026));
+      if(ev>0 && high>.80) ev=Math.min(ev,Math.log2(.93/high)+.44);
+      if(ev<0 && mid>.67) ev*=.9;
+      return clamp(ev,-1.0,1.3);
     } catch(error) {
       console.warn('Brightness sampling unavailable:',error);
       return 0;
@@ -192,18 +195,19 @@
   function pixelGrade(ctx, w, h, cfg) {
     const frame=ctx.getImageData(0,0,w,h); const b=frame.data;
     const gain=Math.pow(2,cfg.exposure), s=cfg.softness;
-    const shoulder=.10+.14*s;
+    const shoulder=.12+.18*s;
     for(let i=0;i<b.length;i+=4) {
       const src=[b[i]/255,b[i+1]/255,b[i+2]/255];
-      let c=src.map(v=>{v*=gain; return (v/(1+shoulder*v)*(1+shoulder*.72)-.5)*(1-.16*s)+.5;});
+      let c=src.map(v=>{v*=gain; return (v/(1+shoulder*v)*(1+shoulder*.78)-.5)*(1-.14*s)+.5;});
       let y=.2126*c[0]+.7152*c[1]+.0722*c[2];
-      const shadowLift=.012*s*(1-smoothstep(.03,.56,y)); c=c.map(v=>v+shadowLift);
+      const shadowLift=.018*s*(1-smoothstep(.04,.58,y));
+      c=c.map(v=>v+shadowLift);
       y=.2126*c[0]+.7152*c[1]+.0722*c[2];
-      c=c.map(v=>y*.18+v*.82);
-      const sh=1-smoothstep(.08,.69,y), hi=smoothstep(.40,.95,y);
-      const shadow=[-.014,.002,.025], highlight=[.023,.013,-.005], warming=[.048,.022,-.05];
+      c=c.map(v=>y*.24+v*.76);
+      const sh=1-smoothstep(.10,.68,y), mid=Math.max(0,1-Math.abs(y-.55)/.55), hi=smoothstep(.42,.97,y);
+      const shadow=[-.008,.006,.026], middle=[.026,.016,-.004], highlight=[.055,.036,.005], warming=[.065,.030,-.045];
       for(let j=0;j<3;j++) {
-        c[j]+=shadow[j]*sh+highlight[j]*hi+warming[j]*cfg.warmth;
+        c[j]+=shadow[j]*sh+middle[j]*mid+highlight[j]*hi+warming[j]*cfg.warmth;
         b[i+j]=clamp(Math.round((src[j]*(1-cfg.strength)+c[j]*cfg.strength)*255),0,255);
       }
     }
@@ -320,7 +324,7 @@
       els.exportFormat.textContent=kind==='image'?'사진 · JPG 고화질':'영상 · 브라우저 지원 형식';
       els.fileInfo.textContent=`${file.name} · ${mediaDimensions().join(' × ')}`;
       renderFrame();
-      status(kind==='image'?'보정 완료. 비교 슬라이더로 원본과 비교해 보세요.':'보정 미리보기 준비 완료. 영상 저장은 재생 길이만큼 진행됩니다.');
+      status(kind==='image'?'보정 완료. 비교 슬라이더로 바로 확인해 보세요.':'보정 미리보기 준비 완료. 영상을 저장하면 같은 톤으로 내보냅니다.');
     } catch(error) {
       console.error(error);
       if(serial===fileSerial) {
@@ -465,7 +469,7 @@
   }
   async function exportCurrent() {
     if(!current || saving) return;
-    saving=true;els.export.disabled=true;els.replace.disabled=true;
+    saving=true;els.export.disabled=true;els.replace.disabled=true;if(els.open)els.open.disabled=true;if(els.inlineOpen)els.inlineOpen.disabled=true;
     const originalText=els.export.innerHTML;
     try {
       if(current.kind==='image') await photoExport();
@@ -474,7 +478,7 @@
       console.error(error);
       status(error.message||'저장 중 오류가 발생했습니다.',true);
     } finally {
-      saving=false;els.export.disabled=false;els.replace.disabled=false;
+      saving=false;els.export.disabled=false;els.replace.disabled=false;if(els.open)els.open.disabled=false;if(els.inlineOpen)els.inlineOpen.disabled=false;
       els.export.innerHTML=originalText;
     }
   }
@@ -489,9 +493,11 @@
     updateVideoTime();
   }
   function installEvents() {
-    els.drop.addEventListener('click',()=>{if(!current && !saving)els.input.click();});
-    els.drop.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!current){e.preventDefault();els.input.click();}});
     const openFile=()=>{if(!saving)els.input.click();};
+    els.drop.addEventListener('click',()=>{if(!current && !saving)openFile();});
+    els.drop.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!current){e.preventDefault();openFile();}});
+    els.open?.addEventListener('click',openFile);
+    els.inlineOpen?.addEventListener('click',e=>{e.stopPropagation();openFile();});
     els.replace.addEventListener('click',openFile);
     els.input.addEventListener('change',()=>{const file=els.input.files?.[0];if(file)loadMedia(file);els.input.value='';});
     for(const event of ['dragenter','dragover']) els.drop.addEventListener(event,e=>{e.preventDefault();if(!saving)els.drop.classList.add('dragover');});
