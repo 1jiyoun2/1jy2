@@ -17,7 +17,7 @@
     auto: $('auto-exposure'), strength: $('strength'), light: $('light'), warmth: $('warmth'),
     softness: $('softness'), grain: $('grain')
   };
-  const defaults = { auto: true, strength: 88, light: 0, warmth: 14, softness: 72, grain: 5 };
+  const defaults = { auto: true, strength: 92, light: 4, warmth: 22, softness: 70, grain: 4 };
   const sampleCanvas = document.createElement('canvas');
   sampleCanvas.width = sampleCanvas.height = 128;
   const sampleContext = sampleCanvas.getContext('2d', { willReadFrequently: true });
@@ -83,14 +83,14 @@
       float y = luminance(c);
       c += 0.018*uSoftness*(1.0-smoothstep(0.04,0.58,y));
       y = luminance(c);
-      c = mix(vec3(y), c, 0.76);
+      c = mix(vec3(y), c, 0.90);
       float shadow = 1.0-smoothstep(0.10,0.68,y);
       float midtone = 1.0-abs(y-0.55)/0.55;
       float highlight = smoothstep(0.42,0.97,y);
-      c += vec3(-0.008,0.006,0.026)*shadow;
-      c += vec3(0.026,0.016,-0.004)*midtone;
-      c += vec3(0.055,0.036,0.005)*highlight;
-      c += uWarmth * vec3(0.065,0.030,-0.045);
+      c += vec3(-0.004,0.008,0.022)*shadow;
+      c += vec3(0.040,0.024,0.002)*midtone;
+      c += vec3(0.080,0.058,0.020)*highlight;
+      c += uWarmth * vec3(0.085,0.050,-0.020);
       c = mix(src, c, uStrength);
       float grain = (random(floor(uv*uResolution*0.83))-0.5)*0.04*uGrain*uStrength;
       c += vec3(grain);
@@ -173,7 +173,7 @@
       };
       const mid=percentile(.50), high=percentile(.92), brightShare=bright/count;
       const isSnow = high>.80 && brightShare>.25 && mid>.42;
-      const desired = isSnow ? .62 : .56;
+      const desired = isSnow ? .64 : .58;
       let ev = Math.log2((desired+.026)/(mid+.026));
       if(ev>0 && high>.80) ev=Math.min(ev,Math.log2(.93/high)+.44);
       if(ev<0 && mid>.67) ev*=.9;
@@ -203,9 +203,9 @@
       const shadowLift=.018*s*(1-smoothstep(.04,.58,y));
       c=c.map(v=>v+shadowLift);
       y=.2126*c[0]+.7152*c[1]+.0722*c[2];
-      c=c.map(v=>y*.24+v*.76);
+      c=c.map(v=>y*.10+v*.90);
       const sh=1-smoothstep(.10,.68,y), mid=Math.max(0,1-Math.abs(y-.55)/.55), hi=smoothstep(.42,.97,y);
-      const shadow=[-.008,.006,.026], middle=[.026,.016,-.004], highlight=[.055,.036,.005], warming=[.065,.030,-.045];
+      const shadow=[-.004,.008,.022], middle=[.040,.024,.002], highlight=[.080,.058,.020], warming=[.085,.050,-.020];
       for(let j=0;j<3;j++) {
         c[j]+=shadow[j]*sh+middle[j]*mid+highlight[j]*hi+warming[j]*cfg.warmth;
         b[i+j]=clamp(Math.round((src[j]*(1-cfg.strength)+c[j]*cfg.strength)*255),0,255);
